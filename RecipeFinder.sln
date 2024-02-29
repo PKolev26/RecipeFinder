@@ -5,6 +5,10 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeFinder", "RecipeFinder\RecipeFinder.csproj", "{B40F5E07-CB7C-4C1F-9566-B49FEE988C62}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeFinder.Core", "RecipeFinder.Core\RecipeFinder.Core.csproj", "{F8CC0D1E-CBA6-4266-BC09-CA676E1400EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeFinder.Infrastructure", "RecipeFinder.Infrastructure\RecipeFinder.Infrastructure.csproj", "{DAC186C6-6404-4CB2-927A-D46D61249E9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{B40F5E07-CB7C-4C1F-9566-B49FEE988C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B40F5E07-CB7C-4C1F-9566-B49FEE988C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B40F5E07-CB7C-4C1F-9566-B49FEE988C62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8CC0D1E-CBA6-4266-BC09-CA676E1400EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8CC0D1E-CBA6-4266-BC09-CA676E1400EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8CC0D1E-CBA6-4266-BC09-CA676E1400EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8CC0D1E-CBA6-4266-BC09-CA676E1400EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAC186C6-6404-4CB2-927A-D46D61249E9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAC186C6-6404-4CB2-927A-D46D61249E9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAC186C6-6404-4CB2-927A-D46D61249E9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAC186C6-6404-4CB2-927A-D46D61249E9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

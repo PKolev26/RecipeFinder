@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeFinder", "RecipeFinder\RecipeFinder.csproj", "{B40F5E07-CB7C-4C1F-9566-B49FEE988C62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B40F5E07-CB7C-4C1F-9566-B49FEE988C62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B40F5E07-CB7C-4C1F-9566-B49FEE988C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B40F5E07-CB7C-4C1F-9566-B49FEE988C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B40F5E07-CB7C-4C1F-9566-B49FEE988C62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D34E0CEF-20E8-4679-8751-BCBF341BFE97}
+	EndGlobalSection
+EndGlobal

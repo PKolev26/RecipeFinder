@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <Folder Include="Data\Models\" />
+    <Folder Include="Constants\" />
+    <Folder Include="Data\SeedDatabase\" />
   </ItemGroup>
 
   <ItemGroup>

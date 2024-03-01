@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace RecipeFinder.Infrastructure.Data.SeedDatabase
 {
-    internal class RecipeConfiguration
+    public class RecipeConfiguration
     {
+
     }
 }

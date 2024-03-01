@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using RecipeFinder.Infrastructure.Constants;
 using System;
 using System.Collections.Generic;
@@ -20,12 +21,12 @@ namespace RecipeFinder.Infrastructure.Data.Models
         [Required]
         [MaxLength(RecipeNameMaxLength)]
         [Comment("The Recipe Name")]
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; } = null!;
 
         [Required]
         [MaxLength(RecipeInstructionsMaxLength)]
         [Comment("The Recipe Instructions")]
-        public string Instructions { get; set; } = string.Empty;
+        public string Instructions { get; set; } = null!;
 
         [Required]
         [Comment("The Recipe Cover Image")]
@@ -35,6 +36,10 @@ namespace RecipeFinder.Infrastructure.Data.Models
         [Comment("The Recipe Preparation Time")]
         public int PreparationTime { get; set; }
 
+        [Required]
+        [Comment("Date of post")]
+        public DateTime PostedOn { get; set; }
+
         [Comment("The Recipe Category Id")]
         [Required]
         public int CategoryId { get; set; }
@@ -43,6 +48,16 @@ namespace RecipeFinder.Infrastructure.Data.Models
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; } = null!;
 
-        public ICollection<Ingredients> Ingredients { get; set; } = new List<Ingredients>();
+        [Required]
+        [Comment("The Cook Identifier")]
+        public string CookId { get; set; } = null!;
+
+        [Comment("The Cook")]
+        [ForeignKey(nameof(CookId))]
+        public IdentityUser Cook { get; set; } = null!;
+
+        [Required]
+        [Comment("A list of all ingredients")]
+        public ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
     }
 }

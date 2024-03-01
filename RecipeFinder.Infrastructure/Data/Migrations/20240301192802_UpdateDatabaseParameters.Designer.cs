@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecipeFinder.Data;
 
@@ -11,9 +12,10 @@ using RecipeFinder.Data;
 namespace RecipeFinder.Data.Migrations
 {
     [DbContext(typeof(RecipeFinderDbContext))]
-    partial class RecipeFinderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240301192802_UpdateDatabaseParameters")]
+    partial class UpdateDatabaseParameters
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -331,21 +333,6 @@ namespace RecipeFinder.Data.Migrations
                     b.ToTable("Recipes");
                 });
 
-            modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.RecipeMaker", b =>
-                {
-                    b.Property<string>("MakerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("RecipeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MakerId", "RecipeId");
-
-                    b.HasIndex("RecipeId");
-
-                    b.ToTable("RecipesMakers");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -423,30 +410,9 @@ namespace RecipeFinder.Data.Migrations
                     b.Navigation("Cook");
                 });
 
-            modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.RecipeMaker", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Maker")
-                        .WithMany()
-                        .HasForeignKey("MakerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RecipeFinder.Infrastructure.Data.Models.Recipe", "Recipe")
-                        .WithMany("RecipesMakers")
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Maker");
-
-                    b.Navigation("Recipe");
-                });
-
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Recipe", b =>
                 {
                     b.Navigation("Ingredients");
-
-                    b.Navigation("RecipesMakers");
                 });
 #pragma warning restore 612, 618
         }

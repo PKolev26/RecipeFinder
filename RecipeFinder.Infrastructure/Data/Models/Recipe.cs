@@ -50,7 +50,7 @@ namespace RecipeFinder.Infrastructure.Data.Models
 
         [Required]
         [Comment("The Cook Identifier")]
-        public string CookId { get; set; } = null!;
+        public string CookId { get; set; } = string.Empty;
 
         [Comment("The Cook")]
         [ForeignKey(nameof(CookId))]
@@ -59,5 +59,8 @@ namespace RecipeFinder.Infrastructure.Data.Models
         [Required]
         [Comment("A list of all ingredients")]
         public ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
+
+        [Comment("Recipe Cooks")]
+        public IList<RecipeMaker> RecipesMakers { get; set; } = new List<RecipeMaker>();
     }
 }

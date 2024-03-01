@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecipeFinder.Data;
 
@@ -11,9 +12,10 @@ using RecipeFinder.Data;
 namespace RecipeFinder.Data.Migrations
 {
     [DbContext(typeof(RecipeFinderDbContext))]
-    partial class RecipeFinderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240301200429_AddingComments")]
+    partial class AddingComments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,9 +270,6 @@ namespace RecipeFinder.Data.Migrations
                         .HasColumnType("datetime2")
                         .HasComment("Comment Posted Date");
 
-                    b.Property<int?>("RecipeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(30)
@@ -280,8 +279,6 @@ namespace RecipeFinder.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
-
-                    b.HasIndex("RecipeId");
 
                     b.ToTable("Comments");
                 });
@@ -447,10 +444,6 @@ namespace RecipeFinder.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RecipeFinder.Infrastructure.Data.Models.Recipe", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("RecipeId");
-
                     b.Navigation("Author");
                 });
 
@@ -501,8 +494,6 @@ namespace RecipeFinder.Data.Migrations
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Recipe", b =>
                 {
-                    b.Navigation("Comments");
-
                     b.Navigation("Ingredients");
 
                     b.Navigation("RecipesMakers");

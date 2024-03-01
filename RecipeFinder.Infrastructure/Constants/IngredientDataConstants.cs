@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RecipeFinder.Infrastructure.Constants
 {
-    public class IngredientDataConstants
+    public static class IngredientDataConstants
     {
         // Ingredient Name Data Constants
         public const int IngredientNameMaxLength = 50;

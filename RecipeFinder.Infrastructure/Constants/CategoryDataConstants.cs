@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RecipeFinder.Infrastructure.Constants
 {
-    public class CategoryDataConstants
+    public static class CategoryDataConstants
     {
         // Category Name Data Constants
         public const int CategoryNameMaxLength = 25;

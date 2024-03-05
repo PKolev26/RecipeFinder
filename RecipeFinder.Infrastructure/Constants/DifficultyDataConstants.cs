@@ -10,7 +10,7 @@ namespace RecipeFinder.Infrastructure.Constants
     {
 
         // Difficulty Name Data Constants
-        public const int DifficultyNameMaxLength = 30;
+        public const int DifficultyNameMaxLength = 25;
         public const int DifficultyNameMinLength = 2;
 
         // Difficulty Description Data Constants

@@ -72,7 +72,7 @@ namespace RecipeFinder.Infrastructure.Data.Models
         [Comment("A list of all comments")]
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
-        [Comment("Recipe Makers")]
-        public ICollection<Maker> Makers { get; set; } = new List<Maker>();
+        [Comment("Recipe Users")]
+        public ICollection<RecipeUser> RecipesUsers { get; set; } = new List<RecipeUser>();
     }
 }

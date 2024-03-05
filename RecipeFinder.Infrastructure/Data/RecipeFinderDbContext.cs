@@ -29,5 +29,6 @@ namespace RecipeFinder.Data
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<RecipeMaker> RecipesMakers { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Difficulty> Difficulties { get; set; }
     }
 }

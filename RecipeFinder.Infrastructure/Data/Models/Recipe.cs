@@ -48,6 +48,14 @@ namespace RecipeFinder.Infrastructure.Data.Models
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; } = null!;
 
+        [Comment("The Recipe Difficulty Id")]
+        [Required]
+        public int DifficultyId { get; set; }
+
+        [Comment("The Recipe Difficulty")]
+        [ForeignKey(nameof(DifficultyId))]
+        public Difficulty Difficulty { get; set; } = null!;
+
         [Required]
         [Comment("The Cook Identifier")]
         public string CookId { get; set; } = string.Empty;

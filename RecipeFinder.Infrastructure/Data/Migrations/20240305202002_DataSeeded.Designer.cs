@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecipeFinder.Data;
 
@@ -11,9 +12,10 @@ using RecipeFinder.Data;
 namespace RecipeFinder.Data.Migrations
 {
     [DbContext(typeof(RecipeFinderDbContext))]
-    partial class RecipeFinderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240305202002_DataSeeded")]
+    partial class DataSeeded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,15 +145,15 @@ namespace RecipeFinder.Data.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4e517565-eb91-405e-a2cd-715735512d5a",
+                            ConcurrencyStamp = "fc7f7abf-3aa6-45a8-af7e-46acdd811e20",
                             Email = "user@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "user@gmail.com",
                             NormalizedUserName = "user@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI1pcv5wHgyzQfjRsZCpqctmgeS6jaImEt8GWvUaGd1yO9I1TJeTf8wYCB6ILjyz+A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMu/o779E1TrUtyvs/cExkKKIueTc3Zq1KnPrMDTW184Dhf+bI0ncnB01aD5wMFGMg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6a31a912-5e41-46b9-b3d5-7214dccdb75c",
+                            SecurityStamp = "4d1b0089-4b03-4663-85f6-cb950fd68495",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         },
@@ -159,15 +161,15 @@ namespace RecipeFinder.Data.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7d9db03b-78ad-4f52-8874-ae7ebe80e5d5",
+                            ConcurrencyStamp = "a4382623-0f8c-45a3-842a-7ba657ab463e",
                             Email = "guest@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@gmail.com",
                             NormalizedUserName = "guest@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGFP/dtTqaGRtXhxvwaGZTZ7yYIkXI+ouhjQonVdigPdt3Tv3jJ1Cohe7b2vur36Zg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOjnPKeFQtVaXw43z2kLpnthgtwP/r4g/xqah9J8TUW6vYHA9vzHZ7pkC/rQoELh9w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c823856a-f5ad-478f-b126-18a1b8a74617",
+                            SecurityStamp = "78f60505-2744-47bf-844d-fe165ea5b4cd",
                             TwoFactorEnabled = false,
                             UserName = "guest@gmail.com"
                         });
@@ -275,24 +277,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Appetizer"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Main Course"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Dessert"
-                        });
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Comment", b =>
@@ -334,7 +319,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Difficulty", b =>
@@ -348,14 +333,14 @@ namespace RecipeFinder.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
                         .HasComment("The Difficulty Description");
 
                     b.Property<string>("IngredientComplexity")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
                         .HasComment("The Ingredient Complexity");
 
                     b.Property<string>("Name")
@@ -370,49 +355,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Difficulties", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Recipes suitable for novice cooks with basic cooking skills.",
-                            IngredientComplexity = "Common ingredients.",
-                            Name = "Beginner",
-                            SkillLevel = 1.0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Recipes requiring some cooking experience and familiarity with various cooking techniques.",
-                            IngredientComplexity = "Mix of common and some specialty ingredients.",
-                            Name = "Intermediate",
-                            SkillLevel = 3.0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Recipes suitable for experienced cooks with confidence in their cooking skills.",
-                            IngredientComplexity = "Primarily specialty ingredients.",
-                            Name = "Advanced",
-                            SkillLevel = 5.0
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Highly challenging recipes requiring expert-level cooking skills and experience.",
-                            IngredientComplexity = "Rare or exotic ingredients.",
-                            Name = "Expert",
-                            SkillLevel = 7.0
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "Culinary creations for professionals or exceptionally skilled home cooks.",
-                            IngredientComplexity = "Varied, may include rare, seasonal, or hard-to-find ingredients.",
-                            Name = "Master Chef",
-                            SkillLevel = 9.0
-                        });
+                    b.ToTable("Difficulties");
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Ingredient", b =>
@@ -447,7 +390,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("Ingredients", (string)null);
+                    b.ToTable("Ingredients");
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Recipe", b =>
@@ -479,8 +422,8 @@ namespace RecipeFinder.Data.Migrations
 
                     b.Property<string>("Instructions")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
                         .HasComment("The Recipe Instructions");
 
                     b.Property<string>("Name")
@@ -505,7 +448,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasIndex("DifficultyId");
 
-                    b.ToTable("Recipes", (string)null);
+                    b.ToTable("Recipes");
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.RecipeUser", b =>
@@ -522,7 +465,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RecipesUsers", (string)null);
+                    b.ToTable("RecipesUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

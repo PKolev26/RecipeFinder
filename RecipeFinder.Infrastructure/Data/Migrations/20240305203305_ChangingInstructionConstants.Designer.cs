@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecipeFinder.Data;
 
@@ -11,9 +12,10 @@ using RecipeFinder.Data;
 namespace RecipeFinder.Data.Migrations
 {
     [DbContext(typeof(RecipeFinderDbContext))]
-    partial class RecipeFinderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240305203305_ChangingInstructionConstants")]
+    partial class ChangingInstructionConstants
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -275,7 +277,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -334,7 +336,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Difficulty", b =>
@@ -370,7 +372,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Difficulties", (string)null);
+                    b.ToTable("Difficulties");
 
                     b.HasData(
                         new
@@ -447,7 +449,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("Ingredients", (string)null);
+                    b.ToTable("Ingredients");
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Recipe", b =>
@@ -505,7 +507,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasIndex("DifficultyId");
 
-                    b.ToTable("Recipes", (string)null);
+                    b.ToTable("Recipes");
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.RecipeUser", b =>
@@ -522,7 +524,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RecipesUsers", (string)null);
+                    b.ToTable("RecipesUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

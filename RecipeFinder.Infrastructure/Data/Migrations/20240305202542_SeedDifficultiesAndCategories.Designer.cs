@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecipeFinder.Data;
 
@@ -11,9 +12,10 @@ using RecipeFinder.Data;
 namespace RecipeFinder.Data.Migrations
 {
     [DbContext(typeof(RecipeFinderDbContext))]
-    partial class RecipeFinderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240305202542_SeedDifficultiesAndCategories")]
+    partial class SeedDifficultiesAndCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,15 +145,15 @@ namespace RecipeFinder.Data.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4e517565-eb91-405e-a2cd-715735512d5a",
+                            ConcurrencyStamp = "0db673b5-4512-4034-a57f-bb21086da0f3",
                             Email = "user@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "user@gmail.com",
                             NormalizedUserName = "user@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI1pcv5wHgyzQfjRsZCpqctmgeS6jaImEt8GWvUaGd1yO9I1TJeTf8wYCB6ILjyz+A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDX2ziSt1YRHoOnR0cNunJ5aStCB1wT0JKQnfnfxMtggtN7U01ZTSEZEZ1Q+PDW4/A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6a31a912-5e41-46b9-b3d5-7214dccdb75c",
+                            SecurityStamp = "bf460d8f-b83a-4180-b892-58afb174c1e3",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         },
@@ -159,15 +161,15 @@ namespace RecipeFinder.Data.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7d9db03b-78ad-4f52-8874-ae7ebe80e5d5",
+                            ConcurrencyStamp = "2583110c-12bc-4fec-b931-db358942fbe2",
                             Email = "guest@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@gmail.com",
                             NormalizedUserName = "guest@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGFP/dtTqaGRtXhxvwaGZTZ7yYIkXI+ouhjQonVdigPdt3Tv3jJ1Cohe7b2vur36Zg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH1fRuVGHlXVQNI/i7bI5FzgKDcuhVNtVjn3xzEcyDYGwk2n2jf8teonSf9Di7WpJg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c823856a-f5ad-478f-b126-18a1b8a74617",
+                            SecurityStamp = "9cbd859b-e5a4-433c-b18b-d9a8cacb9b39",
                             TwoFactorEnabled = false,
                             UserName = "guest@gmail.com"
                         });
@@ -275,7 +277,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -334,7 +336,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Difficulty", b =>
@@ -370,7 +372,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Difficulties", (string)null);
+                    b.ToTable("Difficulties");
 
                     b.HasData(
                         new
@@ -447,7 +449,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("Ingredients", (string)null);
+                    b.ToTable("Ingredients");
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Recipe", b =>
@@ -479,8 +481,8 @@ namespace RecipeFinder.Data.Migrations
 
                     b.Property<string>("Instructions")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
                         .HasComment("The Recipe Instructions");
 
                     b.Property<string>("Name")
@@ -505,7 +507,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasIndex("DifficultyId");
 
-                    b.ToTable("Recipes", (string)null);
+                    b.ToTable("Recipes");
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.RecipeUser", b =>
@@ -522,7 +524,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RecipesUsers", (string)null);
+                    b.ToTable("RecipesUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -18,9 +18,9 @@ namespace RecipeFinder.Infrastructure.Data.Models
         public Recipe Recipe { get; set; } = null!;
 
         [Required]
-        public string MakerId { get; set; } = string.Empty;
+        public int MakerId { get; set; } 
 
         [ForeignKey(nameof(MakerId))]
-        public IdentityUser Maker { get; set; } = null!;
+        public Maker Maker { get; set; } = null!;
     }
 }

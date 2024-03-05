@@ -241,7 +241,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Comment", b =>
@@ -283,7 +283,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Difficulty", b =>
@@ -319,7 +319,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Difficulties");
+                    b.ToTable("Difficulties", (string)null);
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Ingredient", b =>
@@ -354,32 +354,7 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("Ingredients");
-                });
-
-            modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Maker", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasComment("Maker Identifier");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<double>("SkillLevel")
-                        .HasColumnType("float")
-                        .HasComment("The skill level that the cook have");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)")
-                        .HasComment("User Identifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Makers");
+                    b.ToTable("Ingredients", (string)null);
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Recipe", b =>
@@ -437,22 +412,22 @@ namespace RecipeFinder.Data.Migrations
 
                     b.HasIndex("DifficultyId");
 
-                    b.ToTable("Recipes");
+                    b.ToTable("Recipes", (string)null);
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.RecipeMaker", b =>
                 {
+                    b.Property<string>("MakerId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("RecipeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MakerId")
-                        .HasColumnType("int");
+                    b.HasKey("MakerId", "RecipeId");
 
-                    b.HasKey("RecipeId", "MakerId");
+                    b.HasIndex("RecipeId");
 
-                    b.HasIndex("MakerId");
-
-                    b.ToTable("RecipesMakers");
+                    b.ToTable("RecipesMakers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -528,17 +503,6 @@ namespace RecipeFinder.Data.Migrations
                         .HasForeignKey("RecipeId");
                 });
 
-            modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Maker", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Recipe", b =>
                 {
                     b.HasOne("RecipeFinder.Infrastructure.Data.Models.Category", "Category")
@@ -568,8 +532,8 @@ namespace RecipeFinder.Data.Migrations
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.RecipeMaker", b =>
                 {
-                    b.HasOne("RecipeFinder.Infrastructure.Data.Models.Maker", "Maker")
-                        .WithMany("RecipesMakers")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Maker")
+                        .WithMany()
                         .HasForeignKey("MakerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -583,11 +547,6 @@ namespace RecipeFinder.Data.Migrations
                     b.Navigation("Maker");
 
                     b.Navigation("Recipe");
-                });
-
-            modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Maker", b =>
-                {
-                    b.Navigation("RecipesMakers");
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Recipe", b =>

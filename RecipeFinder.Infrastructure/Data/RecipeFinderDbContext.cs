@@ -13,20 +13,20 @@ namespace RecipeFinder.Data
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<RecipeMaker>().HasKey(rc => new {  rc.RecipeId, rc.MakerId });
-            builder.Entity<RecipeMaker>()
-            .HasOne(sc => sc.Recipe)
-            .WithMany(s => s.RecipesMakers)
-            .HasForeignKey(sc => sc.RecipeId);
-            builder.Entity<RecipeMaker>()
-             .HasOne(sc => sc.Maker)
-             .WithMany(s => s.RecipesMakers)
-             .HasForeignKey(sc => sc.MakerId);
+            //builder.Entity<RecipeMaker>().HasKey(rc => new {  rc.RecipeId, rc.MakerId });
+            //builder.Entity<RecipeMaker>()
+            //.HasOne(sc => sc.Recipe)
+            //.WithMany(s => s.RecipesMakers)
+            //.HasForeignKey(sc => sc.RecipeId);
+            //builder.Entity<RecipeMaker>()
+            // .HasOne(sc => sc.Maker)
+            // .WithMany(s => s.RecipesMakers)
+            // .HasForeignKey(sc => sc.MakerId);
 
-            builder.Entity<RecipeMaker>()
-               .HasOne(e => e.Recipe)
-               .WithMany(e => e.RecipesMakers)
-               .OnDelete(DeleteBehavior.Restrict);
+            //builder.Entity<RecipeMaker>()
+            //   .HasOne(e => e.Recipe)
+            //   .WithMany(e => e.RecipesMakers)
+            //   .OnDelete(DeleteBehavior.Restrict);
 
 
 
@@ -37,7 +37,6 @@ namespace RecipeFinder.Data
         public virtual DbSet<Recipe> Recipes { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<RecipeMaker> RecipesMakers { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Difficulty> Difficulties { get; set; }
         public virtual DbSet<Maker> Makers { get; set; }

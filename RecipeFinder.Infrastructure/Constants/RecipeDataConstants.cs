@@ -13,7 +13,7 @@ namespace RecipeFinder.Infrastructure.Constants
         public const int RecipeNameMinLength = 5;
 
         // Recipe Instructions Data Constants
-        public const int RecipeInstructionsMaxLength = 250;
+        public const int RecipeInstructionsMaxLength = 500;
         public const int RecipeInstructionsMinLength = 10;
     }
 }

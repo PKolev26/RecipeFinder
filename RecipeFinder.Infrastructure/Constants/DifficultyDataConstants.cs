@@ -14,7 +14,7 @@ namespace RecipeFinder.Infrastructure.Constants
         public const int DifficultyNameMinLength = 2;
 
         // Difficulty Description Data Constants
-        public const int DifficultyDescriptionMaxLength = 50;
+        public const int DifficultyDescriptionMaxLength = 100;
         public const int DifficultyDescriptionMinLength = 5;
 
         // Diffuculty SkillLevel Data Constants
@@ -22,7 +22,7 @@ namespace RecipeFinder.Infrastructure.Constants
         public const double DifficultySkillLevelMax = 10.00;
 
         // Difficulty IngredientComplexity Data Constants
-        public const int DifficultyIngredientComplexityMaxLength = 50;
+        public const int DifficultyIngredientComplexityMaxLength = 100;
         public const int DifficultyIngredientComplexityMinLength = 5;
     }
 }

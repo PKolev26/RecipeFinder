@@ -27,9 +27,11 @@ namespace RecipeFinder.Infrastructure.Data.Models
         public string Unit { get; set; } = null!;
 
         [Required]
+        [Comment("Recipe Identifier")]
         public int RecipeId { get; set; }
 
         [ForeignKey(nameof(RecipeId))]
+        [Comment("Recipe")]
         public Recipe Recipe { get; set; } = null!;
 
 

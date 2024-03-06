@@ -16,7 +16,7 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
         {
             var data = new SeedData();
 
-            builder.HasData(new Ingredient[] { data.MusakaPotato });
+            builder.HasData(new Ingredient[] { data.MusakaPotato, data.MusakaMincedМeat });
         }
     }
 }

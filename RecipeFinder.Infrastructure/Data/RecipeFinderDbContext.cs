@@ -15,6 +15,7 @@ namespace RecipeFinder.Data
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // Data Seed
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new DifficultyConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
@@ -22,8 +23,8 @@ namespace RecipeFinder.Data
             builder.ApplyConfiguration(new IngredientConfiguration());
             builder.ApplyConfiguration(new RecipeConfiguration());
 
+            // Recipe User Settings
             builder.Entity<RecipeUser>().HasKey(rc => new { rc.RecipeId, rc.UserId });
-
             builder.Entity<RecipeUser>()
                .HasOne(e => e.Recipe)
                .WithMany(e => e.RecipesUsers)

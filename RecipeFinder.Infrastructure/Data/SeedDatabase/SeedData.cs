@@ -10,24 +10,31 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
 {
     internal class SeedData
     {
+        // Users
         public IdentityUser User1 { get; set; }
         public IdentityUser User2 { get; set; }
 
+        // Categories
         public Category FirstCategory { get; set; }
         public Category SecondCategory { get; set; }
         public Category ThirdCategory { get; set; }
 
+        // Difficulties
         public Difficulty Beginner { get; set; }
         public Difficulty Intermediate { get; set; }
         public Difficulty Advanced { get; set; }
         public Difficulty Expert { get; set; }
         public Difficulty MasterChef { get; set; }
 
+        // Recipes
         public Recipe Musaka {  get; set; }
 
+        // Comment
         public Comment MusakaComment { get; set; }
 
+        // Ingredient
         public Ingredient MusakaPotato { get; set; }
+        public Ingredient MusakaMincedМeat { get; set; }
 
         public SeedData()
         {
@@ -171,6 +178,14 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
                 Id = 1,
                 Name = "Potato",
                 Quantity = 4,
+                Unit = "kg",
+                RecipeId = 1
+            };
+            MusakaMincedМeat = new Ingredient()
+            {
+                Id = 2,
+                Name = "Minced Meat",
+                Quantity = 3,
                 Unit = "kg",
                 RecipeId = 1
             };

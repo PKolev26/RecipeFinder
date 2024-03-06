@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecipeFinder.Data;
 
@@ -11,9 +12,10 @@ using RecipeFinder.Data;
 namespace RecipeFinder.Data.Migrations
 {
     [DbContext(typeof(RecipeFinderDbContext))]
-    partial class RecipeFinderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240306085243_UpdatedIngredientTable")]
+    partial class UpdatedIngredientTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,15 +145,15 @@ namespace RecipeFinder.Data.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d2f97c48-8c8c-4f57-a71c-bf6342264cc0",
+                            ConcurrencyStamp = "e55fe1d1-66c5-4be1-875c-648bd45b891f",
                             Email = "user@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "user@gmail.com",
                             NormalizedUserName = "user@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAECn+TdfOQhpANoq6+4B7+97OlxWP0yWB4NF/F6JKcsC+072+0eIBbGZs1r9TpdGcqg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEfrntAEGnN7lwdB/S/PvPq3VmIid1EPH9RZtsxo2gC9iu1MXUtKZU4WfWNUhSfilQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bc5ceeaa-7c89-4106-a7df-0e5b8ba671ae",
+                            SecurityStamp = "efeb11bb-f96f-4841-b019-60cdd87cc462",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         },
@@ -159,15 +161,15 @@ namespace RecipeFinder.Data.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6fc8295b-2cad-4198-a29a-785e11c99e11",
+                            ConcurrencyStamp = "fbd57d35-e4b1-49ce-8e0d-1e67ea6d69b5",
                             Email = "guest@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@gmail.com",
                             NormalizedUserName = "guest@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIDJ+pZ2pSPgZYX7eZup9t3Io6rOVuRGSmFgphyOOlMSc3w1E11sHNRJTo1Oldl6PA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELv1MSK3WKYX45t+nT8ZzfRsi2N5+8i0VlTt9DRlY7ucjkP/eDR4NN4Xjkj5SamF9g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c1902cb7-f952-4c8e-8346-87d50d51f0bd",
+                            SecurityStamp = "cc117c23-e0fe-49f2-8015-aa774fbaa06f",
                             TwoFactorEnabled = false,
                             UserName = "guest@gmail.com"
                         });
@@ -335,17 +337,6 @@ namespace RecipeFinder.Data.Migrations
                     b.HasIndex("RecipeId");
 
                     b.ToTable("Comments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AuthorId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
-                            Description = "I made this musaka with your recipe and its awesome.",
-                            PostedOn = new DateTime(2024, 3, 6, 12, 13, 36, 830, DateTimeKind.Local).AddTicks(872),
-                            RecipeId = 1,
-                            Title = "Very good Musaka!"
-                        });
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Difficulty", b =>
@@ -459,16 +450,6 @@ namespace RecipeFinder.Data.Migrations
                     b.HasIndex("RecipeId");
 
                     b.ToTable("Ingredients");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Potato",
-                            Quantity = 4.0,
-                            RecipeId = 1,
-                            Unit = "kg"
-                        });
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.Recipe", b =>
@@ -527,20 +508,6 @@ namespace RecipeFinder.Data.Migrations
                     b.HasIndex("DifficultyId");
 
                     b.ToTable("Recipes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 2,
-                            CookId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            DifficultyId = 2,
-                            ImageUrl = "https://assets.kulinaria.bg/attachments/pictures-images/0000/1918/MAIN-vegetarianska-musaka.jpg?1431936459",
-                            Instructions = "1. Preheat oven to 180°C.\r\n2. Slice potatoes & eggplants\r\n3. Heat olive oil. Cook onions until soft. Add ground beef, garlic, tomato paste, diced tomatoes, oregano, cinnamon, salt & pepper. Simmer.\r\n4. Fry potato slices until golden brown.\r\n5. Layer potatoes, eggplants, & meat mixture. Repeat layers.\r\n6. Whisk eggs & yogurt. Pour over meat.\r\n7. Bake at 180°C (350°F) for 45 minutes to 1 hour.\r\n8. Cool before serving. Enjoy!\r\n",
-                            Name = "Musaka",
-                            PostedOn = new DateTime(2024, 3, 6, 12, 13, 36, 871, DateTimeKind.Local).AddTicks(1379),
-                            PreparationTime = 60
-                        });
                 });
 
             modelBuilder.Entity("RecipeFinder.Infrastructure.Data.Models.RecipeUser", b =>

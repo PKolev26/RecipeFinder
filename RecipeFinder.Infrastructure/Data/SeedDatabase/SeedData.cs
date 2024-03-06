@@ -25,12 +25,18 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
 
         public Recipe Musaka {  get; set; }
 
+        public Comment MusakaComment { get; set; }
+
+        public Ingredient MusakaPotato { get; set; }
+
         public SeedData()
         {
             SeedUsers();
             SeedDifficulties();
             SeedCategories();
             SeedRecipes();
+            SeedIngredient();
+            SeedComments();
         }
 
         private void SeedUsers()
@@ -143,31 +149,30 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
                 PostedOn = DateTime.Now,
                 CategoryId = SecondCategory.Id,
                 DifficultyId = Intermediate.Id,
-                CookId = User1.Id,
-                Ingredients = new List<Ingredient>
-                {
-                    new Ingredient { Name = "Potatoes", Quantity = 4, Unit = "medium" },
-                    new Ingredient { Name = "Eggplants", Quantity = 2, Unit = "large" },
-                    new Ingredient { Name = "Olive oil", Quantity = 3, Unit = "tablespoons" },
-                    new Ingredient { Name = "Onion", Quantity = 1, Unit = "large" },
-                    new Ingredient { Name = "Ground beef", Quantity = 500, Unit = "grams" },
-                    new Ingredient { Name = "Garlic", Quantity = 3, Unit = "cloves" },
-                    new Ingredient { Name = "Tomato paste", Quantity = 2, Unit = "tablespoons" },
-                    new Ingredient { Name = "Diced tomatoes", Quantity = 1, Unit = "can (400g)" },
-                    new Ingredient { Name = "Dried oregano", Quantity = 1, Unit = "teaspoon" },
-                    new Ingredient { Name = "Ground cinnamon", Quantity = 1, Unit = "teaspoon" },
-                    new Ingredient { Name = "Salt", Quantity = 1, Unit = "teaspoon" },
-                    new Ingredient { Name = "Black pepper", Quantity = 1, Unit = "teaspoon" },
-                    new Ingredient { Name = "Eggs", Quantity = 2, Unit = "large" },
-                    new Ingredient { Name = "Greek yogurt", Quantity = 200, Unit = "grams" }
-                },
-                Comments = new List<Comment>
-                {
-                    new Comment 
-                    { 
-                        Id = 1, Title = "Very good Musaka!", Description = "I made this musaka with your recipe and its awesome.", AuthorId = User2.Id, PostedOn = DateTime.Now
-                    }
-                }
+                CookId = User1.Id
+            };
+        }
+        private void SeedComments()
+        {
+            MusakaComment = new Comment()
+            {
+                Id = 1,
+                Title = "Very good Musaka!",
+                Description = "I made this musaka with your recipe and its awesome.",
+                AuthorId = User2.Id,
+                PostedOn = DateTime.Now,
+                RecipeId = 1               
+            };
+        }
+        private void SeedIngredient()
+        {
+            MusakaPotato = new Ingredient()
+            {
+                Id = 1,
+                Name = "Potato",
+                Quantity = 4,
+                Unit = "kg",
+                RecipeId = 1
             };
         }
     }

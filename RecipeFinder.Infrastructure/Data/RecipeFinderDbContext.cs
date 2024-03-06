@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using RecipeFinder.Infrastructure.Data.Models;
 using RecipeFinder.Infrastructure.Data.SeedDatabase;
+using System.Reflection.Emit;
 
 namespace RecipeFinder.Data
 {
@@ -17,7 +18,9 @@ namespace RecipeFinder.Data
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new DifficultyConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
-            //builder.ApplyConfiguration(new RecipeConfiguration());
+            builder.ApplyConfiguration(new CommentConfiguration());
+            builder.ApplyConfiguration(new IngredientConfiguration());
+            builder.ApplyConfiguration(new RecipeConfiguration());
 
             builder.Entity<RecipeUser>().HasKey(rc => new { rc.RecipeId, rc.UserId });
 
@@ -25,8 +28,6 @@ namespace RecipeFinder.Data
                .HasOne(e => e.Recipe)
                .WithMany(e => e.RecipesUsers)
                .OnDelete(DeleteBehavior.Restrict);
-
-       
 
             base.OnModelCreating(builder);
         }

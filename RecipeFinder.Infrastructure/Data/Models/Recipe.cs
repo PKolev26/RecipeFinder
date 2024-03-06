@@ -68,7 +68,6 @@ namespace RecipeFinder.Infrastructure.Data.Models
         [Comment("A list of all ingredients")]
         public ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
 
-        [Required]
         [Comment("A list of all comments")]
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 

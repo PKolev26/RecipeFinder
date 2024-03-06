@@ -39,5 +39,11 @@ namespace RecipeFinder.Infrastructure.Data.Models
         [Comment("Comment Posted Date")]
         public DateTime PostedOn { get; set; }
 
+        [Required]
+        public int RecipeId { get; set; }
+
+        [ForeignKey(nameof(RecipeId))]
+        public Recipe Recipe { get; set; } = null!;
+
     }
 }

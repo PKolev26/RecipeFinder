@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using static RecipeFinder.Infrastructure.Constants.IngredientDataConstants;
 
 namespace RecipeFinder.Infrastructure.Data.Models
@@ -24,6 +25,12 @@ namespace RecipeFinder.Infrastructure.Data.Models
         [MaxLength(IngredientUnitMaxLength)]
         [Comment("The unit in which the ingredient is measured")]
         public string Unit { get; set; } = null!;
+
+        [Required]
+        public int RecipeId { get; set; }
+
+        [ForeignKey(nameof(RecipeId))]
+        public Recipe Recipe { get; set; } = null!;
 
 
     }

@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RecipeFinder.Infrastructure\RecipeFinder.Infrastructure.csproj" />
+    <ProjectReference Include="..\RecipeFinder.Core\RecipeFinder.Core.csproj" />
   </ItemGroup>
 
 </Project>

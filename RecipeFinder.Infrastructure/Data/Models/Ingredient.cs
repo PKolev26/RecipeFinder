@@ -19,7 +19,8 @@ namespace RecipeFinder.Infrastructure.Data.Models
         [Required]
         [Range(IngredientQuantityMinLength, IngredientQuantityMaxLength)]
         [Comment("The Ingredient Quantity")]
-        public double Quantity { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Quantity { get; set; }
 
         [Required]
         [MaxLength(IngredientUnitMaxLength)]

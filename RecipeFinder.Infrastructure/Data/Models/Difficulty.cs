@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,8 @@ namespace RecipeFinder.Infrastructure.Data.Models
         [Required]
         [Range(DifficultySkillLevelMin,DifficultySkillLevelMax)]
         [Comment("The recommended skill level that the cook should have")]
-        public double SkillLevel { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal SkillLevel { get; set; }
 
         [Required]
         [MaxLength(DifficultyIngredientComplexityMaxLength)]

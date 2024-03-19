@@ -8,23 +8,11 @@ namespace RecipeFinder.Core.Models.Recipe
 {
     public class AllRecipeViewModel
     {
-        public AllRecipeViewModel(string name, string imageUrl, int preparationTime, DateTime postedOn, string category, string difficulty, int ingredientCount, int commentCount, int madeByCount)
-        {
-            Name = name;
-            ImageUrl = imageUrl;
-            PreparationTime = preparationTime;
-            PostedOn = postedOn;
-            Category = new Category { Name = category };
-            Difficulty = new Difficulty { Name = difficulty };
-            IngredientCount = ingredientCount;
-            CommentCount = commentCount;
-            MadeByCount = madeByCount;
-        }
 
         [Display(Name = "Recipe")]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
-        public string ImageUrl { get; set; }
+        public string ImageUrl { get; set; } = null!;
 
         [Display(Name = "Preparation time")]
         public int PreparationTime { get; set; }
@@ -33,13 +21,13 @@ namespace RecipeFinder.Core.Models.Recipe
         public DateTime PostedOn { get; set; }
 
         [Display(Name = "Category")]
-        public Category Category { get; set; }
+        public string CategoryName { get; set; } = null!;
 
         [Display(Name = "Difficulty")]
-        public Difficulty Difficulty { get; set; }
+        public string DifficultyName { get; set; } = null!;
 
         [Display(Name = "Cooked by")]
-        public IdentityUser Cook { get; set; }
+        public string Cook { get; set; } = null!;
 
         [Display(Name = "Ingredients count")]
         public int IngredientCount { get; set; }

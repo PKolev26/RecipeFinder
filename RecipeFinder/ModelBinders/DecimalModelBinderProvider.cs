@@ -1,7 +1,7 @@
-﻿namespace RecipeFinder.ModelBinders
-{
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
+namespace RecipeFinder.ModelBinders
+{
     public class DecimalModelBinderProvider : IModelBinderProvider
     {
         public IModelBinder? GetBinder(ModelBinderProviderContext context)

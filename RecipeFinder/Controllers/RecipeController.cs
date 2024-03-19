@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RecipeFinder.Core.Contracts.Recipe;
+using RecipeFinder.Core.Services;
 
 namespace RecipeFinder.Controllers
 {
@@ -9,10 +11,12 @@ namespace RecipeFinder.Controllers
     {
 
         private readonly IRecipeService recipeService;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public RecipeController(IRecipeService recipeService)
+        public RecipeController(IRecipeService recipeService, UserManager<IdentityUser> userManager)
         {
             this.recipeService = recipeService;
+            this._userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -47,6 +51,15 @@ namespace RecipeFinder.Controllers
         public async Task<IActionResult> MasterChefDifficulty()
         {
             var recipes = await recipeService.RecipesInMasterChefDifficultyAsync();
+            return View(recipes);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Mine()
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+            var recipes = await recipeService.MineRecipesAsync(currentUser);
+
             return View(recipes);
         }
     }

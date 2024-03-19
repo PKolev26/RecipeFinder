@@ -1,4 +1,5 @@
-﻿using RecipeFinder.Core.Models.Recipe;
+﻿using Microsoft.AspNetCore.Identity;
+using RecipeFinder.Core.Models.Recipe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace RecipeFinder.Core.Contracts.Recipe
         Task<IEnumerable<RecipeInfoViewModel>> Top3RecipesAsync();
         Task<IEnumerable<RecipeInfoViewModel>> TheLastedRecipeAsync();
         Task<IEnumerable<RecipeInfoViewModel>> RecipesInMasterChefDifficultyAsync();
+        Task<IEnumerable<RecipeInfoViewModel>> MineRecipesAsync(IdentityUser currentUser);
     }
 }

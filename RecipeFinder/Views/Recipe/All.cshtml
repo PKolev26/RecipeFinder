@@ -14,7 +14,8 @@
             <div class="card-body">
                 <img class="card-imgurl" style="width: 18rem; height: 15rem;" src="@e.ImageUrl" alt="recipe image" />
                 <h4 class="card-title">@e.Name</h4>
-                <h5 class="card-cook">Cooked by: @e.Cook</h5>
+                <br />
+                <h5 class="card-cook">Cooked by: @e.Cook.Substring(0, e.Cook.LastIndexOf("@"))</h5>
                 <h5 class="card-categoryname">Category: @e.CategoryName</h5>
                 <h5 class="card-difficultyname">Difficulty level: @e.DifficultyName</h5>
                 <h5 class="card-ingredientcount">Ingredients: @e.IngredientCount</h5>

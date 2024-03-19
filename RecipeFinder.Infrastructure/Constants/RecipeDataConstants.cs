@@ -9,5 +9,8 @@
         // Recipe Instructions Data Constants
         public const int RecipeInstructionsMaxLength = 500;
         public const int RecipeInstructionsMinLength = 10;
+
+        // Date and time format
+        public const string DateAndTimeFormat = "dd/MM/yyyy HH:mm";
     }
 }

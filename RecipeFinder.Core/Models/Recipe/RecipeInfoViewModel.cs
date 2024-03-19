@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RecipeFinder.Core.Models.Recipe
 {
-    public class AllRecipeViewModel
+    public class RecipeInfoViewModel
     {
 
         [Display(Name = "Recipe")]
@@ -18,7 +18,7 @@ namespace RecipeFinder.Core.Models.Recipe
         public int PreparationTime { get; set; }
 
         [Display(Name = "Posted on")]
-        public DateTime PostedOn { get; set; }
+        public string PostedOn { get; set; } = null!;
 
         [Display(Name = "Category")]
         public string CategoryName { get; set; } = null!;

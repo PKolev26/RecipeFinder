@@ -10,8 +10,4 @@
     <ProjectReference Include="..\RecipeFinder.Infrastructure\RecipeFinder.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>

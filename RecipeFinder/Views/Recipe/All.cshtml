@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AllRecipeViewModel>
+﻿@model IEnumerable<RecipeInfoViewModel>
 @{
     ViewBag.Title = "All Recipes";
 }
@@ -14,14 +14,16 @@
             <div class="card-body">
                 <img class="card-imgurl" style="width: 18rem; height: 15rem;" src="@e.ImageUrl" alt="recipe image" />
                 <h4 class="card-title">@e.Name</h4>
-                <br />
                 <h5 class="card-cook">Cooked by: @e.Cook.Substring(0, e.Cook.LastIndexOf("@"))</h5>
-                <h5 class="card-categoryname">Category: @e.CategoryName</h5>
-                <h5 class="card-difficultyname">Difficulty level: @e.DifficultyName</h5>
-                <h5 class="card-ingredientcount">Ingredients: @e.IngredientCount</h5>
-                <h5 class="card-commentcount">Comments: @e.CommentCount</h5>
-                <h5 class="card-madebycount">Made by @e.MadeByCount users</h5>
+                <br />
                 <p class="mb-0"><span class="fw-bold">Preparation time: </span>@e.PreparationTime</p>
+                <p class="mb-0"><span class="fw-bold">Category: </span>@e.CategoryName</p>
+                <p class="mb-0"><span class="fw-bold">Difficulty level: </span>@e.DifficultyName</p>
+                <p class="mb-0"><span class="fw-bold">Ingredients: </span>@e.IngredientCount</p>
+                <p class="mb-0"><span class="fw-bold">Comments: </span>@e.CommentCount</p>
+                <p class="mb-0"><span class="fw-bold">Made by: </span>@e.MadeByCount <span class="fw-bold">users</span></p>
+                <br />
+                <p class="mb-0"><span class="fw-bold">Posted on: </span>@e.PostedOn</p>
             </div>
         </div>
     }

@@ -3,6 +3,48 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div id="carouselExampleCaptions" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <a href="@Url.Action("Top3Recipes", "Recipe")" class="carousel-link">
+                    <img src="~/images/top3recipesbanner.png" class="d-block w-100" alt="Top 3 recipes">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>View the top 3 recipes</h5>
+                        <p>Sorted by how many people made them</p>
+                    </div>
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="@Url.Action("TheLatestRecipe", "Recipe")" class="carousel-link">
+                    <img src="~/images/thelatestrecipe.png" class="d-block w-100" alt="The latest recipe">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>The latest recipe</h5>
+                        <p>Check the latest recipe, added in Recipe Finder</p>
+                    </div>
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="@Url.Action("MasterChefDifficulty", "Recipe")" class="carousel-link">
+                    <img src="~/images/masterchef.png" class="d-block w-100" alt="Master Chef">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Master Chef Difficulty</h5>
+                        <p>Challenge yourself by doing a recipe from Master Chef difficulty</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 </div>

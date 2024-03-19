@@ -9,6 +9,9 @@ namespace RecipeFinder.Core.Contracts.Recipe
 {
     public interface IRecipeService
     {
-        Task<IEnumerable<AllRecipeViewModel>> AllRecipesAsync();
+        Task<IEnumerable<RecipeInfoViewModel>> AllRecipesAsync();
+        Task<IEnumerable<RecipeInfoViewModel>> Top3RecipesAsync();
+        Task<IEnumerable<RecipeInfoViewModel>> TheLastedRecipeAsync();
+        Task<IEnumerable<RecipeInfoViewModel>> RecipesInMasterChefDifficultyAsync();
     }
 }

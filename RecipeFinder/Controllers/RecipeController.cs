@@ -25,5 +25,29 @@ namespace RecipeFinder.Controllers
             var recipes = await recipeService.AllRecipesAsync();
             return View(recipes);
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Top3Recipes()
+        {
+            var recipes = await recipeService.Top3RecipesAsync();
+            return View(recipes);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> TheLatestRecipe()
+        {
+            var recipes = await recipeService.TheLastedRecipeAsync();
+            return View(recipes);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> MasterChefDifficulty()
+        {
+            var recipes = await recipeService.RecipesInMasterChefDifficultyAsync();
+            return View(recipes);
+        }
     }
 }

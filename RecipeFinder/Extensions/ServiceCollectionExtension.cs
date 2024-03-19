@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Core.Types;
+using RecipeFinder.Core.Contracts.Recipe;
+using RecipeFinder.Core.Services.Recipe;
 using RecipeFinder.Data;
+using RecipeFinder.Infrastructure.Common;
+using Repository = RecipeFinder.Infrastructure.Common.Repository;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -8,6 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IRecipeService, RecipeService>();
             return services;
         }
 
@@ -16,6 +22,8 @@ namespace Microsoft.Extensions.DependencyInjection
             var connectionString = config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             services.AddDbContext<RecipeFinderDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            services.AddScoped<IRepository, Repository>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 

@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RecipeFinder.Core.Contracts.Recipe;
 
 namespace RecipeFinder.Controllers
 {
+    [Authorize]
     public class RecipeController : Controller
     {
 
@@ -16,10 +18,12 @@ namespace RecipeFinder.Controllers
         {
             return View();
         }
+        [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> All()
         {
-
-            return View();
+            var recipes = await recipeService.AllRecipesAsync();
+            return View(recipes);
         }
     }
 }

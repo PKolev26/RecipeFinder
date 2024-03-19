@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Core.Types;
 using RecipeFinder.Core.Contracts.Recipe;
-using RecipeFinder.Core.Services.Recipe;
+using RecipeFinder.Core.Services;
 using RecipeFinder.Data;
 using RecipeFinder.Infrastructure.Common;
 using Repository = RecipeFinder.Infrastructure.Common.Repository;

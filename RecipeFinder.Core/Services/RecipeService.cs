@@ -57,6 +57,7 @@ namespace RecipeFinder.Core.Services
                     Name = e.Name,
                     ImageUrl = e.ImageUrl,
                     PreparationTime = e.PreparationTime,
+                    Instructions = e.Instructions,
                     PostedOn = e.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
                     CategoryName = e.Category.Name,
                     DifficultyName = e.Difficulty.Name,

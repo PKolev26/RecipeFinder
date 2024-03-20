@@ -25,14 +25,13 @@
                 @foreach (var ingredient in e.Ingredients)
                 {
                     <p class="mb-0"><span class="fw-bold">@ingredient.Name</p>
-                    <p class="mb-0"><span class="fw-bold">@ingredient.Quantity</p>
-                    <p class="mb-0"><span class="fw-bold">@ingredient.Unit</p>
+                    <p class="mb-0"><span class="fw-bold">@ingredient.Quantity @ingredient.Unit</p>
 
                 }
                 
             </div>
-            
         </div>
+        <p>@e.Instructions</p>
         @foreach (var comment in e.Comments)
 {
     <div class="container my-5 py-5">

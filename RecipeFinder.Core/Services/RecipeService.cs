@@ -31,6 +31,7 @@ namespace RecipeFinder.Core.Services
             return await repository.AllAsReadOnly<Recipe>()
                 .Select(e => new RecipeInfoViewModel()
                 {
+                    Id = e.Id,
                     Name = e.Name,
                     ImageUrl = e.ImageUrl,
                     PreparationTime = e.PreparationTime,
@@ -43,6 +44,26 @@ namespace RecipeFinder.Core.Services
                     MadeByCount = e.RecipesUsers.Count()
                 })
                 .ToListAsync();         
+        }
+
+        public async Task<IEnumerable<RecipeDetailsViewModel>> DetailsAsync(int id)
+        {
+            return await repository.AllAsReadOnly<Recipe>()
+                .Where(e => e.Id == id)
+                .Select(e => new RecipeDetailsViewModel()
+                {
+                    Name = e.Name,
+                    ImageUrl = e.ImageUrl,
+                    PreparationTime = e.PreparationTime,
+                    PostedOn = e.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
+                    CategoryName = e.Category.Name,
+                    DifficultyName = e.Difficulty.Name,
+                    Cook = e.Cook.UserName,
+                    Comments = e.Comments,
+                    Ingredients = e.Ingredients,
+                    MadeByCount = e.RecipesUsers.Count()
+                })
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<RecipeInfoViewModel>> MineRecipesAsync(IdentityUser currentUser)

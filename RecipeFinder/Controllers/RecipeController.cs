@@ -62,5 +62,12 @@ namespace RecipeFinder.Controllers
 
             return View(recipes);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var recipe = await recipeService.DetailsAsync(id);
+            return View(recipe);
+        }
     }
 }

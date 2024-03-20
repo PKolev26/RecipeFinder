@@ -12,5 +12,9 @@
 
         // Date and time format
         public const string DateAndTimeFormat = "dd/MM/yyyy HH:mm";
+
+        // Recipe PreparationTime Data Constants
+        public const int RecipePreparetionTimeMinLength = 1;
+        public const int RecipePreparetionTimeMaxLength = 720;
     }
 }

@@ -1,4 +1,5 @@
-﻿using RecipeFinder.Infrastructure.Data.Models;
+﻿using RecipeFinder.Core.Models.Comment;
+using RecipeFinder.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -37,7 +38,7 @@ namespace RecipeFinder.Core.Models.Recipe
         public ICollection<Ingredient> Ingredients { get; set;} = new List<Ingredient>();
 
         [Display(Name = "Recipe's comments")]
-        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public ICollection<CommentDetailsViewModel> Comments { get; set; } = new List<CommentDetailsViewModel>();
 
         [Display(Name = "Made by")]
         public int MadeByCount { get; set; }

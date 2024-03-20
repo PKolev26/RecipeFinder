@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RecipeFinder.Core.Contracts.Recipe;
+using RecipeFinder.Core.Models.Comment;
 using RecipeFinder.Core.Models.Recipe;
 using RecipeFinder.Infrastructure.Common;
 using RecipeFinder.Infrastructure.Constants;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace RecipeFinder.Core.Services
 {
@@ -59,7 +61,13 @@ namespace RecipeFinder.Core.Services
                     CategoryName = e.Category.Name,
                     DifficultyName = e.Difficulty.Name,
                     Cook = e.Cook.UserName,
-                    Comments = e.Comments,
+                    Comments = (ICollection<CommentDetailsViewModel>)e.Comments.Select(c => new CommentDetailsViewModel
+                    {
+                        Title = c.Title,
+                        Description = c.Description,
+                        PostedOn = c.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
+                        AuthorName = c.Author.UserName
+                    }),
                     Ingredients = e.Ingredients,
                     MadeByCount = e.RecipesUsers.Count()
                 })

@@ -2,8 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RecipeFinder.Core.Contracts.Recipe;
-using RecipeFinder.Core.Models.Comment;
-using RecipeFinder.Core.Models.Recipe;
+using RecipeFinder.Core.Models.CategoryModels;
+using RecipeFinder.Core.Models.CommentModels;
+using RecipeFinder.Core.Models.DifficultyModels;
+using RecipeFinder.Core.Models.IngredientModels;
+using RecipeFinder.Core.Models.RecipeModels;
 using RecipeFinder.Infrastructure.Common;
 using RecipeFinder.Infrastructure.Constants;
 using RecipeFinder.Infrastructure.Data.Models;
@@ -26,6 +29,61 @@ namespace RecipeFinder.Core.Services
         {
             this.repository = repository;
             this._userManager = userManager;
+        }
+
+        public async Task<int> AddAsync(RecipeAddViewModel model)
+        {
+            var newRecipe = new RecipeAddViewModel
+            {
+                Name = model.Name,
+                Instructions = model.Instructions,
+                PreparationTime = model.PreparationTime,
+                CategoryId = model.CategoryId,
+                DifficultyId = model.DifficultyId,
+                ImageUrl = model.ImageUrl,
+                Ingredients = new List<IngredientsAddViewModel>()
+            };
+
+            await repository.AddAsync(newRecipe);
+            await repository.SaveChangesAsync();
+
+            return newRecipe.Id;
+        }
+
+        public async Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync()
+        {
+            return await repository.AllAsReadOnly<Category>()
+                .Select(ct => new CategoryViewModel()
+                {
+                    Id = ct.Id,
+                    Name = ct.Name
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<string>> AllCategoriesNamesAsync()
+        {
+            return await repository.AllAsReadOnly<Category>()
+                .Select(ct => ct.Name)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<DifficultyViewModel>> AllDifficultiesAsync()
+        {
+            return await repository.AllAsReadOnly<Difficulty>()
+                .Select(ct => new DifficultyViewModel()
+                {
+                    Id = ct.Id,
+                    Name = ct.Name
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<string>> AllDifficultiesNamesAsync()
+        {
+            return await repository.AllAsReadOnly<Difficulty>()
+               .Select(ct => ct.Name)
+               .ToListAsync();
         }
 
         public async Task<IEnumerable<RecipeInfoViewModel>> AllRecipesAsync()

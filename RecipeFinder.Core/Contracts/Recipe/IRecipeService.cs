@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using RecipeFinder.Core.Models.Recipe;
+using RecipeFinder.Core.Models.CategoryModels;
+using RecipeFinder.Core.Models.DifficultyModels;
+using RecipeFinder.Core.Models.IngredientModels;
+using RecipeFinder.Core.Models.RecipeModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +19,10 @@ namespace RecipeFinder.Core.Contracts.Recipe
         Task<IEnumerable<RecipeInfoViewModel>> RecipesInMasterChefDifficultyAsync();
         Task<IEnumerable<RecipeInfoViewModel>> MineRecipesAsync(IdentityUser currentUser);
         Task<IEnumerable<RecipeDetailsViewModel>> DetailsAsync(int id);
-
+        Task<int> AddAsync(RecipeAddViewModel model);
+        Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync();
+        Task<IEnumerable<string>> AllCategoriesNamesAsync();
+        Task<IEnumerable<DifficultyViewModel>> AllDifficultiesAsync();
+        Task<IEnumerable<string>> AllDifficultiesNamesAsync();
     }
 }

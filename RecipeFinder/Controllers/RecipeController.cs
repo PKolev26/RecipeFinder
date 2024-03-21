@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RecipeFinder.Core.Contracts.Recipe;
-using RecipeFinder.Core.Services;
+using RecipeFinder.Core.Models.IngredientModels;
+using RecipeFinder.Core.Models.RecipeModels;
 
 namespace RecipeFinder.Controllers
 {
@@ -68,6 +69,25 @@ namespace RecipeFinder.Controllers
         {
             var recipe = await recipeService.DetailsAsync(id);
             return View(recipe);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+
+            var newRecipe = new RecipeAddViewModel()
+            {
+                Categories = await recipeService.AllCategoriesAsync(),
+                Difficulties = await recipeService.AllDifficultiesAsync(),
+            };
+
+            return View(newRecipe);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(RecipeAddViewModel newRecipe)
+        {
+            int newRecipeId = await recipeService.AddAsync(newRecipe);
+            return RedirectToAction(nameof(All));
         }
     }
 }

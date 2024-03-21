@@ -13,26 +13,21 @@
                 <input asp-for="@Model.Name" class="form-control" aria-required="true" />
                 <span asp-validation-for="@Model.Name" class="text-danger"></span>
             </div>
-            @* <div class="mb-3">
-                <label asp-for="@Model.Lecturer" class="form-label-add-edit">Lecturer</label>
-                <input asp-for="@Model.Lecturer" class="form-control" aria-required="true" />
-                <span asp-validation-for="@Model.Lecturer" class="text-danger"></span>
+            <div class="mb-3">
+                <label asp-for="@Model.Instructions" class="form-label-add-edit">Instructions</label>
+                <textarea asp-for="@Model.Instructions" class="form-control" aria-required="true" rows="5"></textarea>
+                <span asp-validation-for="@Model.Instructions" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Details" class="form-label-add-edit">More Info</label>
-                <textarea asp-for="@Model.Details" class="form-control" aria-required="true" rows="5"></textarea>
-                <span asp-validation-for="@Model.Details" class="text-danger"></span>
+                <label asp-for="@Model.PreparationTime" class="form-label-add-edit">Preparation time</label>
+                <input asp-for="@Model.PreparationTime" class="form-control" aria-required="true" />
+                <span asp-validation-for="@Model.PreparationTime" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.DateAndTime" class="form-label-add-edit">Date of Seminar</label>
-                <input asp-for="@Model.DateAndTime" class="form-control" aria-required="true" placeholder="dd/MM/yyyy HH:mm" )" />
-                <span asp-validation-for="@Model.DateAndTime" class="text-danger"></span>
+                <label asp-for="@Model.ImageUrl" class="form-label-add-edit">Recipe picture</label>
+                <input asp-for="@Model.ImageUrl" class="form-control" aria-required="true" />
+                <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="@Model.Duration" class="form-label-add-edit">Duration</label>
-                <input asp-for="@Model.Duration" class="form-control" placeholder="30-180 min" />
-                <span asp-validation-for="@Model.Duration" class="text-danger"></span>
-            </div> *@
             <div class="mb-3">
                 <label asp-for="@Model.CategoryId" class="form-label-add-edit">Select Category</label>
                 <select asp-for="@Model.CategoryId" class="form-control" aria-required="true">
@@ -45,7 +40,18 @@
                 <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <input class="btn btn-warning mb-2 w-100 p-3 fw-bold" type="submit" value="Announce" />
+                <label asp-for="@Model.DifficultyId" class="form-label-add-edit">Select Difficulty</label>
+                <select asp-for="@Model.DifficultyId" class="form-control" aria-required="true">
+                    <option disabled selected value="">Select Difficulty...</option>
+                    @foreach (var difficulty in Model.Difficulties)
+                    {
+                        <option value="@difficulty.Id">@difficulty.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="@Model.DifficultyId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-warning mb-2 w-100 p-3 fw-bold" type="submit" asp-controller="Ingredient" asp-action="IngredientsAdd" asp-route-id="@Model.Id" value="Next" />
             </div>
         </form>
     </div>

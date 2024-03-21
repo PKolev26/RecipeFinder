@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Core.Types;
+using RecipeFinder.Core.Contracts.Ingredient;
 using RecipeFinder.Core.Contracts.Recipe;
 using RecipeFinder.Core.Services;
 using RecipeFinder.Data;
@@ -14,6 +15,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IRecipeService, RecipeService>();
+            services.AddScoped<IIngredientService, IngredientService>();
             return services;
         }
 

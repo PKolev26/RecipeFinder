@@ -73,7 +73,6 @@ namespace RecipeFinder.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-
             var newRecipe = new RecipeAddViewModel()
             {
                 Categories = await recipeService.AllCategoriesAsync(),
@@ -86,8 +85,14 @@ namespace RecipeFinder.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(RecipeAddViewModel newRecipe)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return View(newRecipe);
+            }
+
             int newRecipeId = await recipeService.AddAsync(newRecipe);
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(IngredientController.IngredientsAdd));
         }
     }
 }

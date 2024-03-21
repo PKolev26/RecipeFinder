@@ -13,6 +13,7 @@ namespace RecipeFinder.Core.Models.IngredientModels
 {
     public class IngredientsAddViewModel
     {
+        public int Id { get; set; }
         [Required(ErrorMessage = RequiredErrorMessage)]
         [StringLength(IngredientNameMaxLength, MinimumLength = IngredientNameMinLength, ErrorMessage = LengthErrorMessage)]
         public string Name { get; set; } = null!;
@@ -25,6 +26,9 @@ namespace RecipeFinder.Core.Models.IngredientModels
         [Required(ErrorMessage = RequiredErrorMessage)]
         [StringLength(IngredientUnitMaxLength, MinimumLength = IngredientUnitMinLength, ErrorMessage = LengthErrorMessage)]
         public string Unit { get; set; } = null!;
+
+        [Required(ErrorMessage = RequiredErrorMessage)]
+        public int RecipeId { get; set; }
 
     }
 }

@@ -40,8 +40,7 @@ namespace RecipeFinder.Core.Services
                 PreparationTime = model.PreparationTime,
                 CategoryId = model.CategoryId,
                 DifficultyId = model.DifficultyId,
-                ImageUrl = model.ImageUrl,
-                Ingredients = new List<IngredientsAddViewModel>()
+                ImageUrl = model.ImageUrl
             };
 
             await repository.AddAsync(newRecipe);

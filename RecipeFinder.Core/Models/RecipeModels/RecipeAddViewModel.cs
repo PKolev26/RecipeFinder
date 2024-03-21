@@ -38,10 +38,5 @@ namespace RecipeFinder.Core.Models.RecipeModels
         [Required(ErrorMessage = RequiredErrorMessage)]
         public int DifficultyId { get; set; }
         public IEnumerable<DifficultyViewModel> Difficulties { get; set; } = new List<DifficultyViewModel>();
-
-        [Required(ErrorMessage = RequiredErrorMessage)]
-        public ICollection<IngredientsAddViewModel> Ingredients = new List<IngredientsAddViewModel>();
-
-
     }
 }

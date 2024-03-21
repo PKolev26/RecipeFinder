@@ -7,8 +7,8 @@
         public const int IngredientNameMinLength = 3;
 
         // Ingredient Quantity Data Constants
-        public const double IngredientQuantityMaxLength = 0.01;
-        public const double IngredientQuantityMinLength = 999.99;
+        public const double IngredientQuantityMaxLength = 999.99;
+        public const double IngredientQuantityMinLength = 0.01;
 
         // Ingredient Unit Data Constants
         public const int IngredientUnitMaxLength = 10;

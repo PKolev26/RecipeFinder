@@ -13,16 +13,16 @@ namespace RecipeFinder.Core.Models.CommentModels
     public class CommentDetailsViewModel
     {
 
-        [Display( Name ="Comment Title")]
+        [Display( Name ="Title")]
         public string Title { get; set; } = string.Empty;
 
-        [Display(Name = "Comment Description")]
+        [Display(Name = "Description")]
         public string Description { get; set; } = string.Empty;
 
-        [Display(Name = "Comment Author")]
+        [Display(Name = "Author")]
         public string AuthorName { get; set; } = null!;
 
-        [Display(Name = "Comment Posted Date")]
+        [Display(Name = "Posted Date")]
         public string PostedOn { get; set; } = null!;
     }
 }

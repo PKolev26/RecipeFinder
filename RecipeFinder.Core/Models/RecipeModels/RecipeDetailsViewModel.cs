@@ -22,6 +22,9 @@ namespace RecipeFinder.Core.Models.RecipeModels
         [Display(Name = "Preparation time")]
         public int PreparationTime { get; set; }
 
+        [Display(Name = "Instructions")]
+        public string Instructions { get; set; } = null!;
+
         [Display(Name = "Posted on")]
         public string PostedOn { get; set; } = null!;
 

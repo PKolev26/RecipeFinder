@@ -1,4 +1,4 @@
-﻿using RecipeFinder.Core.Models.Comment;
+﻿using RecipeFinder.Core.Models.CommentModels;
 using RecipeFinder.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RecipeFinder.Core.Models.Recipe
+namespace RecipeFinder.Core.Models.RecipeModels
 {
     public class RecipeDetailsViewModel
     {

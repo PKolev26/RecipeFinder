@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace RecipeFinder.Core.Models.Recipe
+namespace RecipeFinder.Core.Models.RecipeModels
 {
     public class RecipeInfoViewModel
     {

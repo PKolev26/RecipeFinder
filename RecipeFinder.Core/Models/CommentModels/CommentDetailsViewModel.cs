@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RecipeFinder.Core.Models.Comment
+namespace RecipeFinder.Core.Models.CommentModels
 {
     public class CommentDetailsViewModel
     {

@@ -22,24 +22,28 @@ namespace RecipeFinder.Controllers
             return View();
         }
         [HttpGet]
-        public async Task<IActionResult> AddIngredients()
+        public async Task<IActionResult> AddIngredients(int id)
         {
-            var ingredient = new IngredientsAddViewModel();
+            var ingredient = new IngredientsAddViewModel()
+            {
+                
+                RecipeId = id
+            };
 
             return View(ingredient);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddIngredients(IngredientsAddViewModel ingredient, int id)
+        public async Task<IActionResult> AddIngredients(IngredientsAddViewModel model, int id)
         {
 
             if (!ModelState.IsValid)
             {
-                return View(ingredient);
+                return View(model);
             }
 
-            int newIngredientId = await ingredientService.AddAsync(ingredient, id);
-            return RedirectToAction(nameof(RecipeController.Details), new { id });
+            await ingredientService.AddAsync(model, id);
+            return RedirectToAction("Details", "Recipe",  new { id });
         }
     }
 }

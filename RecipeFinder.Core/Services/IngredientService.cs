@@ -3,6 +3,7 @@ using RecipeFinder.Core.Contracts.Ingredient;
 using RecipeFinder.Core.Models.IngredientModels;
 using RecipeFinder.Core.Models.RecipeModels;
 using RecipeFinder.Infrastructure.Common;
+using RecipeFinder.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +21,10 @@ namespace RecipeFinder.Core.Services
             this.repository = repository;
         }
 
-        public async Task<int> AddAsync(IngredientsAddViewModel model, int id)
+        public async Task AddAsync(IngredientsAddViewModel model, int id)
         {
-            var newIngredient = new IngredientsAddViewModel
+            Ingredient newIngredient = new Ingredient
             {
-
                 Name = model.Name,
                 Quantity = model.Quantity,
                 Unit = model.Unit,
@@ -34,8 +34,6 @@ namespace RecipeFinder.Core.Services
 
             await repository.AddAsync(newIngredient);
             await repository.SaveChangesAsync();
-
-            return newIngredient.Id;
         }
     }
 }

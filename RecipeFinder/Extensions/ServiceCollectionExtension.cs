@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Core.Types;
+using RecipeFinder.Core.Contracts.Comment;
 using RecipeFinder.Core.Contracts.Home;
 using RecipeFinder.Core.Contracts.Ingredient;
 using RecipeFinder.Core.Contracts.Recipe;
@@ -18,6 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IRecipeService, RecipeService>();
             services.AddScoped<IIngredientService, IngredientService>();
             services.AddScoped<IHomeService, HomeService>();
+            services.AddScoped<ICommentService, CommentService>();
             return services;
         }
 

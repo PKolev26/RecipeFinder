@@ -37,11 +37,12 @@ namespace RecipeFinder.Core.Services
             {
                 Name = model.Name,
                 CookId = cookId.Id,
+                ImageUrl = model.ImageUrl,
                 Instructions = model.Instructions,
                 PreparationTime = model.PreparationTime,
                 CategoryId = model.CategoryId,
                 DifficultyId = model.DifficultyId,
-                ImageUrl = model.ImageUrl
+                PostedOn = DateTime.Now
             };
 
             await repository.AddAsync(newRecipe);

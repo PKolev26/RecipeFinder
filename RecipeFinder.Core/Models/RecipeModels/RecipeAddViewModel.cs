@@ -26,7 +26,7 @@ namespace RecipeFinder.Core.Models.RecipeModels
         public string Instructions { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredErrorMessage)]
-        public string ImageUrl = null!;
+        public string ImageUrl { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredErrorMessage)]
         [Range(RecipePreparetionTimeMinLength, RecipePreparetionTimeMaxLength, ErrorMessage = LengthErrorMessage)]

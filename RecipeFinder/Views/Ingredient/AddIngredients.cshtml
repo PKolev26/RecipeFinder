@@ -24,7 +24,7 @@
                 <span asp-validation-for="@Model.Unit" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <a asp-controller="Recipe" asp-action="All" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Finish</a>
+                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@Model.RecipeId" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Finish</a>
             </div>
         </form>
     </div>

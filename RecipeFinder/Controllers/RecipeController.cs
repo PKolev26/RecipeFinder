@@ -91,8 +91,9 @@ namespace RecipeFinder.Controllers
                 return View(newRecipe);
             }
             var cookId = await _userManager.GetUserAsync(User);
+
             int newRecipeId = await recipeService.AddAsync(newRecipe, cookId);
-            return RedirectToAction("AddIngredients", "Ingredient", new { id = newRecipeId });
+            return RedirectToAction("AddIngredients", "Ingredient", new {  id = newRecipeId });
         }
     }
 }

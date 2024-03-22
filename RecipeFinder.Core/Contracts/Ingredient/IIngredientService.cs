@@ -9,6 +9,6 @@ namespace RecipeFinder.Core.Contracts.Ingredient
 {
     public interface IIngredientService
     {
-        Task<int> AddAsync(IngredientsAddViewModel model, int recipeId);
+        Task<int> AddAsync(IngredientsAddViewModel model, int id);
     }
 }

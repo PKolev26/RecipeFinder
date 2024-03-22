@@ -20,7 +20,7 @@ namespace RecipeFinder.Core.Services
             this.repository = repository;
         }
 
-        public async Task<int> AddAsync(IngredientsAddViewModel model, int recipeId)
+        public async Task<int> AddAsync(IngredientsAddViewModel model, int id)
         {
             var newIngredient = new IngredientsAddViewModel
             {
@@ -28,7 +28,7 @@ namespace RecipeFinder.Core.Services
                 Name = model.Name,
                 Quantity = model.Quantity,
                 Unit = model.Unit,
-                RecipeId = recipeId
+                RecipeId = id
                 
             };
 

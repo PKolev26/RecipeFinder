@@ -33,7 +33,22 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Recipe" asp-action="Mine">Mine recipes</a>
                             </li>
-                        </ul>                        
+                            
+                        </ul>
+                        @if (ViewBag.HasUnfinishedRecipe == true)
+                        {
+                            <div class="icon" id="bell"> <img src="~/images/bell.png" alt=""> </div>
+                            <div class="notifications" id="box">
+                                <h2>Notifications - <span>1</span></h2>
+                                <div class="notifications-item">
+                                    <img src="~/images/logo.png" alt="img">
+                                    <div class="text">
+                                        <h4>RecipeFinder Admin</h4>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Recipe" asp-action="Mine">You have unfinished recipes.</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     }
                     <partial name="_LoginPartial" />
                 </div>

@@ -10,22 +10,47 @@
 <div class="text-center row">
     @foreach (var e in Model)
     {
-        <div class="card col-4" style="width: 20rem; ">
-            <div class="card-body">
-                <img class="card-imgurl" style="width: 18rem; height: 15rem;" src="@e.ImageUrl" alt="recipe image" />
-                <h4 class="card-title">@e.Name</h4>
-                <h5 class="card-cook">Cooked by: @e.Cook.Substring(0, e.Cook.LastIndexOf("@"))</h5>
-                <br />
-                <p class="mb-0"><span class="fw-bold">Preparation time: </span>@e.PreparationTime</p>
-                <p class="mb-0"><span class="fw-bold">Category: </span>@e.CategoryName</p>
-                <p class="mb-0"><span class="fw-bold">Difficulty level: </span>@e.DifficultyName</p>
-                <p class="mb-0"><span class="fw-bold">Ingredients: </span>@e.IngredientCount</p>
-                <p class="mb-0"><span class="fw-bold">Comments: </span>@e.CommentCount</p>
-                <p class="mb-0"><span class="fw-bold">Made by: </span>@e.MadeByCount <span class="fw-bold">users</span></p>
-                <br />
-                <p class="mb-0"><span class="fw-bold">Posted on: </span>@e.PostedOn</p>
+        if (e.IngredientCount == 0)
+        {
+            <div class="card col-4" style="width: 20rem; ">
+                <div class="card-body">
+                    <img class="card-imgurl" style="width: 18rem; height: 15rem;" src="@e.ImageUrl" alt="recipe image" />
+                    <h4 class="card-title">@e.Name</h4>
+                    <h5 class="card-cook">Cooked by: @e.Cook.Substring(0, e.Cook.LastIndexOf("@"))</h5>
+                    <br />
+                    <p class="mb-0"><span class="fw-bold">Preparation time: </span>@e.PreparationTime</p>
+                    <p class="mb-0"><span class="fw-bold">Category: </span>@e.CategoryName</p>
+                    <p class="mb-0"><span class="fw-bold">Difficulty level: </span>@e.DifficultyName</p>
+                    <p class="mb-0"><span class="fw-bold">Ingredients: </span>@e.IngredientCount</p>
+                    <p class="mb-0"><span class="fw-bold">Comments: </span>@e.CommentCount</p>
+                    <p class="mb-0"><span class="fw-bold">Made by: </span>@e.MadeByCount <span class="fw-bold">users</span></p>
+                    <br />
+                    <p class="mb-0"><span class="fw-bold">Posted on: </span>@e.PostedOn</p>
+                </div>
+                <div>
+                    <a asp-controller="Ingredient" asp-action="AddIngredients" asp-route-id="@e.Id" class="btn btn-danger mb-2 w-100 p-3 fw-bold">FINISH</a>
+                </div>
             </div>
-        </div>
+        }
+        else
+        {
+           <div class="card col-4" style="width: 20rem; ">
+                <div class="card-body">
+                    <img class="card-imgurl" style="width: 18rem; height: 15rem;" src="@e.ImageUrl" alt="recipe image" />
+                    <h4 class="card-title">@e.Name</h4>
+                    <h5 class="card-cook">Cooked by: @e.Cook.Substring(0, e.Cook.LastIndexOf("@"))</h5>
+                    <br />
+                    <p class="mb-0"><span class="fw-bold">Preparation time: </span>@e.PreparationTime</p>
+                    <p class="mb-0"><span class="fw-bold">Category: </span>@e.CategoryName</p>
+                    <p class="mb-0"><span class="fw-bold">Difficulty level: </span>@e.DifficultyName</p>
+                    <p class="mb-0"><span class="fw-bold">Ingredients: </span>@e.IngredientCount</p>
+                    <p class="mb-0"><span class="fw-bold">Comments: </span>@e.CommentCount</p>
+                    <p class="mb-0"><span class="fw-bold">Made by: </span>@e.MadeByCount <span class="fw-bold">users</span></p>
+                    <br />
+                    <p class="mb-0"><span class="fw-bold">Posted on: </span>@e.PostedOn</p>
+                </div>
+            </div> 
+        }
     }
 </div>
 

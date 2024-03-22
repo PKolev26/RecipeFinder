@@ -152,6 +152,7 @@ namespace RecipeFinder.Core.Services
               .Where(e => e.CookId == currentUser.Id)
               .Select(e => new RecipeInfoViewModel()
               {
+                  Id = e.Id,
                   Name = e.Name,
                   ImageUrl = e.ImageUrl,
                   PreparationTime = e.PreparationTime,

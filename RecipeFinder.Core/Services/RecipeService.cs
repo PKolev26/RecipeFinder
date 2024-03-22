@@ -31,11 +31,12 @@ namespace RecipeFinder.Core.Services
             this._userManager = userManager;
         }
 
-        public async Task<int> AddAsync(RecipeAddViewModel model)
+        public async Task<int> AddAsync(RecipeAddViewModel model, IdentityUser cookId)
         {
-            var newRecipe = new RecipeAddViewModel
+            Recipe newRecipe = new Recipe
             {
                 Name = model.Name,
+                CookId = cookId.Id,
                 Instructions = model.Instructions,
                 PreparationTime = model.PreparationTime,
                 CategoryId = model.CategoryId,
@@ -130,6 +131,13 @@ namespace RecipeFinder.Core.Services
                     MadeByCount = e.RecipesUsers.Count()
                 })
                 .ToListAsync();
+        }
+
+        public async Task<string?> GetCookIdAsync(string cookId)
+        {
+            return (await repository
+                .AllAsReadOnly<IdentityUser>()
+                .FirstOrDefaultAsync(iu => iu.Id == cookId))?.Id;
         }
 
         public async Task<IEnumerable<RecipeInfoViewModel>> MineRecipesAsync(IdentityUser currentUser)

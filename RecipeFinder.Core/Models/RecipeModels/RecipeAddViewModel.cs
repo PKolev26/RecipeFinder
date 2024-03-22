@@ -17,7 +17,7 @@ namespace RecipeFinder.Core.Models.RecipeModels
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage =RequiredErrorMessage)]
+        [Required(ErrorMessage = RequiredErrorMessage)]
         [StringLength(RecipeNameMaxLength, MinimumLength = RecipeNameMinLength, ErrorMessage = LengthErrorMessage)]
         public string Name { get; set; } = null!;
 

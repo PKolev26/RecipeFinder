@@ -53,7 +53,7 @@ namespace RecipeFinder.Core.Services
 
         public async Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync()
         {
-            return await repository.AllAsReadOnly<Category>()
+            return await repository.AllReadOnly<Category>()
                 .Select(ct => new CategoryViewModel()
                 {
                     Id = ct.Id,
@@ -64,14 +64,14 @@ namespace RecipeFinder.Core.Services
 
         public async Task<IEnumerable<string>> AllCategoriesNamesAsync()
         {
-            return await repository.AllAsReadOnly<Category>()
+            return await repository.AllReadOnly<Category>()
                 .Select(ct => ct.Name)
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<DifficultyViewModel>> AllDifficultiesAsync()
         {
-            return await repository.AllAsReadOnly<Difficulty>()
+            return await repository.AllReadOnly<Difficulty>()
                 .Select(ct => new DifficultyViewModel()
                 {
                     Id = ct.Id,
@@ -82,14 +82,14 @@ namespace RecipeFinder.Core.Services
 
         public async Task<IEnumerable<string>> AllDifficultiesNamesAsync()
         {
-            return await repository.AllAsReadOnly<Difficulty>()
+            return await repository.AllReadOnly<Difficulty>()
                .Select(ct => ct.Name)
                .ToListAsync();
         }
 
         public async Task<IEnumerable<RecipeInfoViewModel>> AllRecipesAsync()
         {
-            return await repository.AllAsReadOnly<Recipe>()
+            return await repository.AllReadOnly<Recipe>()
                 .Select(e => new RecipeInfoViewModel()
                 {
                     Id = e.Id,
@@ -109,7 +109,7 @@ namespace RecipeFinder.Core.Services
 
         public async Task<IEnumerable<RecipeDetailsViewModel>> DetailsAsync(int id)
         {
-            return await repository.AllAsReadOnly<Recipe>()
+            return await repository.AllReadOnly<Recipe>()
                 .Where(e => e.Id == id)
                 .Select(e => new RecipeDetailsViewModel()
                 {
@@ -138,7 +138,7 @@ namespace RecipeFinder.Core.Services
         public async Task<string?> GetCookIdAsync(string cookId)
         {
             return (await repository
-                .AllAsReadOnly<IdentityUser>()
+                .AllReadOnly<IdentityUser>()
                 .FirstOrDefaultAsync(iu => iu.Id == cookId))?.Id;
         }
 
@@ -149,7 +149,7 @@ namespace RecipeFinder.Core.Services
                 return Enumerable.Empty<RecipeInfoViewModel>();
             }
 
-            return await repository.AllAsReadOnly<Recipe>()
+            return await repository.AllReadOnly<Recipe>()
               .Where(e => e.CookId == currentUser.Id)
               .Select(e => new RecipeInfoViewModel()
               {
@@ -170,7 +170,7 @@ namespace RecipeFinder.Core.Services
 
         public async Task<IEnumerable<RecipeInfoViewModel>> RecipesInMasterChefDifficultyAsync()
         {
-            return await repository.AllAsReadOnly<Recipe>()
+            return await repository.AllReadOnly<Recipe>()
                .Where(e => e.Difficulty.Id == 5)
               .Select(e => new RecipeInfoViewModel()
               {
@@ -190,7 +190,7 @@ namespace RecipeFinder.Core.Services
 
         public async Task<IEnumerable<RecipeInfoViewModel>> TheLastedRecipeAsync()
         {
-            return await repository.AllAsReadOnly<Recipe>()
+            return await repository.AllReadOnly<Recipe>()
                .OrderByDescending(e => e.PostedOn)
                .Select(e => new RecipeInfoViewModel()
                {
@@ -211,7 +211,7 @@ namespace RecipeFinder.Core.Services
 
         public async Task<IEnumerable<RecipeInfoViewModel>> Top3RecipesAsync()
         {
-            return await repository.AllAsReadOnly<Recipe>()
+            return await repository.AllReadOnly<Recipe>()
                .Select(e => new RecipeInfoViewModel()
                {
                    Name = e.Name,

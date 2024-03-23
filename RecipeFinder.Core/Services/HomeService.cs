@@ -21,7 +21,7 @@ namespace RecipeFinder.Core.Services
         }
         public async Task<bool> UserHasUnfinishedRecipeAsync(IdentityUser user)
         {
-            var hasUnfinishedRecipeList = await repository.AllAsReadOnly<Recipe>()
+            var hasUnfinishedRecipeList = await repository.AllReadOnly<Recipe>()
                 .Where(r => r.CookId == user.Id && r.Ingredients.Count() == 0)
                 .ToListAsync();
 

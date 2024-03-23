@@ -113,6 +113,7 @@ namespace RecipeFinder.Core.Services
                 .Where(e => e.Id == id)
                 .Select(e => new RecipeDetailsViewModel()
                 {
+                    Id = id,
                     Name = e.Name,
                     ImageUrl = e.ImageUrl,
                     PreparationTime = e.PreparationTime,
@@ -121,7 +122,7 @@ namespace RecipeFinder.Core.Services
                     CategoryName = e.Category.Name,
                     DifficultyName = e.Difficulty.Name,
                     Cook = e.Cook.UserName,
-                    Comments = (ICollection<CommentDetailsViewModel>)e.Comments.Select(c => new CommentDetailsViewModel
+                    Comments = (ICollection<CommentsInfoViewModel>)e.Comments.Select(c => new CommentsInfoViewModel
                     {
                         Title = c.Title,
                         Description = c.Description,

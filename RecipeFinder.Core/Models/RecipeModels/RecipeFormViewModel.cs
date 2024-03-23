@@ -13,7 +13,7 @@ using RecipeFinder.Core.Models.IngredientModels;
 
 namespace RecipeFinder.Core.Models.RecipeModels
 {
-    public class RecipeAddViewModel
+    public class RecipeFormViewModel
     {
         public int Id { get; set; }
 

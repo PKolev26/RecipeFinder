@@ -5,6 +5,7 @@ using RecipeFinder.Core.Contracts.Recipe;
 using RecipeFinder.Core.Models.CommentModels;
 using RecipeFinder.Core.Models.RecipeModels;
 using RecipeFinder.Core.Services;
+using RecipeFinder.Extensions;
 
 namespace RecipeFinder.Controllers
 {
@@ -25,24 +26,20 @@ namespace RecipeFinder.Controllers
         [HttpGet]
         public async Task<IActionResult> AddComment(int id)
         {
-            var newComment = new CommentAddViewModel()
-            {
-                RecipeId = id,
-            };
-
-            return View(newComment);
+            var model = new CommentAddViewModel();
+            return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddComment(CommentAddViewModel model, int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(model);
+            //}
             var authorId = await _userManager.GetUserAsync(User);
-            await commentService.AddAsync(model, authorId, id);
-            return RedirectToAction("Details", "Recipe", new { id}, $"#{model.Id}");
+            await commentService.AddAsync(model,authorId, id);
+            return RedirectToAction("Details", "Recipe", new {id});
         }
     }
 }

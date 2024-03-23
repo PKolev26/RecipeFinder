@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using RecipeFinder.Infrastructure.Data.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -17,17 +13,23 @@ namespace RecipeFinder.Core.Models.CommentModels
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage =RequiredErrorMessage)]
+        [Required]
         [StringLength(CommentTitleMaxLength, MinimumLength = CommentTitleMinLength, ErrorMessage = LengthErrorMessage)]
+        [Display(Name = "Title")]
         public string Title { get; set; } = string.Empty;
 
         [Required]
         [StringLength(CommentDescriptionMaxLength, MinimumLength = CommentDescriptionMinLength, ErrorMessage = LengthErrorMessage)]
+        [Display(Name = "Description")]
         public string Description { get; set; } = string.Empty;
 
         public string AuthorId { get; set; } = string.Empty;
 
-        public DateTime PostedOn { get; set; }
+        [Display(Name = "Author")]
+        public string AuthorName { get; set; } = null!;
+
+        [Display(Name = "Posted Date")]
+        public string PostedOn { get; set; } = null!;
 
         public int RecipeId { get; set; }
     }

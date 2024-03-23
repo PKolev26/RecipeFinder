@@ -41,9 +41,11 @@ namespace RecipeFinder.Core.Models.RecipeModels
         public ICollection<Ingredient> Ingredients { get; set;} = new List<Ingredient>();
 
         [Display(Name = "Recipe's comments")]
-        public ICollection<CommentDetailsViewModel> Comments { get; set; } = new List<CommentDetailsViewModel>();
+        public ICollection<CommentsInfoViewModel> Comments { get; set; } = new List<CommentsInfoViewModel>();
 
         [Display(Name = "Made by")]
         public int MadeByCount { get; set; }
+
+        public CommentAddViewModel AddComment { get; set; } = new CommentAddViewModel();
     }
 }

@@ -1,20 +1,18 @@
 ﻿@model IEnumerable<RecipeInfoViewModel>
 @{
-    ViewBag.Title = "All Recipes";
+    ViewBag.Title = "Recipe Book";
 }
 
 
- <h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
 <div class="text-center row">
     @foreach (var e in Model)
     {
-        if(@e.IngredientCount > 0)
-        {
-            <div class="card col-4" style="width: 20rem;">
+            <div class="card col-4" style="width: 20rem; ">
                 <div class="card-body">
-                    <img class="card-imgurl" style=" width: 18rem; height: 15rem;" src="@e.ImageUrl" alt="recipe image" />
+                    <img class="card-imgurl" style="width: 18rem; height: 15rem;" src="@e.ImageUrl" alt="recipe image" />
                     <h4 class="card-title">@e.Name</h4>
                     <h5 class="card-cook">Cooked by: @e.Cook.Substring(0, e.Cook.LastIndexOf("@"))</h5>
                     <br />
@@ -26,20 +24,13 @@
                     <p class="mb-0"><span class="fw-bold">Made by: </span>@e.MadeByCount <span class="fw-bold">users</span></p>
                     <br />
                     <p class="mb-0"><span class="fw-bold">Posted on: </span>@e.PostedOn</p>
-                    <a asp-controller="Recipe" asp-action="Details" asp-route-id="@e.Id" class="btn btn-outline-warning mb-2 w-100 p-3 fw-bold">More info</a>
-                    @if(User.Identity.Name == e.Cook)
-                    {
-                        <a asp-controller="Recipe" asp-action="Edit" asp-route-id="@e.Id" class="btn btn-outline-dark mb-2 w-100 p-3 fw-bold">Edit</a>
-                    }
-                    else
-                    {
-                        <form method="post" asp-controller="Recipe" asp-action="AddToRecipeBook" asp-route-id="@e.Id">
-                            <button type="submit" class="btn btn-outline-success mb-2 w-100 p-3 fw-bold">Add to Recipe Book</button>
-                        </form>
-                    }
+                </div>
+                <div>
+                    <form method="post" asp-controller="Recipe" asp-action="RemoveFromRecipeBook" asp-route-id="@e.Id">
+                        <button type="submit" class="btn btn-outline-danger mb-2 w-100 p-3 fw-bold">Remove from Recipe book</button>
+                    </form>
                 </div>
             </div>
-        }
     }
 </div>
 

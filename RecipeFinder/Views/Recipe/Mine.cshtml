@@ -30,6 +30,11 @@
                 <div>
                     <a asp-controller="Ingredient" asp-action="AddIngredients" asp-route-id="@e.Id" class="btn btn-danger mb-2 w-100 p-3 fw-bold">FINISH</a>
                 </div>
+                <div>
+                    <form method="post" asp-controller="Recipe" asp-action="Delete" asp-route-id="@e.Id">
+                        <button type="submit" class="btn btn-outline-danger mb-2 w-100 p-3 fw-bold">Delete</button>
+                    </form>
+                </div>
             </div>
         }
         else
@@ -48,6 +53,11 @@
                     <p class="mb-0"><span class="fw-bold">Made by: </span>@e.MadeByCount <span class="fw-bold">users</span></p>
                     <br />
                     <p class="mb-0"><span class="fw-bold">Posted on: </span>@e.PostedOn</p>
+                </div>
+                <div>
+                    <form method="post" asp-controller="Recipe" asp-action="Delete" asp-route-id="@e.Id">
+                        <button type="submit" class="btn btn-outline-danger mb-2 w-100 p-3 fw-bold">Delete</button>
+                    </form>
                 </div>
             </div> 
         }

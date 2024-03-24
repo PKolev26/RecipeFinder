@@ -19,11 +19,18 @@ namespace RecipeFinder.Core.Contracts.Recipe
         Task<IEnumerable<RecipeInfoViewModel>> RecipesInMasterChefDifficultyAsync();
         Task<IEnumerable<RecipeInfoViewModel>> MineRecipesAsync(IdentityUser currentUser);
         Task<IEnumerable<RecipeDetailsViewModel>> DetailsAsync(int id);
-        Task<int> AddAsync(RecipeAddViewModel model, IdentityUser cookId);
+        Task<RecipeDetailsViewModel> RecipeDetailsByIdAsync(int id);
+        Task<int> AddAsync(RecipeFormViewModel model, IdentityUser cookId);
         Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync();
         Task<IEnumerable<string>> AllCategoriesNamesAsync();
         Task<IEnumerable<DifficultyViewModel>> AllDifficultiesAsync();
         Task<IEnumerable<string>> AllDifficultiesNamesAsync();
         Task<string?> GetCookIdAsync(string cookId);
+        Task EditAsync(int recipeId, RecipeFormViewModel model);
+        Task<RecipeFormViewModel?> GetRecipeFormViewModelByIdAsync(int id);
+        Task AddToRecipeUsersAsync(int recipeId, IdentityUser userId);
+        Task<IEnumerable<RecipeInfoViewModel>> RecipeBookAsync(IdentityUser currentUser);
+        Task RemoveFromRecipeUsersAsync(int recipeId, IdentityUser userId);
+        Task DeleteAsync(int recipeId);
     }
 }

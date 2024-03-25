@@ -3,41 +3,107 @@
     ViewBag.Title = "Details";
 }
 
- <h2 class="text-center">@ViewBag.Title</h2>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/design.css">
+</head>
+<h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
-<div class="text-center row">
-    @foreach (var e in Model)
-    {
-        ViewData["Id"] = @e.Id;
-        <div class="card col-4" style="width: 20rem; ">
-            <div class="card-body">
-                <img class="card-imgurl" style="width: 18rem; height: 15rem;" src="@e.ImageUrl" alt="recipe image" />
-                <h4 class="card-title">@e.Name</h4>
-                <h5 class="card-cook">Cooked by: @e.Cook.Substring(0, e.Cook.LastIndexOf("@"))</h5>
-                <br />
-                <p class="mb-0"><span class="fw-bold">Preparation time: </span>@e.PreparationTime</p>
-                <p class="mb-0"><span class="fw-bold">Category: </span>@e.CategoryName</p>
-                <p class="mb-0"><span class="fw-bold">Difficulty level: </span>@e.DifficultyName</p>
-                <p class="mb-0"><span class="fw-bold">Made by: </span>@e.MadeByCount <span class="fw-bold">users</span></p>
-                <br />
-                <p class="mb-0"><span class="fw-bold">Posted on: </span>@e.PostedOn</p>
-                @foreach (var ingredient in e.Ingredients)
-                {
-                    <p class="mb-0"><span class="fw-bold">@ingredient.Name</span></p>
-                    <p class="mb-0"><span class="fw-bold">@ingredient.Quantity @ingredient.Unit</span></p>
 
-                }
+@foreach (var e in Model)
+{
+    ViewData["Id"] = @e.Id;
+    <div class="details-body">
+        <section>
+
+
+            <div class="title">
+                <p>@e.Name</p>
+
             </div>
-        </div>
-        <p>@e.Instructions</p>
-        @foreach (var comment in e.Comments)
-        {
-            <partial name="_CommentsPartialView" model="@comment" />
-        }
-        <partial name="_AddCommentPartialView" model="e.AddComment" view-data="ViewData" />
-    }
-</div>
+            <article>
+                <header>
+                    <div class="details">
+                        <div class="icon">
+                            <i class="fa-solid fa-person"></i>
+                            <p><strong>Chef</strong></p>
+                            <p>User</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa-solid fa-users"></i>
+                            <p><strong>Made by</strong></p>
+                            <p>3 users</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <p><strong>Posted on</strong></p>
+                            <p>17-03-2024 13:20</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa-solid fa-bars"></i>
+                            <p><strong>Category</strong></p>
+                            <p>Main Course</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa-solid fa-signal"></i>
+                            <p><strong>Difficulty level</strong></p>
+                            <p>Medium</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa-regular fa-clock"></i>
+                            <p><strong>Time</strong></p>
+                            <p>60 min</p>
+                        </div>
+                    </div>
+
+
+                    <div class="ingredients">
+                        <p>Needed ingredients</p>
+                        <div class="products">
+                            <ul>
+
+                                @foreach (var ingredient in e.Ingredients)
+                                {
+                                    <li>@ingredient.Name @ingredient.Quantity @ingredient.Unit</li>
+
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+                <div class="image">
+                    <img src="@e.ImageUrl" alt="Recipe image">
+                </div>
+
+            </article>
+
+        </section>
+
+        <section class="preparation">
+            <p class="preparation-title">Preparation instructions</p>
+            <div class="description">
+                <p>
+                    @e.Instructions
+                </p>
+            </div>
+            <section class='comments' style="background-color: #fff;width: 60vw;align-self: center;border-top-left-radius: 2em ;border-top-right-radius: 2em ;">
+                <div class="container my-2 py-5">
+                    <div class="row d-flex justify-content-center" style="gap:2em;">
+                        @foreach (var comment in e.Comments)
+                        {
+                            <partial name="_CommentsPartialView" model="@comment" />
+                        }
+                        <partial name="_AddCommentPartialView" model="e.AddComment" view-data="ViewData" />
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
+}
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+details-body {
+    font: 16px/1.5em "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    padding: 0 2em;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+}
+
+    section:first-child {
+        padding: 4em 0;
+        font-size: 1.2em;
+        display: flex;
+        justify-content: space-evenly;
+        gap: 2em;
+    }
+
+article {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+header {
+    flex: 0 1 55%;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    max-width: 45vw;
+    font-size: 2.5em;
+    font-weight: 500;
+    /* font-style: oblique; */
+    text-align: center;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5em 0.5em;
+}
+
+    .icon p:first-of-type {
+        font-size: 1.3em;
+    }
+
+    .icon p:nth-of-type(2) {
+        margin-top: -1.5em;
+    }
+
+    .icon p {
+        margin: 0;
+    }
+
+    .icon i {
+        font-size: 2.5em;
+    }
+
+.details {
+    display: flex;
+    flex-direction: row;
+    font-size: 0.7em;
+    justify-content: space-around;
+    font-style: italic;
+    background-color: #FFC107;
+    padding: 2em 0 1.5em 0;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    border-bottom: 5px solid white;
+    color: black;
+    /* text-shadow: 0 0 0.1em black; */
+}
+
+.image {
+    max-width: 500px;
+    align-self: center;
+}
+
+    .image img {
+        border-radius: 0.5em;
+        box-shadow: 0 0 0.3em 0.1em rgb(0, 0, 0, 0.3);
+    }
+
+.ingredients {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #d9d9d9;
+    color: black;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    padding: 1em 0;
+}
+
+    .ingredients p {
+        font-size: 1.7em;
+        font-weight: 500;
+        font-style: oblique;
+    }
+
+    .ingredients li {
+        font-size: 1em;
+    }
+
+.products {
+    align-self: center;
+}
+
+.details-body ul {
+    margin-left: -100px;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    text-align: left;
+}
+
+.preparation {
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 7em;
+}
+
+.preparation-title {
+    font-size: 2em;
+    font-weight: 500;
+    /* font-style: italic; */
+}
+
+.description {
+    padding: 1em 0 5em 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    text-align: center;
+}
+
+.comments button {
+    background-color: #FFC107;
+    border-color: black;
+    color: black;
+}
+
+    .comments button:active {
+        background-color: #503C3C;
+        color: white;
+    }

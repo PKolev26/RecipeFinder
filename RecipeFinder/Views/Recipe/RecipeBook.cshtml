@@ -25,6 +25,7 @@
                     <br />
                     <p class="mb-0"><span class="fw-bold">Posted on: </span>@e.PostedOn</p>
                 </div>
+                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@e.Id" class="btn btn-outline-warning mb-2 w-100 p-3 fw-bold">More info</a>
                 <div>
                     <form method="post" asp-controller="Recipe" asp-action="RemoveFromRecipeBook" asp-route-id="@e.Id">
                         <button type="submit" class="btn btn-outline-danger mb-2 w-100 p-3 fw-bold">Remove from Recipe book</button>

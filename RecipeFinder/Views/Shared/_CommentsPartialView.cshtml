@@ -5,10 +5,10 @@
         <div class="d-flex flex-start align-items-center" style="gap:1em;">
             <div style="height: 45px;width: 45px;">
                 <img class="rounded-circle shadow-1-strong me-3"
-                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" />
+                     src="https://p7.hiclipart.com/preview/355/848/997/computer-icons-user-profile-google-account-photos-icon-account.jpg" alt="avatar" />
             </div>
             <div>
-                <h6 style="font-size: 0.9em;color: black;font-weight: bold;font-style: italic;">@Model.AuthorName</h6>
+                <h6 style="font-size: 0.9em;color: black;font-weight: bold;font-style: italic;">@Model.AuthorName.Substring(0, Model.AuthorName.LastIndexOf("@"))</h6>
                 <p class="text-muted small mb-0" style="font-size: 0.7em;">
                     Shared publicly - @Model.PostedOn
                 </p>

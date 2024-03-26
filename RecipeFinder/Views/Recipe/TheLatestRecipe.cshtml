@@ -25,6 +25,7 @@
                 <br />
                 <p class="mb-0"><span class="fw-bold">Posted on: </span>@e.PostedOn</p>
             </div>
+             <a asp-controller="Recipe" asp-action="Details" asp-route-id="@e.Id" class="btn btn-outline-warning mb-2 w-100 p-3 fw-bold">More info</a>
         </div>
     }
 </div>

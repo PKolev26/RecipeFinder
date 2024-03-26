@@ -30,32 +30,32 @@
                         <div class="icon">
                             <i class="fa-solid fa-person"></i>
                             <p><strong>Chef</strong></p>
-                            <p>User</p>
+                            <p>@e.Cook.Substring(0, @e.Cook.LastIndexOf("@"))</p>
                         </div>
                         <div class="icon">
                             <i class="fa-solid fa-users"></i>
                             <p><strong>Made by</strong></p>
-                            <p>3 users</p>
+                            <p>@e.MadeByCount users</p>
                         </div>
                         <div class="icon">
                             <i class="fa-solid fa-calendar-days"></i>
                             <p><strong>Posted on</strong></p>
-                            <p>17-03-2024 13:20</p>
+                            <p>@e.PostedOn</p>
                         </div>
                         <div class="icon">
                             <i class="fa-solid fa-bars"></i>
                             <p><strong>Category</strong></p>
-                            <p>Main Course</p>
+                            <p>@e.CategoryName</p>
                         </div>
                         <div class="icon">
                             <i class="fa-solid fa-signal"></i>
                             <p><strong>Difficulty level</strong></p>
-                            <p>Medium</p>
+                            <p>@e.DifficultyName</p>
                         </div>
                         <div class="icon">
                             <i class="fa-regular fa-clock"></i>
                             <p><strong>Time</strong></p>
-                            <p>60 min</p>
+                            <p>@e.PreparationTime min</p>
                         </div>
                     </div>
 

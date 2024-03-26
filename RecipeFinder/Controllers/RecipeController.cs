@@ -6,6 +6,7 @@ using RecipeFinder.Core.Models.IngredientModels;
 using RecipeFinder.Core.Models.RecipeModels;
 using RecipeFinder.Core.Services;
 using RecipeFinder.Extensions;
+using RecipeFinder.Infrastructure.Data.Models;
 
 namespace RecipeFinder.Controllers
 {
@@ -69,6 +70,10 @@ namespace RecipeFinder.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
+            if (await recipeService.ExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
             var recipe = await recipeService.DetailsAsync(id);
             return View(recipe);
         }
@@ -87,22 +92,30 @@ namespace RecipeFinder.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(RecipeFormViewModel newRecipe)
         {
-
-            if (!ModelState.IsValid)
-            {
-                return View(newRecipe);
-            }
             var cookId = await _userManager.GetUserAsync(User);
 
             int newRecipeId = await recipeService.AddAsync(newRecipe, cookId);
+
             return RedirectToAction("AddIngredients", "Ingredient", new { id = newRecipeId });
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            var recipe = await recipeService.RecipeDetailsByIdAsync(id);
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (await recipeService.ExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
 
             var model = await recipeService.GetRecipeFormViewModelByIdAsync(id);
+
+            if (recipe.CookId != currentUser.Id)
+            {
+                return BadRequest();
+            }
 
             return View(model);
         }
@@ -110,12 +123,18 @@ namespace RecipeFinder.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, RecipeFormViewModel model)
         {
+            var recipe = await recipeService.RecipeDetailsByIdAsync(id);
 
-            if (ModelState.IsValid == false)
+            if (await recipeService.ExistsAsync(id) == false)
             {
-                model.Categories = await recipeService.AllCategoriesAsync();
-                model.Difficulties = await recipeService.AllDifficultiesAsync();
-                return View(model);
+                return BadRequest();
+            }
+
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if(recipe.CookId != currentUser.Id)
+            {
+                return BadRequest();
             }
 
             await recipeService.EditAsync(id, model);
@@ -127,16 +146,43 @@ namespace RecipeFinder.Controllers
         public async Task<IActionResult> AddToRecipeBook(int id)
         {
             var currentUser = await _userManager.GetUserAsync(User);
-            await recipeService.AddToRecipeUsersAsync(id, currentUser);
 
-            return RedirectToAction(nameof(RecipeBook));
+            var recipe = await recipeService.RecipeDetailsByIdAsync(id);
+
+            if (await recipeService.ExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            if (currentUser.Id != recipe.CookId)
+            {
+                return BadRequest();
+            }
+
+            if (recipe.RecipeUser != null && recipe.RecipeUser.RecipeId == id && recipe.RecipeUser.UserId == currentUser.Id)
+            {
+                return RedirectToAction(nameof(RecipeBook));
+            }
+            else
+            {
+                await recipeService.AddToRecipeUsersAsync(id, currentUser);
+
+                return RedirectToAction(nameof(RecipeBook));
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> RemoveFromRecipeBook(int id)
         {
+            if (await recipeService.ExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
             var currentUser = await _userManager.GetUserAsync(User);
+
             await recipeService.RemoveFromRecipeUsersAsync(id, currentUser);
+
             return RedirectToAction(nameof(RecipeBook));
         }
 
@@ -152,7 +198,19 @@ namespace RecipeFinder.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (await recipeService.ExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
             var recipe = await recipeService.RecipeDetailsByIdAsync(id);
+
+            if (currentUser.Id != recipe.CookId)
+            {
+                return BadRequest();
+            }
 
             var model = new RecipeDetailsViewModel()
             {
@@ -172,6 +230,20 @@ namespace RecipeFinder.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(RecipeDetailsViewModel model)
         {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (await recipeService.ExistsAsync(model.Id) == false)
+            {
+                return BadRequest();
+            }
+
+            var recipe = await recipeService.RecipeDetailsByIdAsync(model.Id);
+
+            if (currentUser.Id != recipe.CookId)
+            {
+                return BadRequest();
+            }
+
             await recipeService.DeleteAsync(model.Id);
 
             return RedirectToAction(nameof(All));

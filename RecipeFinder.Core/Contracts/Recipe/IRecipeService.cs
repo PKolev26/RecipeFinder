@@ -32,5 +32,7 @@ namespace RecipeFinder.Core.Contracts.Recipe
         Task<IEnumerable<RecipeInfoViewModel>> RecipeBookAsync(IdentityUser currentUser);
         Task RemoveFromRecipeUsersAsync(int recipeId, IdentityUser userId);
         Task DeleteAsync(int recipeId);
+        Task<bool> ExistsAsync(int id);
+
     }
 }

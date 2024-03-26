@@ -84,10 +84,10 @@ namespace RecipeFinder.Core.Services
         public async Task<IEnumerable<DifficultyViewModel>> AllDifficultiesAsync()
         {
             return await repository.AllReadOnly<Difficulty>()
-                .Select(ct => new DifficultyViewModel()
+                .Select(d => new DifficultyViewModel()
                 {
-                    Id = ct.Id,
-                    Name = ct.Name
+                    Id = d.Id,
+                    Name = d.Name
                 })
                 .ToListAsync();
         }
@@ -95,13 +95,14 @@ namespace RecipeFinder.Core.Services
         public async Task<IEnumerable<string>> AllDifficultiesNamesAsync()
         {
             return await repository.AllReadOnly<Difficulty>()
-               .Select(ct => ct.Name)
+               .Select(d => d.Name)
                .ToListAsync();
         }
 
         public async Task<IEnumerable<RecipeInfoViewModel>> AllRecipesAsync()
         {
             return await repository.AllReadOnly<Recipe>()
+                .Include(r => r.RecipesUsers)
                 .Select(e => new RecipeInfoViewModel()
                 {
                     Id = e.Id,
@@ -114,7 +115,8 @@ namespace RecipeFinder.Core.Services
                     Cook = e.Cook.UserName,
                     IngredientCount = e.Ingredients.Count(),
                     CommentCount = e.Comments.Count(),
-                    MadeByCount = e.RecipesUsers.Count()
+                    MadeByCount = e.RecipesUsers.Count(),
+                    RecipeUser = e.RecipesUsers.FirstOrDefault(),
                 })
                 .ToListAsync();         
         }
@@ -201,6 +203,12 @@ namespace RecipeFinder.Core.Services
             }
         }
 
+        public async Task<bool> ExistsAsync(int id)
+        {
+            return await repository.AllReadOnly<Recipe>()
+               .AnyAsync(r => r.Id == id);
+        }
+
         public async Task<string?> GetCookIdAsync(string cookId)
         {
             return (await repository
@@ -211,15 +219,16 @@ namespace RecipeFinder.Core.Services
         public async Task<RecipeFormViewModel?> GetRecipeFormViewModelByIdAsync(int id)
         {
             var recipe = await repository.AllReadOnly<Recipe>()
-                .Where(h => h.Id == id)
-                .Select(h => new RecipeFormViewModel()
+                .Where(r => r.Id == id)
+                .Select(r => new RecipeFormViewModel()
                 {
-                    Name = h.Name,
-                    Instructions = h.Instructions,
-                    ImageUrl = h.ImageUrl,
-                    PreparationTime = h.PreparationTime,
-                    CategoryId = h.CategoryId,
-                    DifficultyId = h.DifficultyId
+                    Name = r.Name,
+                    Instructions = r.Instructions,
+                    ImageUrl = r.ImageUrl,
+                    PreparationTime = r.PreparationTime,
+                    CategoryId = r.CategoryId,
+                    DifficultyId = r.DifficultyId,
+                    CookId = r.CookId
                 })
                 .FirstOrDefaultAsync();
 
@@ -288,6 +297,7 @@ namespace RecipeFinder.Core.Services
         public async Task<RecipeDetailsViewModel> RecipeDetailsByIdAsync(int id)
         {
             return await repository.AllReadOnly<Recipe>()
+                .Include(r => r.RecipesUsers)
                 .Where(r => r.Id == id)
                 .Select(r => new RecipeDetailsViewModel()
                 {
@@ -298,10 +308,13 @@ namespace RecipeFinder.Core.Services
                     DifficultyName = r.Difficulty.Name,
                     ImageUrl = r.ImageUrl,
                     PreparationTime = r.PreparationTime,
-                    PostedOn = r.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat)
+                    PostedOn = r.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
+                    RecipeUser = r.RecipesUsers.FirstOrDefault(),
+                    CookId = r.CookId
                 })
                 .FirstAsync();
         }
+
 
         public async Task<IEnumerable<RecipeInfoViewModel>> RecipesInMasterChefDifficultyAsync()
         {

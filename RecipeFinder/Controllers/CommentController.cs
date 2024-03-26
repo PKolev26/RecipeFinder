@@ -13,11 +13,13 @@ namespace RecipeFinder.Controllers
     {
         private readonly ICommentService commentService;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IRecipeService recipeService;
 
-        public CommentController(ICommentService commentService, UserManager<IdentityUser> userManager)
+        public CommentController(ICommentService commentService, UserManager<IdentityUser> userManager, IRecipeService recipeService)
         {
             this.commentService = commentService;
             this._userManager = userManager;
+            this.recipeService = recipeService;
         }
         public IActionResult Index()
         {
@@ -26,6 +28,12 @@ namespace RecipeFinder.Controllers
         [HttpGet]
         public async Task<IActionResult> AddComment(int id)
         {
+
+            if (await recipeService.ExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
             var model = new CommentAddViewModel();
             return View(model);
         }
@@ -33,12 +41,14 @@ namespace RecipeFinder.Controllers
         [HttpPost]
         public async Task<IActionResult> AddComment(CommentAddViewModel model, int id)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(model);
-            //}
-            var authorId = await _userManager.GetUserAsync(User);
-            await commentService.AddAsync(model,authorId, id);
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (await recipeService.ExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            await commentService.AddAsync(model, currentUser, id);
             return RedirectToAction("Details", "Recipe", new {id});
         }
     }

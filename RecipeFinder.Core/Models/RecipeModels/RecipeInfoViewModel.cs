@@ -39,5 +39,8 @@ namespace RecipeFinder.Core.Models.RecipeModels
 
         [Display(Name = "Made by")]
         public int MadeByCount { get; set; }
+
+        [Display(Name = "Users that made this recipe")]
+        public RecipeUser RecipeUser = new RecipeUser();
     }
 }

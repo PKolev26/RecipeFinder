@@ -34,6 +34,8 @@ namespace RecipeFinder.Core.Models.RecipeModels
         [Display(Name = "Difficulty")]
         public string DifficultyName { get; set; } = null!;
 
+        [Display(Name = "Recipe's cook id")]
+        public string CookId = null!;
         [Display(Name = "Cooked by")]
         public string Cook { get; set; } = null!;
 
@@ -45,7 +47,8 @@ namespace RecipeFinder.Core.Models.RecipeModels
 
         [Display(Name = "Made by")]
         public int MadeByCount { get; set; }
-
         public CommentAddViewModel AddComment { get; set; } = new CommentAddViewModel();
+
+        public RecipeUser RecipeUser = new RecipeUser();
     }
 }

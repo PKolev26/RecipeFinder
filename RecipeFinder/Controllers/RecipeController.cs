@@ -154,11 +154,6 @@ namespace RecipeFinder.Controllers
                 return BadRequest();
             }
 
-            if (currentUser.Id != recipe.CookId)
-            {
-                return BadRequest();
-            }
-
             if (recipe.RecipeUser != null && recipe.RecipeUser.RecipeId == id && recipe.RecipeUser.UserId == currentUser.Id)
             {
                 return RedirectToAction(nameof(RecipeBook));

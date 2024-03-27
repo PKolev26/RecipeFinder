@@ -28,10 +28,23 @@ namespace RecipeFinder.Controllers
         }
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery] AllRecipesQueryModel model)
         {
-            var recipes = await recipeService.AllRecipesAsync();
-            return View(recipes);
+            var recipe = await recipeService.AllRecipesAsync(
+                model.Search,
+                model.Sorting,
+                model.CurrentPage,
+                model.RecipesPerPage,
+                model.Category,
+                model.Difficulty);
+
+            model.TotalRecipesCount = recipe.TotalRecipesCount;
+            model.Categories = await recipeService.AllCategoriesNamesAsync();
+            model.Difficulties = await recipeService.AllDifficultiesNamesAsync();
+            
+            model.Recipes = recipe.Recipes;
+
+            return View(model);
         }
 
         [HttpGet]

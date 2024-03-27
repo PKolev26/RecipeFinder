@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RecipeFinder.Core.Contracts.Recipe;
+using RecipeFinder.Core.Enumerations;
 using RecipeFinder.Core.Models.CategoryModels;
 using RecipeFinder.Core.Models.CommentModels;
 using RecipeFinder.Core.Models.DifficultyModels;
@@ -99,18 +100,54 @@ namespace RecipeFinder.Core.Services
                .ToListAsync();
         }
 
-        public async Task<IEnumerable<RecipeInfoViewModel>> AllRecipesAsync()
+        public async Task<RecipeQueryServiceModel> AllRecipesAsync(string? search = null, RecipeSorting sorting = RecipeSorting.Newest, int currentPage = 1, int recipesPerPage = 1, string? category = null, string? difficulty = null)
         {
-            return await repository.AllReadOnly<Recipe>()
-                .Include(r => r.RecipesUsers)
-                .Select(e => new RecipeInfoViewModel()
+            var recipes = repository.AllReadOnly<Recipe>().Where(r => r.Ingredients.Count > 0);
+
+            if (category != null)
+            {
+                recipes = recipes
+                   .Where(r => r.Category.Name == category);
+            }
+
+            if (difficulty != null)
+            {   
+                recipes = recipes
+                   .Where(r => r.Difficulty.Name == difficulty);
+            }
+
+            if (search != null)
+            {
+                string searchToLower = search.ToLower();
+                recipes = recipes
+                    .Where(r => (r.Name.ToLower().Contains(searchToLower)));
+            }
+
+            recipes = sorting switch
+            {
+                RecipeSorting.ByIngredientsCount => recipes
+                    .OrderByDescending(r => r.Ingredients.Count),
+                RecipeSorting.Popular => recipes
+                    .OrderByDescending(r => r.RecipesUsers.Count),
+                RecipeSorting.ByPreparationTime => recipes
+                    .OrderBy(r => r.PreparationTime),
+                _ => recipes
+                    .OrderByDescending(h => h.Id)
+            };
+
+            var AllRecipes = await recipes
+                .Skip((currentPage - 1) * recipesPerPage)
+                .Take(recipesPerPage)
+                .Select(e => new RecipeServiceModel()
                 {
                     Id = e.Id,
                     Name = e.Name,
                     ImageUrl = e.ImageUrl,
                     PreparationTime = e.PreparationTime,
                     PostedOn = e.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
+                    CategoryId = e.CategoryId,
                     CategoryName = e.Category.Name,
+                    DifficultyId = e.DifficultyId,
                     DifficultyName = e.Difficulty.Name,
                     Cook = e.Cook.UserName,
                     IngredientCount = e.Ingredients.Count(),
@@ -118,7 +155,15 @@ namespace RecipeFinder.Core.Services
                     MadeByCount = e.RecipesUsers.Count(),
                     RecipeUser = e.RecipesUsers.FirstOrDefault(),
                 })
-                .ToListAsync();         
+                .ToListAsync();
+
+            int recipesCount = await recipes.CountAsync();
+
+            return new RecipeQueryServiceModel()
+            {
+                Recipes = AllRecipes,
+                TotalRecipesCount = recipesCount
+            };
         }
 
         public async Task DeleteAsync(int recipeId)
@@ -127,7 +172,7 @@ namespace RecipeFinder.Core.Services
                 .Where(i => i.RecipeId == recipeId)
                 .ToListAsync();
 
-            foreach(var ingredient in ingredientsToRemove)
+            foreach (var ingredient in ingredientsToRemove)
             {
                 await repository.DeleteAsync<Ingredient>(ingredient.RecipeId);
             }

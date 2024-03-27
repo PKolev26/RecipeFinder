@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using RecipeFinder.Core.Enumerations;
 using RecipeFinder.Core.Models.CategoryModels;
 using RecipeFinder.Core.Models.DifficultyModels;
 using RecipeFinder.Core.Models.IngredientModels;
@@ -13,7 +14,13 @@ namespace RecipeFinder.Core.Contracts.Recipe
 {
     public interface IRecipeService
     {
-        Task<IEnumerable<RecipeInfoViewModel>> AllRecipesAsync();
+        Task<RecipeQueryServiceModel> AllRecipesAsync(
+            string? search = null,
+            RecipeSorting sorting = RecipeSorting.Newest,
+            int currentPage = 1,
+            int recipesPerPage = 1,
+            string? category = null,
+            string? difficulty = null);
         Task<IEnumerable<RecipeInfoViewModel>> Top3RecipesAsync();
         Task<IEnumerable<RecipeInfoViewModel>> TheLastedRecipeAsync();
         Task<IEnumerable<RecipeInfoViewModel>> RecipesInMasterChefDifficultyAsync();

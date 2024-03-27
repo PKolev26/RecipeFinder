@@ -1,58 +1,146 @@
 ﻿@using RecipeFinder.Extensions
-@model IEnumerable<RecipeInfoViewModel>
+@model AllRecipesQueryModel
+
 @{
     ViewBag.Title = "All Recipes";
 }
 
-
- <h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
-<div class="text-center row">
-    @foreach (var e in Model)
-    {
-        if(@e.IngredientCount > 0)
-        {
-            <div class="card col-4" style="width: 20rem;">
-                <div class="card-body">
-                    <img class="card-imgurl" style=" width: 18rem; height: 15rem;" src="@e.ImageUrl" alt="recipe image" />
-                    <h4 class="card-title">@e.Name</h4>
-                    <h5 class="card-cook">Cooked by: @e.Cook.Substring(0, e.Cook.LastIndexOf("@"))</h5>
-                    <br />
-                    <p class="mb-0"><span class="fw-bold">Preparation time: </span>@e.PreparationTime</p>
-                    <p class="mb-0"><span class="fw-bold">Category: </span>@e.CategoryName</p>
-                    <p class="mb-0"><span class="fw-bold">Difficulty level: </span>@e.DifficultyName</p>
-                    <p class="mb-0"><span class="fw-bold">Ingredients: </span>@e.IngredientCount</p>
-                    <p class="mb-0"><span class="fw-bold">Comments: </span>@e.CommentCount</p>
-                    <p class="mb-0"><span class="fw-bold">Made by: </span>@e.MadeByCount <span class="fw-bold">users</span></p>
-                    <br />
-                    <p class="mb-0"><span class="fw-bold">Posted on: </span>@e.PostedOn</p>
-                    <a asp-controller="Recipe" asp-action="Details" asp-route-id="@e.Id" class="btn btn-outline-warning mb-2 w-100 p-3 fw-bold">More info</a>
-                    @if(User.Identity.Name == e.Cook)
+<form method="get">
+    <div class="row">
+        <div class="form-group col-md-3 d-flex justify-content-between">
+            <div class="form-group">
+                <label asp-for="Category"></label>
+                <select asp-for="Category" class="form-control">
+                    <option value="">All</option>
+                    @foreach (var category in Model.Categories)
                     {
-                        <a asp-controller="Recipe" asp-action="Edit" asp-route-id="@e.Id" class="btn btn-outline-dark mb-2 w-100 p-3 fw-bold">Edit</a>
+                        <option value="@category">@category</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Difficulty"></label>
+                <select asp-for="Difficulty" class="form-control">
+                    <option value="">All</option>
+                    @foreach (var difficulty in Model.Difficulties)
+                    {
+                        <option value="@difficulty">@difficulty</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label asp-for="Search"></label>
+            <input asp-for="Search" class="form-control" placeholder="Type here....">
+        </div>
+
+        <div class="form-group col-md-3">
+            <div class="form-group">
+                <label asp-for="Sorting"></label>
+                <select asp-for="Sorting" class="form-control">
+                    <option value="0">Newest</option>
+                    <option value="1">By ingredients count</option>
+                    <option value="2">By preparation time</option>
+                    <option value="3">Popular</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group mt-4 p-2">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+    var maxPage = Math.Ceiling((double)Model.TotalRecipesCount /
+        Model.RecipesPerPage);
+}
+
+<div class="row mb-5">
+    <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+           asp-controller="Recipe"
+           asp-action="All"
+           asp-route-currentPage="@previousPage"
+           asp-route-category="@Model.Category"
+           asp-route-searchTerm="@Model.Search"
+           asp-route-sorting="@((int)Model.Sorting)"><<</a>
+    </div>
+
+    @{
+        var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
+        !Model.Recipes.Any();
+    }
+
+    <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-primary
+           @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
+           asp-controller="Recipe"
+           asp-action="All"
+           asp-route-currentPage="@(Model.CurrentPage + 1)"
+           asp-route-category="@Model.Category"
+           asp-route-searchTerm="@Model.Search"
+           asp-route-sorting="@((int)Model.Sorting)">>></a>
+    </div>
+</div>
+
+@if (!Model.Recipes.Any())
+{
+    <h2 class="text-center">No recipes found!</h2>
+}
+
+<div class="row">
+    @foreach (var recipe in Model.Recipes)
+    {
+        <div class="card col-4" style="width: 20rem;">
+            <div class="card-body">
+                <img class="card-imgurl" style=" width: 18rem; height: 15rem;" src="@recipe.ImageUrl" alt="recipe image" />
+                <h4 class="card-title">@recipe.Name</h4>
+                <h5 class="card-cook">Cooked by: @recipe.Cook.Substring(0, recipe.Cook.LastIndexOf("@"))</h5>
+                <br />
+                <p class="mb-0"><span class="fw-bold">Preparation time: </span>@recipe.PreparationTime</p>
+                <p class="mb-0"><span class="fw-bold">Category: </span>@recipe.CategoryName</p>
+                <p class="mb-0"><span class="fw-bold">Difficulty level: </span>@recipe.DifficultyName</p>
+                <p class="mb-0"><span class="fw-bold">Ingredients: </span>@recipe.IngredientCount</p>
+                <p class="mb-0"><span class="fw-bold">Comments: </span>@recipe.CommentCount</p>
+                <p class="mb-0"><span class="fw-bold">Made by: </span>@recipe.MadeByCount <span class="fw-bold">users</span></p>
+                <br />
+                <p class="mb-0"><span class="fw-bold">Posted on: </span>@recipe.PostedOn</p>
+                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id" class="btn btn-outline-warning mb-2 w-100 p-3 fw-bold">More info</a>
+                @if (User.Identity.Name == recipe.Cook)
+                {
+                    <a asp-controller="Recipe" asp-action="Edit" asp-route-id="@recipe.Id" class="btn btn-outline-dark mb-2 w-100 p-3 fw-bold">Edit</a>
+                }
+                else
+                {
+                    if (@recipe.RecipeUser != null && recipe.RecipeUser.RecipeId == recipe.Id && recipe.RecipeUser.UserId == User.Id())
+                    {
+                        <form method="post" asp-controller="Recipe" asp-action="AddToRecipeBook" asp-route-id="@recipe.Id">
+                            <button type="submit" class="btn btn-success mb-2 w-100 p-3 fw-bold">Added to Recipe Book</button>
+                        </form>
                     }
                     else
                     {
-                        if (@e.RecipeUser != null && @e.RecipeUser.RecipeId == @e.Id && @e.RecipeUser.UserId == User.Id())
-                        {
-                            <form method="post" asp-controller="Recipe" asp-action="AddToRecipeBook" asp-route-id="@e.Id">
-                                <button type="submit" class="btn btn-success mb-2 w-100 p-3 fw-bold">Added to Recipe Book</button>
-                            </form>
-                        }
-                        else
-                        {
-                            <form method="post" asp-controller="Recipe" asp-action="AddToRecipeBook" asp-route-id="@e.Id">
-                                <button type="submit" class="btn btn-outline-success mb-2 w-100 p-3 fw-bold">Add to Recipe Book</button>
-                            </form>
-                        }
+                        <form method="post" asp-controller="Recipe" asp-action="AddToRecipeBook" asp-route-id="@recipe.Id">
+                            <button type="submit" class="btn btn-outline-success mb-2 w-100 p-3 fw-bold">Add to Recipe Book</button>
+                        </form>
                     }
-                </div>
+                }
+            </div>
             </div>
         }
-    }
-</div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+    </div>

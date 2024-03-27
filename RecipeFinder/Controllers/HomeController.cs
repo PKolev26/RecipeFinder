@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RecipeFinder.Core.Contracts.Home;
 using RecipeFinder.Core.Contracts.Ingredient;
@@ -27,17 +28,6 @@ namespace RecipeFinder.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
         public async Task<bool> Notification()
         {
             var currentUser = await _userManager.GetUserAsync(User);
@@ -50,6 +40,28 @@ namespace RecipeFinder.Controllers
             }
             return false;
 
+        }
+
+        [AllowAnonymous]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error(int statusCode)
+        {
+            if (statusCode == 400)
+            {
+                return View("Error400");
+            }
+
+            if (statusCode == 404)
+            {
+                return View("Error404");
+            }
+
+            if (statusCode == 401)
+            {
+                return View("Error401");
+            }
+
+            return View();
         }
     }
 }

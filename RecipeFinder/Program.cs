@@ -22,11 +22,14 @@ namespace RecipeFinder
 
             if (app.Environment.IsDevelopment())
             {
+                /*app.UseDeveloperExceptionPage();*/   // Uncomment in Production
+                app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}"); // Remove in Production
                 app.UseMigrationsEndPoint();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
+                app.UseExceptionHandler("/Home/Error/500");
                 app.UseHsts();
             }
 

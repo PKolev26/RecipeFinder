@@ -125,12 +125,18 @@ namespace RecipeFinder.Core.Services
 
             recipes = sorting switch
             {
-                RecipeSorting.ByIngredientsCount => recipes
+                RecipeSorting.ByIngredientsCountAscending => recipes
+                    .OrderBy(r => r.Ingredients.Count),
+                RecipeSorting.ByIngredientsCountDescending => recipes
                     .OrderByDescending(r => r.Ingredients.Count),
                 RecipeSorting.Popular => recipes
                     .OrderByDescending(r => r.RecipesUsers.Count),
-                RecipeSorting.ByPreparationTime => recipes
+                RecipeSorting.Oldest => recipes
+                   .OrderBy(h => h.Id),
+                RecipeSorting.ByPreparationTimeAscending => recipes
                     .OrderBy(r => r.PreparationTime),
+                RecipeSorting.ByPreparationTimeDescending => recipes
+                .OrderByDescending(r => r.PreparationTime),
                 _ => recipes
                     .OrderByDescending(h => h.Id)
             };

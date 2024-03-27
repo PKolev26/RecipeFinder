@@ -115,7 +115,6 @@ namespace RecipeFinder.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var recipe = await recipeService.RecipeDetailsByIdAsync(id);
             var currentUser = await _userManager.GetUserAsync(User);
 
             if (await recipeService.ExistsAsync(id) == false)
@@ -123,12 +122,14 @@ namespace RecipeFinder.Controllers
                 return BadRequest();
             }
 
-            var model = await recipeService.GetRecipeFormViewModelByIdAsync(id);
+            var recipe = await recipeService.RecipeDetailsByIdAsync(id);
 
             if (recipe.CookId != currentUser.Id)
             {
-                return BadRequest();
+                return Unauthorized();
             }
+
+            var model = await recipeService.GetRecipeFormViewModelByIdAsync(id);
 
             return View(model);
         }
@@ -136,18 +137,18 @@ namespace RecipeFinder.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, RecipeFormViewModel model)
         {
-            var recipe = await recipeService.RecipeDetailsByIdAsync(id);
+            var currentUser = await _userManager.GetUserAsync(User);
 
             if (await recipeService.ExistsAsync(id) == false)
             {
                 return BadRequest();
             }
 
-            var currentUser = await _userManager.GetUserAsync(User);
+            var recipe = await recipeService.RecipeDetailsByIdAsync(id);
 
-            if(recipe.CookId != currentUser.Id)
+            if (recipe.CookId != currentUser.Id)
             {
-                return BadRequest();
+                return Unauthorized();
             }
 
             await recipeService.EditAsync(id, model);
@@ -217,7 +218,7 @@ namespace RecipeFinder.Controllers
 
             if (currentUser.Id != recipe.CookId)
             {
-                return BadRequest();
+                return Unauthorized();
             }
 
             var model = new RecipeDetailsViewModel()
@@ -249,7 +250,7 @@ namespace RecipeFinder.Controllers
 
             if (currentUser.Id != recipe.CookId)
             {
-                return BadRequest();
+                return Unauthorized();
             }
 
             await recipeService.DeleteAsync(model.Id);

@@ -9,8 +9,11 @@ namespace RecipeFinder.Core.Enumerations
     public enum RecipeSorting
     {
         Newest = 0,
-        ByIngredientsCount = 1,
-        ByPreparationTime = 2,
-        Popular = 3,
+        Oldest = 1,
+        Popular = 2,
+        ByIngredientsCountAscending = 3,
+        ByIngredientsCountDescending = 4,
+        ByPreparationTimeAscending = 5,
+        ByPreparationTimeDescending = 6,
     }
 }

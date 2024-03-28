@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using RecipeFinder.Infrastructure.Data.Models;
+using RecipeFinder.Hubs;
 using RecipeFinder.ModelBinders;
 
 namespace RecipeFinder
@@ -57,7 +57,8 @@ namespace RecipeFinder
                 endpoints.MapRazorPages();
 
             });
-            
+
+            app.MapHub<ChatHub>("/chatHub");
             app.Run();
         }
     }

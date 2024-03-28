@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+using RecipeFinder.Infrastructure.Data.Models;
 using RecipeFinder.ModelBinders;
 
 namespace RecipeFinder
@@ -14,6 +16,7 @@ namespace RecipeFinder
             builder.Services.AddControllersWithViews(options =>
             {
                 options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
 
             builder.Services.AddApplicationServices();
@@ -41,11 +44,20 @@ namespace RecipeFinder
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapControllerRoute(
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "Recipe Details",
+                    pattern: "/Recipe/Details/{id}/{name}",
+                    defaults: new { Controller = "Recipe", Action = "Details"}
+                );
+                endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-            app.MapRazorPages();
+                endpoints.MapRazorPages();
 
+            });
+            
             app.Run();
         }
     }

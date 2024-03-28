@@ -25,8 +25,8 @@ namespace RecipeFinder.Core.Contracts.Recipe
         Task<IEnumerable<RecipeInfoViewModel>> TheLastedRecipeAsync();
         Task<IEnumerable<RecipeInfoViewModel>> RecipesInMasterChefDifficultyAsync();
         Task<IEnumerable<RecipeInfoViewModel>> MineRecipesAsync(IdentityUser currentUser);
-        Task<IEnumerable<RecipeDetailsViewModel>> DetailsAsync(int id);
-        Task<RecipeDetailsViewModel> RecipeDetailsByIdAsync(int id);
+        Task<IEnumerable<RecipeDetailsServiceModel>> DetailsAsync(int id);
+        Task<RecipeDetailsServiceModel> RecipeDetailsByIdAsync(int id);
         Task<int> AddAsync(RecipeFormViewModel model, IdentityUser cookId);
         Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync();
         Task<IEnumerable<string>> AllCategoriesNamesAsync();

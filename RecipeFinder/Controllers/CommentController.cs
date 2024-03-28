@@ -42,14 +42,14 @@ namespace RecipeFinder.Controllers
         public async Task<IActionResult> AddComment(CommentAddViewModel model, int id)
         {
             var currentUser = await _userManager.GetUserAsync(User);
-
+            var recipe = await recipeService.RecipeDetailsByIdAsync(id);
             if (await recipeService.ExistsAsync(id) == false)
             {
                 return BadRequest();
             }
 
             await commentService.AddAsync(model, currentUser, id);
-            return RedirectToAction("Details", "Recipe", new {id});
+            return RedirectToAction("Details", "Recipe", new {id, name = recipe.Name});
         }
     }
 }

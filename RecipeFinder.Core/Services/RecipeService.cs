@@ -209,11 +209,11 @@ namespace RecipeFinder.Core.Services
             await repository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<RecipeDetailsViewModel>> DetailsAsync(int id)
+        public async Task<IEnumerable<RecipeDetailsServiceModel>> DetailsAsync(int id)
         {
             return await repository.AllReadOnly<Recipe>()
                 .Where(e => e.Id == id)
-                .Select(e => new RecipeDetailsViewModel()
+                .Select(e => new RecipeDetailsServiceModel()
                 {
                     Id = id,
                     Name = e.Name,
@@ -345,12 +345,12 @@ namespace RecipeFinder.Core.Services
               .ToListAsync();
         }
 
-        public async Task<RecipeDetailsViewModel> RecipeDetailsByIdAsync(int id)
+        public async Task<RecipeDetailsServiceModel> RecipeDetailsByIdAsync(int id)
         {
             return await repository.AllReadOnly<Recipe>()
                 .Include(r => r.RecipesUsers)
                 .Where(r => r.Id == id)
-                .Select(r => new RecipeDetailsViewModel()
+                .Select(r => new RecipeDetailsServiceModel()
                 {
                     Id = r.Id,
                     Name = r.Name,

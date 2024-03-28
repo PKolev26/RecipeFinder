@@ -10,10 +10,11 @@ using System.ComponentModel;
 using RecipeFinder.Core.Models.CategoryModels;
 using RecipeFinder.Core.Models.DifficultyModels;
 using RecipeFinder.Core.Models.IngredientModels;
+using RecipeFinder.Core.Contracts.Recipe;
 
 namespace RecipeFinder.Core.Models.RecipeModels
 {
-    public class RecipeFormViewModel
+    public class RecipeFormViewModel : IRecipeModel
     {
         public int Id { get; set; }
 

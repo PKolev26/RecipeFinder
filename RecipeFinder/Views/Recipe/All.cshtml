@@ -80,7 +80,7 @@
                 <p class="mb-0"><span class="fw-bold">Made by: </span>@recipe.MadeByCount <span class="fw-bold">users</span></p>
                 <br />
                 <p class="mb-0"><span class="fw-bold">Posted on: </span>@recipe.PostedOn</p>
-                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id" class="btn btn-outline-warning mb-2 w-100 p-3 fw-bold">More info</a>
+                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id" asp-route-name="@recipe.GetName()" class="btn btn-outline-warning mb-2 w-100 p-3 fw-bold">More info</a>
                 @if (User.Identity.Name == recipe.Cook)
                 {
                     <a asp-controller="Recipe" asp-action="Edit" asp-route-id="@recipe.Id" class="btn btn-outline-dark mb-2 w-100 p-3 fw-bold">Edit</a>

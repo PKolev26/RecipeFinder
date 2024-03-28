@@ -1,4 +1,5 @@
-﻿using RecipeFinder.Core.Models.CommentModels;
+﻿using RecipeFinder.Core.Contracts.Recipe;
+using RecipeFinder.Core.Models.CommentModels;
 using RecipeFinder.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace RecipeFinder.Core.Models.RecipeModels
 {
-    public class RecipeDetailsViewModel
-    {
+    public class RecipeDetailsServiceModel : IRecipeModel
+    { 
         [Display(Name = "Recipe Identifier")]
         public int Id { get; set; }
 

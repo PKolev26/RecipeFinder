@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using RecipeFinder.Core.Contracts.Recipe;
 using RecipeFinder.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RecipeFinder.Core.Models.RecipeModels
 {
-    public class RecipeInfoViewModel
+    public class RecipeInfoViewModel : IRecipeModel
     {
         [Display(Name = "Recipe Identifier")]
         public int Id { get; set; }

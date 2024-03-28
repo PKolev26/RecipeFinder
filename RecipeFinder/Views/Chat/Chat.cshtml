@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> _userManager;
+@{
+    var currentUser = await _userManager.GetUserAsync(User);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Chat Page</title>
+    <link rel="stylesheet" href="~/css/chat.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-3">Username:</div>
+            <input id="userInput" value="@currentUser.UserName.Substring(0, currentUser.UserName.LastIndexOf("@"))" />
+            <div class="col-4"><span/>@currentUser.UserName.Substring(0, currentUser.UserName.LastIndexOf("@"))</span></div>
+        </div>
+        <div class="row">
+            <div class="col-3">Your Message:</div>
+            <div class="col-5"><input type="text" id="messageInput" /></div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-6">
+                <input type="button" id="sendButton" value="Send Message" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <ul id="messagesList"></ul>
+        </div>
+    </div>
+
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/chat.js" asp-append-version="true"></script>
+</body>
+</html>

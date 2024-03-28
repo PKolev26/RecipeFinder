@@ -2,11 +2,11 @@
 
 namespace RecipeFinder.Controllers
 {
-    public class ChatController : Controller
-    {
-        public IActionResult Chat()
-        {
-            return View("Chat");
-        }
-    }
+	public class ChatController : Controller
+	{
+		public IActionResult ChatWithOthers()
+		{
+			return View("Chat");
+		}
+	}
 }

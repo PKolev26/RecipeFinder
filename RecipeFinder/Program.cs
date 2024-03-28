@@ -18,7 +18,7 @@ namespace RecipeFinder
                 options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
-
+            
             builder.Services.AddApplicationServices();
 
             var app = builder.Build();
@@ -56,9 +56,9 @@ namespace RecipeFinder
                 pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
 
-            });
-
-            app.MapHub<ChatHub>("/chatHub");
+                endpoints.MapHub<ChatHub>("/chatHub");
+			});
+            
             app.Run();
         }
     }

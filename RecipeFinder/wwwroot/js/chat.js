@@ -4,7 +4,7 @@ document.getElementById("sendButton").disabled = true;
 
 connection.on("ReceiveMessage", function (user, message) {
     var li = document.createElement("li");
-    li.textContent = `${user}:  ${message}`;
+    li.textContent = `${user} ➔ ${message}`;
     document.getElementById("messagesList").appendChild(li);
 });
 

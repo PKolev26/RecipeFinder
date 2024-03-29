@@ -25,7 +25,6 @@ namespace RecipeFinder.Core.Models.IngredientModels
         [Display(Name = "Ingredient quantity")]
         public decimal Quantity { get; set; }
 
-        [Required(ErrorMessage = RequiredErrorMessage)]
         [StringLength(IngredientUnitMaxLength, MinimumLength = IngredientUnitMinLength, ErrorMessage = LengthErrorMessage)]
         [Display(Name = "Quantity unit")]
         public string Unit { get; set; } = null!;

@@ -14,7 +14,7 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
         public void Configure(EntityTypeBuilder<Recipe> builder)
         {
             var data = new SeedData();
-            builder.HasData(new Recipe[] { data.Musaka });
+            builder.HasData(new Recipe[] { data.Moussaka, data.Pancakes});
         }
     }
 }

@@ -27,14 +27,24 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
         public Difficulty MasterChef { get; set; }
 
         // Recipes
-        public Recipe Musaka {  get; set; }
+        public Recipe Moussaka {  get; set; }
+        public Recipe Pancakes { get; set; }
 
         // Comment
-        public Comment MusakaComment { get; set; }
+        public Comment MoussakaComment { get; set; }
 
         // Ingredient
-        public Ingredient MusakaPotato { get; set; }
-        public Ingredient MusakaMincedМeat { get; set; }
+        public Ingredient MoussakaPotato { get; set; }
+        public Ingredient MoussakaМeat { get; set; }
+
+        public Ingredient PancakesFlour { get; set; }
+        public Ingredient PancakesMilk { get; set; }
+        public Ingredient PancakesEgg { get; set; }
+        public Ingredient PancakesButter { get; set; }
+        public Ingredient PancakesSugar { get; set; }
+        public Ingredient PancakesBakingPowder { get; set; }
+        public Ingredient PancakesSalt { get; set; }
+
 
         public SeedData()
         {
@@ -146,10 +156,10 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
 
         private void SeedRecipes()
         {
-            Musaka = new Recipe()
+            Moussaka = new Recipe()
             {
                 Id = 1,
-                Name = "Musaka",
+                Name = "Moussaka",
                 Instructions = "1. Preheat oven to 180°C.\r\n2. Slice potatoes & eggplants\r\n3. Heat olive oil. Cook onions until soft. Add ground beef, garlic, tomato paste, diced tomatoes, oregano, cinnamon, salt & pepper. Simmer.\r\n4. Fry potato slices until golden brown.\r\n5. Layer potatoes, eggplants, & meat mixture. Repeat layers.\r\n6. Whisk eggs & yogurt. Pour over meat.\r\n7. Bake at 180°C (350°F) for 45 minutes to 1 hour.\r\n8. Cool before serving. Enjoy!\r\n",
                 ImageUrl = "https://assets.kulinaria.bg/attachments/pictures-images/0000/1918/MAIN-vegetarianska-musaka.jpg?1431936459",
                 PreparationTime = 60,
@@ -158,14 +168,27 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
                 DifficultyId = Intermediate.Id,
                 CookId = User1.Id
             };
+
+            Pancakes = new Recipe()
+            {
+                Id = 2,
+                Name = "Homemade Pancakes",
+                Instructions = "Mix flour, milk, egg, butter, sugar, baking powder, and salt together.\r\n\r\nHeat a lightly oiled griddle over low heat. Scoop 1/4 cup batter onto the griddle and cook until top and edges are dry, 3 to 4 minutes. Flip and cook until lightly browned on the other side, 2 to 3 minutes. Repeat with remaining batter.",
+                ImageUrl = "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F7929481.jpg&q=60&c=sc&poi=auto&orient=true&h=512",
+                PreparationTime = 35,
+                PostedOn = DateTime.Now,
+                CategoryId = ThirdCategory.Id,
+                DifficultyId = Beginner.Id,
+                CookId = User1.Id
+            };
         }
         private void SeedComments()
         {
-            MusakaComment = new Comment()
+            MoussakaComment = new Comment()
             {
                 Id = 1,
-                Title = "Very good Musaka!",
-                Description = "I made this musaka with your recipe and its awesome.",
+                Title = "Very good Moussaka!",
+                Description = "I made this moussaka with your recipe and its awesome.",
                 AuthorId = User2.Id,
                 PostedOn = DateTime.Now,
                 RecipeId = 1               
@@ -173,21 +196,80 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
         }
         private void SeedIngredient()
         {
-            MusakaPotato = new Ingredient()
+            //Moussaka Ingredients
+            MoussakaPotato = new Ingredient()
             {
                 Id = 1,
-                Name = "Potato",
+                Name = "potato",
                 Quantity = 4,
                 Unit = "kg",
                 RecipeId = 1
             };
-            MusakaMincedМeat = new Ingredient()
+            MoussakaМeat = new Ingredient()
             {
                 Id = 2,
-                Name = "Minced Meat",
+                Name = "minced meat",
                 Quantity = 3,
                 Unit = "kg",
                 RecipeId = 1
+            };
+
+            //Pancakes Ingredients
+            PancakesFlour = new Ingredient()
+            {
+                Id = 3,
+                Name = "flour",
+                Quantity = 1.5M,
+                Unit = "cups",
+                RecipeId = 2
+            };
+            PancakesMilk = new Ingredient()
+            {
+                Id = 4,
+                Name = "milk",
+                Quantity = 1.75M,
+                Unit = "cups",
+                RecipeId = 2
+            };
+            PancakesEgg = new Ingredient()
+            {
+                Id = 5,
+                Name = "egg",
+                Unit = "count",
+                Quantity = 1,
+                RecipeId = 2
+            };
+            PancakesButter = new Ingredient()
+            {
+                Id = 6,
+                Name = "melted butter",
+                Unit = "cup",
+                Quantity = 1,
+                RecipeId = 2
+            };
+            PancakesSugar = new Ingredient()
+            {
+                Id = 7,
+                Name = "white sugar",
+                Unit = "tablespoon",
+                Quantity = 1,
+                RecipeId = 2
+            };
+            PancakesBakingPowder = new Ingredient()
+            {
+                Id = 8,
+                Name = "baking powder",
+                Quantity = 2,
+                Unit = "tablespoons",
+                RecipeId = 2
+            };
+            PancakesSalt = new Ingredient()
+            {
+                Id = 9,
+                Name = "salt",
+                Quantity = 1,
+                Unit = "tablespoon",
+                RecipeId = 2
             };
         }
     }

@@ -11,7 +11,7 @@
         public const double IngredientQuantityMinLength = 0.01;
 
         // Ingredient Unit Data Constants
-        public const int IngredientUnitMaxLength = 10;
+        public const int IngredientUnitMaxLength = 25;
         public const int IngredientUnitMinLength = 1;
 
     }

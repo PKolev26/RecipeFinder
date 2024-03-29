@@ -19,7 +19,7 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
                .WithMany(e => e.Comments)
                .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasData(new Comment[] { data.MusakaComment });
+            builder.HasData(new Comment[] { data.MoussakaComment });
         }
     }
 }

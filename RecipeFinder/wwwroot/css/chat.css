@@ -13,13 +13,16 @@
 
 .row {
     margin-bottom: 10px;
+    justify-content:center;
 }
-
+.row:nth-of-type(2),.row:nth-of-type(3){
+    
+    justify-content:flex-start;
+}
 .col-3 {
-    flex: 0 0 25%;
-    max-width: 25%;
-    text-align: right;
-    padding-right: 10px;
+    flex: 0 0 17%;
+    max-width: 17%;
+    
 }
 
 .col-4 {
@@ -57,19 +60,21 @@ input[type="button"] {
 
 input[type="button"]:hover {
     background-color: #0056b3;
+    /*justify-content:center;*/
 }
+
 
 ul {
     list-style-type: none;
     padding: 0;
 }
 
-ul li {
+/*ul li {
     background-color: #f9f9f9;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 5px;
-}
+}*/
 
 hr {
     border: none;

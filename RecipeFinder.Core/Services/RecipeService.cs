@@ -372,7 +372,8 @@ namespace RecipeFinder.Core.Services
             return await repository.AllReadOnly<Recipe>()
                .Where(e => e.Difficulty.Id == 5)
               .Select(e => new RecipeInfoViewModel()
-              {
+              {   
+                  Id = e.Id,
                   Name = e.Name,
                   ImageUrl = e.ImageUrl,
                   PreparationTime = e.PreparationTime,
@@ -406,6 +407,7 @@ namespace RecipeFinder.Core.Services
                .OrderByDescending(e => e.PostedOn)
                .Select(e => new RecipeInfoViewModel()
                {
+                   Id = e.Id,
                    Name = e.Name,
                    ImageUrl = e.ImageUrl,
                    PreparationTime = e.PreparationTime,
@@ -426,6 +428,7 @@ namespace RecipeFinder.Core.Services
             return await repository.AllReadOnly<Recipe>()
                .Select(e => new RecipeInfoViewModel()
                {
+                   Id = e.Id,
                    Name = e.Name,
                    ImageUrl = e.ImageUrl,
                    PreparationTime = e.PreparationTime,

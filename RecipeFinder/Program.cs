@@ -25,8 +25,7 @@ namespace RecipeFinder
 
             if (app.Environment.IsDevelopment())
             {
-                /*app.UseDeveloperExceptionPage();*/   // Uncomment in Production
-                app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}"); // Remove in Production
+                app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
             }
             else

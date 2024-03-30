@@ -26,4 +26,12 @@ Welcome to RecipeFinder! RecipeFinder is a web application designed to help you 
 
 - **SignalR**
 
+## 🧁 Test it!
+
+You can test my app with this two accounts:
+
+user@gmail.com - password123
+
+guest@gmail.com - password321
+
 ## ❤️ I hope you enjoy using RecipeFinder as much as I enjoyed creating it!

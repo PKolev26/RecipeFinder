@@ -3,7 +3,7 @@
     public static class RecipeDataConstants
     {
         // Recipe Name Data Constants
-        public const int RecipeNameMaxLength = 50;
+        public const int RecipeNameMaxLength = 25;
         public const int RecipeNameMinLength = 5;
 
         // Recipe Instructions Data Constants

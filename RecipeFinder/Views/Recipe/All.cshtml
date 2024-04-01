@@ -7,6 +7,7 @@
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
+<link rel="stylesheet" href="~/css/card.css">
 
 <form method="get">
     <div class="container">
@@ -63,23 +64,32 @@
     <h2 class="text-center">No recipes found!</h2>
 }
 
+<div class="row-and-pagination">
 <div class="row">
     @foreach (var recipe in Model.Recipes)
     {
         <div class="card col-4" style="width: 20rem;">
             <div class="card-body">
-                <img class="card-imgurl" style=" width: 18rem; height: 15rem;" src="@recipe.ImageUrl" alt="recipe image" />
-                <h4 class="card-title">@recipe.Name</h4>
-                <h5 class="card-cook">Cooked by: @recipe.Cook.Substring(0, recipe.Cook.LastIndexOf("@"))</h5>
+                <section class="main-info">
+                    <h3 class="card-title">@recipe.Name</h3>
+                    <img class="card-imgurl" style="height:15rem;" src="@recipe.ImageUrl" alt="recipe image" />
+                    <h5 class="card-cook"><span class="fw-bold">Cooked by:</span> @recipe.Cook.Substring(0, recipe.Cook.LastIndexOf("@"))</h5>
+                </section>
                 <br />
-                <p class="mb-0"><span class="fw-bold">Preparation time: </span>@recipe.PreparationTime</p>
-                <p class="mb-0"><span class="fw-bold">Category: </span>@recipe.CategoryName</p>
-                <p class="mb-0"><span class="fw-bold">Difficulty level: </span>@recipe.DifficultyName</p>
-                <p class="mb-0"><span class="fw-bold">Ingredients: </span>@recipe.IngredientCount</p>
-                <p class="mb-0"><span class="fw-bold">Comments: </span>@recipe.CommentCount</p>
-                <p class="mb-0"><span class="fw-bold">Made by: </span>@recipe.MadeByCount <span class="fw-bold">users</span></p>
-                <br />
-                <p class="mb-0"><span class="fw-bold">Posted on: </span>@recipe.PostedOn</p>
+                <section class="additional-info">
+                    <p class="mb-0"><span class="fw-bold">Preparation time: </span>@recipe.PreparationTime min</p>
+                    <p class="mb-0"><span class="fw-bold">Category: </span> @recipe.CategoryName </p>
+                    <p class="mb-0"><span class="fw-bold">Difficulty level: </span>@recipe.DifficultyName </p>
+                    <p class="mb-0"><span class="fw-bold">Ingredients: </span>@recipe.IngredientCount</p>
+                    <p class="mb-0"><span class="fw-bold">Comments: </span>@recipe.CommentCount</p>
+                    <p class="mb-0"><span class="fw-bold">Made by: </span>@recipe.MadeByCount<span class="fw-bold"> users</span></p>
+                    <br />
+                </section>
+                <section class="date-and-buttons">
+                    <div class="date">
+                        <p class="mb-0"><span class="fw-bold">Posted on: </span></p>
+                        <p>@recipe.PostedOn</p>
+                    </div>
                 <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id" asp-route-name="@recipe.GetName()" class="btn btn-outline-warning mb-2 w-100 p-3 fw-bold">More info</a>
                 @if (User.Identity.Name == recipe.Cook)
                 {
@@ -100,6 +110,7 @@
                         </form>
                     }
                 }
+                </section>
             </div>
         </div>
     }
@@ -194,3 +205,4 @@
 
     </nav>
 }
+</div>

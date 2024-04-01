@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 html {
   font-size: 14px;
 }
@@ -14,7 +16,13 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    font: 16px/1.5em "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  display:flex;
+  flex-direction:column;
+    padding: 0 2em;
+    text-align: center;
 }
 
 .icon {
@@ -41,7 +49,7 @@ body {
 }
 
 .icon:hover {
-    opacity: .7
+    opacity: 0.7;
 }
 
 .logo {
@@ -107,4 +115,8 @@ body {
 .notifications-item .text p {
     color: #aaa;
     font-size: 12px
+}
+.row-and-pagination{
+    display:flex;
+    flex-direction:column;
 }

@@ -20,6 +20,9 @@ body {
     text-align: center;
 }
 
+.card-body{
+    display: grid;
+}
 .main-info {
     display: flex;
     flex-direction: column;
@@ -45,6 +48,7 @@ span {
     display: flex;
     flex-direction: column;
     gap: 0.3em;
+    align-self: end;
 }
 
     .date-and-buttons .date {

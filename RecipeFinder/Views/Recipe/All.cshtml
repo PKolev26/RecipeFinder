@@ -73,7 +73,7 @@
                 <section class="main-info">
                     <h3 class="card-title">@recipe.Name</h3>
                     <img class="card-imgurl" style="height:15rem;" src="@recipe.ImageUrl" alt="recipe image" />
-                    <h5 class="card-cook"><span class="fw-bold">Cooked by:</span> @recipe.Cook.Substring(0, recipe.Cook.LastIndexOf("@"))</h5>
+                    <h5 class="card-cook"><span class="fw-bold">Cooked by:</span> Chef @recipe.CookLastName</h5>
                 </section>
                 <br />
                 <section class="additional-info">
@@ -90,10 +90,10 @@
                         <p class="mb-0"><span class="fw-bold">Posted on: </span></p>
                         <p>@recipe.PostedOn</p>
                     </div>
-                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id" asp-route-name="@recipe.GetName()" class="btn btn-outline-warning mb-2 w-100 p-3 fw-bold">More info</a>
-                @if (User.Identity.Name == recipe.Cook)
+                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id" asp-route-name="@recipe.GetName()" name="moreinfo" class="btn btn-outline-warning mb-2 w-100 p-3 fw-bold">More info</a>
+                @if (User.Identity.Name == recipe.CookUsername)
                 {
-                    <a asp-controller="Recipe" asp-action="Edit" asp-route-id="@recipe.Id" class="btn btn-outline-dark mb-2 w-100 p-3 fw-bold">Edit</a>
+                    <a asp-controller="Recipe" asp-action="Edit" asp-route-id="@recipe.Id"  class="btn btn-outline-dark mb-2 w-100 p-3 fw-bold">Edit</a>
                 }
                 else
                 {

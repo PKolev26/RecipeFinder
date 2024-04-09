@@ -14,7 +14,7 @@
             <div class="card-body">
                 <img class="card-imgurl" style="width: 25rem; height: 18rem;" src="@e.ImageUrl" alt="recipe image" />
                 <h4 class="card-title">@e.Name</h4>
-                <h5 class="card-cook">Cooked by: @e.Cook.Substring(0, e.Cook.LastIndexOf("@"))</h5>
+                <h5 class="card-cook">Cooked by: @e.CookFirstName @e.CookLastName</h5>
                 <br />
                 <p class="mb-0"><span class="fw-bold">Preparation time: </span>@e.PreparationTime</p>
                 <p class="mb-0"><span class="fw-bold">Category: </span>@e.CategoryName</p>

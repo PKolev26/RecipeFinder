@@ -18,10 +18,14 @@
 <body>
     <div class="container">
         <div class="row">&nbsp;</div>
+        <div class="row" style="display:none;">
+            <input id="profilepicture" value="@currentUser.ProfilePicture" />
+            <div class="col-4"><span />@currentUser.ProfilePicture</span></div>
+        </div>
         <div class="row">
             <div class="col-3">Username:</div>
-            <input id="userInput" value="@currentUser.UserName.Substring(0, currentUser.UserName.LastIndexOf("@"))" />
-            <div class="col-4"><span/>@currentUser.UserName.Substring(0, currentUser.UserName.LastIndexOf("@"))</span></div>
+            <input id="userInput" value="@currentUser.FirstName @currentUser.LastName" />
+            <div class="col-4"><span />@currentUser.FirstName @currentUser.LastName</span></div>
         </div>
         <div class="row">
             <div class="col-3">Your Message:</div>
@@ -39,8 +43,8 @@
             <hr />
         </div>
     </div>
-    <div class="row">
-        <div class="col-6">
+    <div class="row" style="width:100%;">
+        <div class="col-6" style="max-width:100%">
             <ul id="messagesList"></ul>
         </div>
     </div>

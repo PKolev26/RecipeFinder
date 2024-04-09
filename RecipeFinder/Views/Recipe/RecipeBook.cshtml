@@ -15,7 +15,7 @@
                 <section class="main-info">
                     <h3 class="card-title">@e.Name</h3>
                     <img class="card-imgurl" style="height:15rem;" src="@e.ImageUrl" alt="recipe image" />
-                    <h5 class="card-cook"><span class="fw-bold">Cooked by:</span> @e.Cook.Substring(0, e.Cook.LastIndexOf("@"))</h5>
+                    <h5 class="card-cook"><span class="fw-bold">Cooked by:</span> @e.CookFirstName @e.CookLastName</h5>
                 </section>
                 <br />
                 <section class="additional-info">

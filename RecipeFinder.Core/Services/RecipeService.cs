@@ -155,7 +155,9 @@ namespace RecipeFinder.Core.Services
                     CategoryName = e.Category.Name,
                     DifficultyId = e.DifficultyId,
                     DifficultyName = e.Difficulty.Name,
-                    Cook = e.Cook.UserName,
+                    CookUsername = e.Cook.UserName,
+                    CookFirstName = e.Cook.FirstName,
+                    CookLastName = e.Cook.LastName,
                     IngredientCount = e.Ingredients.Count(),
                     CommentCount = e.Comments.Count(),
                     MadeByCount = e.RecipesUsers.Count(),
@@ -223,7 +225,8 @@ namespace RecipeFinder.Core.Services
                     PostedOn = e.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
                     CategoryName = e.Category.Name,
                     DifficultyName = e.Difficulty.Name,
-                    Cook = e.Cook.UserName,
+                    CookFirstName = e.Cook.FirstName,
+                    CookLastName = e.Cook.LastName,
                     Comments = (ICollection<CommentsInfoViewModel>)e.Comments.Select(c => new CommentsInfoViewModel
                     {
                         Title = c.Title,
@@ -312,7 +315,8 @@ namespace RecipeFinder.Core.Services
                   PostedOn = e.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
                   CategoryName = e.Category.Name,
                   DifficultyName = e.Difficulty.Name,
-                  Cook = e.Cook.UserName,
+                  CookFirstName = e.Cook.FirstName,
+                  CookLastName = e.Cook.LastName,
                   IngredientCount = e.Ingredients.Count(),
                   CommentCount = e.Comments.Count(),
                   MadeByCount = e.RecipesUsers.Count()
@@ -339,7 +343,8 @@ namespace RecipeFinder.Core.Services
                   PostedOn = e.Recipe.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
                   CategoryName = e.Recipe.Category.Name,
                   DifficultyName = e.Recipe.Difficulty.Name,
-                  Cook = e.Recipe.Cook.UserName,
+                  CookFirstName = e.Recipe.Cook.FirstName,
+                  CookLastName = e.Recipe.Cook.LastName,
                   IngredientCount = e.Recipe.Ingredients.Count(),
                   CommentCount = e.Recipe.Comments.Count(),
                   MadeByCount = e.Recipe.RecipesUsers.Count()
@@ -382,7 +387,8 @@ namespace RecipeFinder.Core.Services
                   PostedOn = e.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
                   CategoryName = e.Category.Name,
                   DifficultyName = e.Difficulty.Name,
-                  Cook = e.Cook.UserName,
+                  CookFirstName = e.Cook.FirstName,
+                  CookLastName = e.Cook.LastName,
                   IngredientCount = e.Ingredients.Count(),
                   CommentCount = e.Comments.Count(),
                   MadeByCount = e.RecipesUsers.Count()
@@ -416,7 +422,8 @@ namespace RecipeFinder.Core.Services
                    PostedOn = e.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
                    CategoryName = e.Category.Name,
                    DifficultyName = e.Difficulty.Name,
-                   Cook = e.Cook.UserName,
+                   CookFirstName = e.Cook.FirstName,
+                   CookLastName = e.Cook.LastName,
                    IngredientCount = e.Ingredients.Count(),
                    CommentCount = e.Comments.Count(),
                    MadeByCount = e.RecipesUsers.Count()
@@ -437,7 +444,8 @@ namespace RecipeFinder.Core.Services
                    PostedOn = e.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
                    CategoryName = e.Category.Name,
                    DifficultyName = e.Difficulty.Name,
-                   Cook = e.Cook.UserName,
+                   CookFirstName = e.Cook.FirstName,
+                   CookLastName = e.Cook.LastName,
                    IngredientCount = e.Ingredients.Count(),
                    CommentCount = e.Comments.Count(),
                    MadeByCount = e.RecipesUsers.Count()

@@ -21,8 +21,14 @@ namespace RecipeFinder.Core.Models.CommentModels
         [Display(Name = "Description")]
         public string Description { get; set; } = string.Empty;
 
-        [Display(Name = "Author")]
-        public string AuthorName { get; set; } = null!;
+        [Display(Name = "Author first name")]
+        public string AuthorFirstName { get; set; } = null!;
+
+        [Display(Name = "Author last name")]
+        public string AuthorLastName { get; set; } = null!;
+
+        [Display(Name = "Author profile picture")]
+        public string AuthorProfilePicture { get; set; } = null!;
 
         [Display(Name = "Posted Date")]
         public string PostedOn { get; set; } = null!;

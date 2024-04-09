@@ -24,15 +24,15 @@ namespace RecipeFinder.Core.Services
     public class RecipeService : IRecipeService
     {
         private readonly IRepository repository;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public RecipeService(IRepository repository, UserManager<IdentityUser> userManager)
+        public RecipeService(IRepository repository, UserManager<ApplicationUser> userManager)
         {
             this.repository = repository;
             this._userManager = userManager;
         }
 
-        public async Task<int> AddAsync(RecipeFormViewModel model, IdentityUser cookId)
+        public async Task<int> AddAsync(RecipeFormViewModel model, ApplicationUser cookId)
         {
             Recipe newRecipe = new Recipe
             {
@@ -52,7 +52,7 @@ namespace RecipeFinder.Core.Services
             return newRecipe.Id;
         }
 
-        public async Task AddToRecipeUsersAsync(int recipeId, IdentityUser userId)
+        public async Task AddToRecipeUsersAsync(int recipeId, ApplicationUser userId)
         {
             RecipeUser recipeUser = new RecipeUser
             {
@@ -229,7 +229,9 @@ namespace RecipeFinder.Core.Services
                         Title = c.Title,
                         Description = c.Description,
                         PostedOn = c.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
-                        AuthorName = c.Author.UserName
+                        AuthorFirstName = c.Author.FirstName,
+                        AuthorLastName = c.Author.LastName,
+                        AuthorProfilePicture = c.Author.ProfilePicture
                     }),
                     Ingredients = e.Ingredients,
                     MadeByCount = e.RecipesUsers.Count()
@@ -263,7 +265,7 @@ namespace RecipeFinder.Core.Services
         public async Task<string?> GetCookIdAsync(string cookId)
         {
             return (await repository
-                .AllReadOnly<IdentityUser>()
+                .AllReadOnly<ApplicationUser>()
                 .FirstOrDefaultAsync(iu => iu.Id == cookId))?.Id;
         }
 
@@ -292,7 +294,7 @@ namespace RecipeFinder.Core.Services
             return recipe;
         }
 
-        public async Task<IEnumerable<RecipeInfoViewModel>> MineRecipesAsync(IdentityUser currentUser)
+        public async Task<IEnumerable<RecipeInfoViewModel>> MineRecipesAsync(ApplicationUser currentUser)
         {
             if (currentUser == null)
             {
@@ -318,7 +320,7 @@ namespace RecipeFinder.Core.Services
               .ToListAsync();
         }
 
-        public async Task<IEnumerable<RecipeInfoViewModel>> RecipeBookAsync(IdentityUser currentUser)
+        public async Task<IEnumerable<RecipeInfoViewModel>> RecipeBookAsync(ApplicationUser currentUser)
         {
             if (currentUser == null)
             {
@@ -388,7 +390,7 @@ namespace RecipeFinder.Core.Services
               .ToListAsync();
         }
 
-        public async Task RemoveFromRecipeUsersAsync(int recipeId, IdentityUser userId)
+        public async Task RemoveFromRecipeUsersAsync(int recipeId, ApplicationUser userId)
         {
             RecipeUser recipeUser = new RecipeUser
             {

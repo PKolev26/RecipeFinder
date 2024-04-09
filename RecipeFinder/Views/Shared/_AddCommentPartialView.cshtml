@@ -1,11 +1,17 @@
-﻿@model CommentAddViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@using RecipeFinder.Infrastructure.Data.Models
+@model CommentAddViewModel
+@inject UserManager<ApplicationUser> _userManager;
+@{
+    var currentUser = await _userManager.GetUserAsync(User);
+}
 <div class="form-align" style="display:flex;align-items:center;justify-content:center;">
 <form asp-controller="Comment" asp-action="AddComment" method="post" asp-route-id="@ViewData["Id"]" style="flex:0 0 80%;" >
     <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
         <div class="d-flex flex-start w-100" style="gap:1em;">
-            <div style="height: 35px;width: 35px;">
+            <div style="height: 50px;width: 50px;">
                 <img class="rounded-circle shadow-1-strong me-3"
-                         src="https://p7.hiclipart.com/preview/355/848/997/computer-icons-user-profile-google-account-photos-icon-account.jpg" alt="avatar"
+                         src="@currentUser.ProfilePicture" alt="avatar"
                      width="50" height="50" />
             </div>
             <div class="form-outline w-100">

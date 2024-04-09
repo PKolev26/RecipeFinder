@@ -16,9 +16,9 @@ namespace RecipeFinder.Controllers
     {
 
         private readonly IRecipeService recipeService;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public RecipeController(IRecipeService recipeService, UserManager<IdentityUser> userManager)
+        public RecipeController(IRecipeService recipeService, UserManager<ApplicationUser> userManager)
         {
             this.recipeService = recipeService;
             this._userManager = userManager;

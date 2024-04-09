@@ -26,6 +26,6 @@ namespace RecipeFinder.Infrastructure.Data.Models
 
         [Comment("Maker")]
         [ForeignKey(nameof(UserId))]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
     }
 }

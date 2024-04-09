@@ -1,5 +1,6 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject UserManager<IdentityUser> _userManager;
+﻿@using Microsoft.AspNetCore.Identity;
+@using RecipeFinder.Infrastructure.Data.Models;
+@inject UserManager<ApplicationUser> _userManager;
 @{
     var currentUser = await _userManager.GetUserAsync(User);
 } 

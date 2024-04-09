@@ -11,8 +11,10 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
     internal class SeedData
     {
         // Users
-        public IdentityUser User1 { get; set; }
-        public IdentityUser User2 { get; set; }
+        public ApplicationUser User1 { get; set; }
+        public ApplicationUser User2 { get; set; }
+
+        public ApplicationUser Admin { get; set; }
 
         // Categories
         public Category FirstCategory { get; set; }
@@ -58,31 +60,51 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
 
         private void SeedUsers()
         {
-            var hasher = new PasswordHasher<IdentityUser>();
+            var hasher = new PasswordHasher<ApplicationUser>();
 
-            User1 = new IdentityUser()
+            User1 = new ApplicationUser()
             {
                 Id = "dea12856-c198-4129-b3f3-b893d8395082",
                 UserName = "user@gmail.com",
                 NormalizedUserName = "user@gmail.com",
                 Email = "user@gmail.com",
-                NormalizedEmail = "user@gmail.com"
+                NormalizedEmail = "user@gmail.com",
+                FirstName = "Test",
+                LastName = "User"
             };
 
             User1.PasswordHash =
                  hasher.HashPassword(User1, "password123");
 
-            User2 = new IdentityUser()
+            User2 = new ApplicationUser()
             {
                 Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                 UserName = "guest@gmail.com",
                 NormalizedUserName = "guest@gmail.com",
                 Email = "guest@gmail.com",
-                NormalizedEmail = "guest@gmail.com"
+                NormalizedEmail = "guest@gmail.com",
+                FirstName = "Test",
+                LastName = "Guest",
+                ProfilePicture = "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
             };
 
             User2.PasswordHash =
             hasher.HashPassword(User2, "password321");
+
+            Admin = new ApplicationUser()
+            {
+                Id = "8acdd283-300d-4ef1-a83f-813efc164767",
+                UserName = "admin@gmail.com",
+                NormalizedUserName = "admin@gmail.com",
+                Email = "admin@gmail.com",
+                NormalizedEmail = "admin@gmail.com",
+                FirstName = "Admin",
+                LastName = "Admin",
+                ProfilePicture = "https://www.pngmart.com/files/21/Admin-Profile-Vector-PNG-Clipart.png"
+            };
+
+            Admin.PasswordHash =
+            hasher.HashPassword(Admin, "adminpassword213");
         }
 
         private void SeedCategories() 

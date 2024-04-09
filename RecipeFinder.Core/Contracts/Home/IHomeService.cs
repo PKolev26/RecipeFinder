@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using RecipeFinder.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace RecipeFinder.Core.Contracts.Home
 {
     public interface IHomeService
     {
-        Task<bool> UserHasUnfinishedRecipeAsync(IdentityUser user);
+        Task<bool> UserHasUnfinishedRecipeAsync(ApplicationUser user);
     }
 }

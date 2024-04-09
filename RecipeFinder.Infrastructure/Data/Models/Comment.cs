@@ -33,7 +33,7 @@ namespace RecipeFinder.Infrastructure.Data.Models
 
         [ForeignKey(nameof(AuthorId))]
         [Comment("Comment Author")]
-        public IdentityUser Author { get; set; } = null!;
+        public ApplicationUser Author { get; set; } = null!;
 
         [Required]
         [Comment("Comment Posted Date")]

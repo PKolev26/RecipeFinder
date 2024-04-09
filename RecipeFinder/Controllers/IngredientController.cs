@@ -6,6 +6,7 @@ using RecipeFinder.Core.Contracts.Recipe;
 using RecipeFinder.Core.Models.IngredientModels;
 using RecipeFinder.Core.Models.RecipeModels;
 using RecipeFinder.Core.Services;
+using RecipeFinder.Infrastructure.Data.Models;
 
 namespace RecipeFinder.Controllers
 {
@@ -15,9 +16,9 @@ namespace RecipeFinder.Controllers
 
         private readonly IIngredientService ingredientService;
         private readonly IRecipeService recipeService;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public IngredientController(IIngredientService ingredientService, IRecipeService recipeService, UserManager<IdentityUser> userManager)
+        public IngredientController(IIngredientService ingredientService, IRecipeService recipeService, UserManager<ApplicationUser> userManager)
         {
             this.ingredientService = ingredientService;
             this.recipeService = recipeService;

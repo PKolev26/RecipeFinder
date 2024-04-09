@@ -62,7 +62,7 @@ namespace RecipeFinder.Infrastructure.Data.Models
 
         [Comment("The Cook")]
         [ForeignKey(nameof(CookId))]
-        public IdentityUser Cook { get; set; } = null!;
+        public ApplicationUser Cook { get; set; } = null!;
 
         [Required]
         [Comment("A list of all ingredients")]

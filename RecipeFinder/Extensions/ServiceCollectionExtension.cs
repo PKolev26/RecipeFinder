@@ -7,6 +7,7 @@ using RecipeFinder.Core.Contracts.Recipe;
 using RecipeFinder.Core.Services;
 using RecipeFinder.Data;
 using RecipeFinder.Infrastructure.Common;
+using RecipeFinder.Infrastructure.Data.Models;
 using Repository = RecipeFinder.Infrastructure.Common.Repository;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -38,7 +39,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration config)
         {
-            services.AddDefaultIdentity<IdentityUser>(options => {
+            services.AddDefaultIdentity<ApplicationUser>(options => {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = true;
                 options.Password.RequireUppercase = true;

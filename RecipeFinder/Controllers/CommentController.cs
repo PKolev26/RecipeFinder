@@ -6,16 +6,17 @@ using RecipeFinder.Core.Models.CommentModels;
 using RecipeFinder.Core.Models.RecipeModels;
 using RecipeFinder.Core.Services;
 using RecipeFinder.Extensions;
+using RecipeFinder.Infrastructure.Data.Models;
 
 namespace RecipeFinder.Controllers
 {
     public class CommentController : Controller
     {
         private readonly ICommentService commentService;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IRecipeService recipeService;
 
-        public CommentController(ICommentService commentService, UserManager<IdentityUser> userManager, IRecipeService recipeService)
+        public CommentController(ICommentService commentService, UserManager<ApplicationUser> userManager, IRecipeService recipeService)
         {
             this.commentService = commentService;
             this._userManager = userManager;

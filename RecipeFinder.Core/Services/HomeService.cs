@@ -19,7 +19,7 @@ namespace RecipeFinder.Core.Services
         {
             this.repository = repository;
         }
-        public async Task<bool> UserHasUnfinishedRecipeAsync(IdentityUser user)
+        public async Task<bool> UserHasUnfinishedRecipeAsync(ApplicationUser user)
         {
             var hasUnfinishedRecipeList = await repository.AllReadOnly<Recipe>()
                 .Where(r => r.CookId == user.Id && r.Ingredients.Count() == 0)

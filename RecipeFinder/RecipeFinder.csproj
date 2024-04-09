@@ -28,4 +28,9 @@
     <ProjectReference Include="..\RecipeFinder.Core\RecipeFinder.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Administrator\Data\" />
+    <Folder Include="Areas\Administrator\Models\" />
+  </ItemGroup>
+
 </Project>

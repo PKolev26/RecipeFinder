@@ -7,6 +7,8 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+
+
 #userInput{
     display: none;
 }
@@ -15,7 +17,8 @@
     margin-bottom: 10px;
     justify-content:center;
 }
-.row:nth-of-type(2),.row:nth-of-type(3){
+
+.row:nth-of-type(4),.row:nth-of-type(3){
     
     justify-content:flex-start;
 }

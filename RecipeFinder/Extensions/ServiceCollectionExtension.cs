@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using RecipeFinder.Core.Contracts.Admin;
 using RecipeFinder.Core.Contracts.Comment;
 using RecipeFinder.Core.Contracts.Home;
 using RecipeFinder.Core.Contracts.Ingredient;
@@ -20,6 +21,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IIngredientService, IngredientService>();
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IAdminService, AdminService>();
             services.AddSignalR();
             return services;
         }
@@ -48,6 +50,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.SignIn.RequireConfirmedEmail = false;
                 options.User.RequireUniqueEmail = true;
             })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<RecipeFinderDbContext>();
 
             return services;

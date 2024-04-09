@@ -48,8 +48,14 @@ namespace RecipeFinder.Core.Models.RecipeModels
 
         public string DifficultyName { get; set; } = null!;
 
-        [Display(Name = "Cooked by")]
-        public string Cook { get; set; } = null!;
+        [Display(Name = "Cooked username")]
+        public string CookUsername { get; set; } = null!;
+
+        [Display(Name = "Cooked by first name")]
+        public string CookFirstName { get; set; } = null!;
+
+        [Display(Name = "Cooked by last name")]
+        public string CookLastName { get; set; } = null!;
 
         [Display(Name = "Ingredients count")]
         public int IngredientCount { get; set; }

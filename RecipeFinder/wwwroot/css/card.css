@@ -6,11 +6,7 @@
     padding: 0;
 }
 
-img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
+
 
 body {
     font: 16px/1.5em "Montserrat", sans-serif;
@@ -20,9 +16,16 @@ body {
     text-align: center;
 }
 
-.card-body{
+.card-body {
     display: grid;
 }
+
+    .card-body img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
 .main-info {
     display: flex;
     flex-direction: column;
@@ -56,11 +59,11 @@ span {
         justify-content: space-evenly;
     }
 
-    .date-and-buttons a:first-of-type {
+    .date-and-buttons a[name=moreinfo] {
         color: #ffae00;
     }
 
-        .date-and-buttons a:first-of-type:hover {
+        .date-and-buttons a[name=moreinfo]:hover {
             background-color: #ffae00;
             color: white;
         }

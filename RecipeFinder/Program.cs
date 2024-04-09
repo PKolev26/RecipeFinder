@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using RecipeFinder.Extensions;
 using RecipeFinder.Hubs;
 using RecipeFinder.ModelBinders;
 
@@ -46,10 +47,16 @@ namespace RecipeFinder
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                name: "areas",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+
+                endpoints.MapControllerRoute(
                     name: "Recipe Details",
                     pattern: "/Recipe/Details/{id}/{name}",
                     defaults: new { Controller = "Recipe", Action = "Details"}
                 );
+
                 endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -57,7 +64,9 @@ namespace RecipeFinder
 
                 endpoints.MapHub<ChatHub>("/chatHub");
 			});
-            
+
+            app.AddAdminRoleAsync().Wait();
+
             app.Run();
         }
     }

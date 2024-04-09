@@ -37,8 +37,12 @@ namespace RecipeFinder.Core.Models.RecipeModels
 
         [Display(Name = "Recipe's cook id")]
         public string CookId = null!;
-        [Display(Name = "Cooked by")]
-        public string Cook { get; set; } = null!;
+
+        [Display(Name = "Cooked by first name")]
+        public string CookFirstName { get; set; } = null!;
+
+        [Display(Name = "Cooked by last name")]
+        public string CookLastName { get; set; } = null!;
 
         [Display(Name = "Recipe's ingredients")]
         public ICollection<Ingredient> Ingredients { get; set;} = new List<Ingredient>();

@@ -7,19 +7,13 @@
     padding: 0;
 }
 
-img {
+
+
+
+.details-body img {
     width: 100%;
     height: auto;
     display: block;
-}
-
-details-body {
-    font: 16px/1.5em "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    display: flex;
-    flex-direction: column;
-    padding: 0 2em;
 }
 
 section {

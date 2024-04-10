@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RecipeFinder.Core.Contracts.Admin;
+using RecipeFinder.Core.Enumerations;
 using RecipeFinder.Core.Models.AdminModels;
 using RecipeFinder.Core.Models.RecipeModels;
 using RecipeFinder.Infrastructure.Common;
+using RecipeFinder.Infrastructure.Constants;
 using RecipeFinder.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -24,7 +26,7 @@ namespace RecipeFinder.Core.Services
             this.repository = repository;
             this._userManager = userManager;
         }
-        public async Task<AdminPanelServiceModel> PanelInformation()
+        public async Task<AdminPanelServiceModel> PanelInformationAsync()
         {
             var usersCount = await _userManager.Users.CountAsync();
             var recipesCount = await repository.All<Recipe>().CountAsync();
@@ -43,7 +45,7 @@ namespace RecipeFinder.Core.Services
                         CookFirstName = x.Cook.FirstName,
                         CookLastName = x.Cook.LastName,
                         Recipe = x.Name,
-                        PostedOn = x.PostedOn,
+                        PostedOn = x.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
                         CategoryName = x.Category.Name,
                         DifficultyName = x.Difficulty.Name,
                         CommentsCount = x.Comments.Count,

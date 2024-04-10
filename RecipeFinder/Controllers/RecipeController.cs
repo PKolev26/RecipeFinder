@@ -132,7 +132,7 @@ namespace RecipeFinder.Controllers
 
             var recipe = await recipeService.RecipeDetailsByIdAsync(id);
 
-            if (recipe.CookId != currentUser.Id)
+            if (recipe.CookId != currentUser.Id && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
@@ -154,13 +154,16 @@ namespace RecipeFinder.Controllers
 
             var recipe = await recipeService.RecipeDetailsByIdAsync(id);
 
-            if (recipe.CookId != currentUser.Id)
+            if (recipe.CookId != currentUser.Id && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
 
             await recipeService.EditAsync(id, model);
-
+            if (User.IsAdmin())
+            {
+                return RedirectToAction("ManageRecipes", "Management", new { area = "Administrator" });
+            }
             return RedirectToAction(nameof(Details), new { id, name = model.GetName()});
         }
 
@@ -224,7 +227,7 @@ namespace RecipeFinder.Controllers
 
             var recipe = await recipeService.RecipeDetailsByIdAsync(id);
 
-            if (currentUser.Id != recipe.CookId)
+            if (currentUser.Id != recipe.CookId && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
@@ -256,13 +259,17 @@ namespace RecipeFinder.Controllers
 
             var recipe = await recipeService.RecipeDetailsByIdAsync(model.Id);
 
-            if (currentUser.Id != recipe.CookId)
+            if (currentUser.Id != recipe.CookId && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
 
             await recipeService.DeleteAsync(model.Id);
 
+            if (User.IsAdmin())
+            {
+                return RedirectToAction("ManageRecipes", "Management", new { area = "Administrator" });
+            }
             return RedirectToAction(nameof(All));
         }
     }

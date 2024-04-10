@@ -102,7 +102,7 @@ namespace RecipeFinder.Core.Services
 
         public async Task<RecipeQueryServiceModel> AllRecipesAsync(string? search = null, RecipeSorting sorting = RecipeSorting.Newest, int currentPage = 1, int recipesPerPage = 1, string? category = null, string? difficulty = null)
         {
-            var recipes = repository.AllReadOnly<Recipe>().Where(r => r.Ingredients.Count > 0);
+            var recipes = repository.AllReadOnly<Recipe>();
 
             if (category != null)
             {
@@ -165,7 +165,7 @@ namespace RecipeFinder.Core.Services
                 })
                 .ToListAsync();
 
-            int recipesCount = await recipes.CountAsync();
+            int recipesCount = await recipes.CountAsync() - recipes.Where(c => c.Ingredients.Count() == 0).Count();
 
             return new RecipeQueryServiceModel()
             {

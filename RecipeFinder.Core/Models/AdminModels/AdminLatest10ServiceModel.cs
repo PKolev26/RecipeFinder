@@ -13,7 +13,7 @@ namespace RecipeFinder.Core.Models.AdminModels
         public string Recipe { get; set; } = null!;
         public string CategoryName { get; set; } = null!;
         public string DifficultyName { get; set; } = null!;
-        public DateTime PostedOn { get; set; }
+        public string PostedOn { get; set; } = null!;
         public int CommentsCount { get; set; }
         public bool IsFinished { get; set; }
     }

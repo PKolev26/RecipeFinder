@@ -1,4 +1,5 @@
-﻿using RecipeFinder.Core.Models.AdminModels;
+﻿using RecipeFinder.Core.Enumerations;
+using RecipeFinder.Core.Models.AdminModels;
 using RecipeFinder.Core.Models.RecipeModels;
 using RecipeFinder.Infrastructure.Data.Models;
 using System;
@@ -11,6 +12,6 @@ namespace RecipeFinder.Core.Contracts.Admin
 {
     public interface IAdminService
     {
-        Task<AdminPanelServiceModel> PanelInformation();
+        Task<AdminPanelServiceModel> PanelInformationAsync();
     }
 }

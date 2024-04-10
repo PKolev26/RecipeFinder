@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
 <link rel="stylesheet" href="~/css/adminpanel.css" />
-<title>RecipeFinder - Admin Panel</title>
+<title>Admin Panel - RecipeFinder</title>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -24,14 +24,9 @@
     <div class="offcanvas offcanvas-start sidebar-nav bg-dark"
          tabindex="-1"
          id="sidebar">
-        <div class="offcanvas-body p-0">
+        <div class="offcanvas-body p-0" style="display:flex;flex-direction:column;justify-content:space-between;">
             <nav class="navbar-dark">
                 <ul class="navbar-nav">
-                    <li>
-                        <div class="text-muted small fw-bold text-uppercase px-3">
-                            CORE
-                        </div>
-                    </li>
                     <li>
                         <a asp-area="Administrator" asp-action="AdminPanel" asp-controller="Home" class="nav-link px-3 sidebar-link"
                            data-bs-toggle="collapse">
@@ -54,46 +49,41 @@
                         <div id="layouts">
                             <ul class="navbar-nav ps-3">
                                 <li>
-                                    <a asp-area="Administrator" asp-action="ManageUsers" asp-controller="Home" class="nav-link px-3 sidebar-link"
-                                       data-bs-toggle="collapse">
+                                    <a asp-area="Administrator" asp-action="ManageUsers" asp-controller="Management" class="nav-link px-3 sidebar-link">
                                         <span class="me-2"><i class="bi bi-people-fill"></i></span>
                                         <span> Manage Users</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="Administrator" asp-action="ManageRecipes" asp-controller="Home" class="nav-link px-3 sidebar-link"
-                                       data-bs-toggle="collapse">
+                                    <a asp-area="Administrator" asp-action="ManageRecipes" asp-controller="Management" class="nav-link px-3 sidebar-link">
                                         <span class="me-2"><i class="bi bi-egg-fried"></i></span>
                                         <span> Manage Recipes</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="Administrator" asp-action="ManageComments" asp-controller="Home" class="nav-link px-3 sidebar-link"
-                                       data-bs-toggle="collapse">
+                                    <a asp-area="Administrator" asp-action="ManageComments" asp-controller="Management" class="nav-link px-3 sidebar-link">
                                         <span class="me-2"><i class="bi bi-bookmark"></i></span>
                                         <span> Manage Comments</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="Administrator" asp-action="ManageCategories" asp-controller="Home" class="nav-link px-3 sidebar-link"
-                                       data-bs-toggle="collapse">
+                                    <a asp-area="Administrator" asp-action="ManageCategories" asp-controller="Management" class="nav-link px-3 sidebar-link">
                                         <span class="me-2"><i class="bi bi-border-all"></i></span>
                                         <span> Manage Categories</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="Administrator" asp-action="ManageDifficulties" asp-controller="Home" class="nav-link px-3 sidebar-link"
-                                       data-bs-toggle="collapse">
+                                    <a asp-area="Administrator" asp-action="ManageDifficulties" asp-controller="Management" class="nav-link px-3 sidebar-link">
                                         <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                                        <span> Manage Difficulties</span>
+                                        Manage Difficulties
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                 </ul>
-                <a asp-area="Default" asp-action="Index" asp-controller="Home" class="btn btn-danger fixed-bottom mx-3 my-3">Exit</a>
             </nav>
+            <a asp-area="" asp-action="Index" asp-controller="Home" name="btn" class="btn btn-danger mx-3 my-3" style="width:85%;">Exit</a>
         </div>
     </div>
     <main class="mt-5 pt-3">
@@ -114,7 +104,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card bg-warning text-dark h-100">
-                    <div class="card-body py-5" style="font-size:18px;">Total comments count</div>
+                        <div class="card-body py-5" style="font-size:18px;">Total comments count</div>
                         <div class="card-footer d-flex">
                             <h3>@Model.TotalComments</h3>
                         </div>
@@ -122,78 +112,79 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card bg-success text-white h-100">
-                    <div class="card-body py-5" style="font-size:18px;">Total recipes count</div>
+                        <div class="card-body py-5" style="font-size:18px;">Total recipes count</div>
                         <div class="card-footer d-flex">
                             <h3>@Model.TotalRecipes</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <span><i class="bi bi-table me-2"></i></span> Data Table
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="example"
-                                       class="table table-striped data-table"
-                                       style="width: 100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Cook name</th>
-                                            <th>Recipe name</th>
-                                            <th>Category</th>
-                                            <th>Difficulty</th>
-                                            <th>Posted on</th>
-                                            <th>Comments</th>
-                                            <th>Finished</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model.Latest)
-                                        {
-                                            <tr>
-                                                <td>@item.CookFirstName @item.CookLastName</td>
-                                                <td>@item.Recipe</td>
-                                                <td>@item.CategoryName</td>
-                                                <td>@item.DifficultyName</td>
-                                                <td>@item.PostedOn</td>
-                                                <td>@item.CommentsCount</td>
-                                                @if(item.IsFinished == true)
-                                                {
-                                                    <td><img src="~/images/checked.png"/></td>
-                                                }
-                                                else
-                                                {
-                                                    <td><img src="~/images/x.png"/></td>
-                                                }
-                                            </tr>
-                                        }
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Cook name</th>
-                                            <th>Recipe name</th>
-                                            <th>Category</th>
-                                            <th>Difficulty</th>
-                                            <th>Posted on</th>
-                                            <th>Comments</th>
-                                            <th>Finished</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="bi bi-table me-2"></i></span> The latest 10
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example"
+                                   class="table table-striped data-table"
+                                   style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>Cook name</th>
+                                        <th>Recipe name</th>
+                                        <th>Category</th>
+                                        <th>Difficulty</th>
+                                        <th>Posted on</th>
+                                        <th>Comments</th>
+                                        <th>Finished</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Latest)
+                                    {
+                                        <tr>
+                                            <td>@item.CookFirstName @item.CookLastName</td>
+                                            <td>@item.Recipe</td>
+                                            <td>@item.CategoryName</td>
+                                            <td>@item.DifficultyName</td>
+                                            <td>@item.PostedOn</td>
+                                            <td>@item.CommentsCount</td>
+                                            @if (item.IsFinished == true)
+                                            {
+                                                <td><img src="~/images/checked.png" /></td>
+                                            }
+                                            else
+                                            {
+                                                <td><img src="~/images/x.png" /></td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Cook name</th>
+                                        <th>Recipe name</th>
+                                        <th>Category</th>
+                                        <th>Difficulty</th>
+                                        <th>Posted on</th>
+                                        <th>Comments</th>
+                                        <th>Finished</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
     </main>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="./js/script.js"></script>
+</body>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="./js/adminpage.js></script>
 </body>

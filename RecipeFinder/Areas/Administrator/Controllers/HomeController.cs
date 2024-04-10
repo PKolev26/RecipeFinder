@@ -15,32 +15,8 @@ namespace RecipeFinder.Areas.Administrator.Controllers
 
         public async Task<IActionResult> AdminPanel()
         {
-            var model = await adminService.PanelInformation();
+            var model = await adminService.PanelInformationAsync();
             return View(model);
-        }
-
-        public IActionResult ManageUsers()
-        {
-            return View();
-        }
-
-        public IActionResult ManageRecipes()
-        {
-            return View();
-        }
-
-        public IActionResult ManageCategories()
-        {
-            return View();
-        }
-
-        public IActionResult ManageDifficulties()
-        {
-            return View();
-        }
-        public IActionResult ManageComments()
-        {
-            return View();
         }
     }
 }

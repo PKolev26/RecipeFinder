@@ -234,7 +234,10 @@ namespace RecipeFinder.Core.Services
                         PostedOn = c.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
                         AuthorFirstName = c.Author.FirstName,
                         AuthorLastName = c.Author.LastName,
-                        AuthorProfilePicture = c.Author.ProfilePicture
+                        AuthorProfilePicture = c.Author.ProfilePicture,
+                        AuthorId = c.AuthorId,
+                        RecipeId = c.RecipeId,
+                        Id = c.Id,
                     }),
                     Ingredients = e.Ingredients,
                     MadeByCount = e.RecipesUsers.Count()

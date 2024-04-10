@@ -1,20 +1,28 @@
-﻿@model CommentsInfoViewModel
+﻿@using RecipeFinder.Extensions
+@model CommentsInfoViewModel
+
 <div class="card" style="width: 80%;">
     <div class="card-body">
-
         <div class="d-flex flex-start align-items-center" style="gap:1em;">
             <div style="height: 35px;width: 35px;">
                 <img class="rounded-circle shadow-1-strong me-3"
                      src="@Model.AuthorProfilePicture" alt="avatar"
                      width="50" height="50" />
             </div>
-            <div>
+            <div style="flex-grow: 1;">
                 <h6 style="font-size: 0.9em;color: black;font-weight: bold;font-style: italic;">@Model.AuthorFirstName @Model.AuthorLastName</h6>
                 <p class="text-muted small mb-0" style="font-size: 0.7em;">
                     Shared publicly - @Model.PostedOn
                 </p>
             </div>
-
+            <div style="align-content:flex-end">
+                @if (User.Id() == Model.AuthorId)
+                {
+                    <form method="post" asp-controller="Comment" asp-action="Delete" asp-route-id="@Model.Id">
+                        <button type="submit" class="btn btn-outline-danger mb-2 w-100 p-3 fw-bold" style="background-color:#DC3545; color:white">Delete</button>
+                    </form>
+                }
+            </div>
         </div>
         <div style="width: 100%;">
             <p class="mt-4 mb-3 pb-2" style="text-align: left;font-size: 1em;">

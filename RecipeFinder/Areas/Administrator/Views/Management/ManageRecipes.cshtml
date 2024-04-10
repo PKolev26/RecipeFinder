@@ -162,25 +162,34 @@
                                         <th>Ingredients</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach (var item in Model.Recipes)
-                                    {
-                                        <tr>
-                                            <td>@item.CookFirstName @item.CookLastName</td>
-                                            <td>@item.Name</td>
-                                            <td>@item.CategoryName</td>
-                                            <td>@item.DifficultyName</td>
-                                            <td>@item.PostedOn</td>
-                                            <td>@item.CommentCount</td>
-                                            <td>@item.IngredientCount</td>
-                                            <td> <form method="post" asp-area="" asp-controller="Recipe" asp-action="Delete" asp-route-id="@item.Id" style="margin-bottom:auto;">
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                                 </form>
-                                            </td>
-                                            <td><a asp-area="" asp-action="Edit" asp-controller="Recipe" asp-route-id="@item.Id" class="btn btn-warning">Edit</a></td>
-                                        </tr> 
-                                    }
-                                </tbody>
+                                @if (Model.Recipes.Any())
+                                {
+                                    <tbody>
+                                        @foreach (var item in Model.Recipes)
+                                        {
+                                            <tr>
+                                                <td>@item.CookFirstName @item.CookLastName</td>
+                                                <td>@item.Name</td>
+                                                <td>@item.CategoryName</td>
+                                                <td>@item.DifficultyName</td>
+                                                <td>@item.PostedOn</td>
+                                                <td>@item.CommentCount</td>
+                                                <td>@item.IngredientCount</td>
+                                                <td> <form method="post" asp-area="" asp-controller="Recipe" asp-action="Delete" asp-route-id="@item.Id" style="margin-bottom:auto;">
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </td>
+                                                <td><a asp-area="" asp-action="Edit" asp-controller="Recipe" asp-route-id="@item.Id" class="btn btn-warning">Edit</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="7">No data found</td>
+                                    </tr>
+                                }
                                 <tfoot>
                                     <tr>
                                         <th>Cook name</th>

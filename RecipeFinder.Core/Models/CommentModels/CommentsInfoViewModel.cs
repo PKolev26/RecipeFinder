@@ -15,6 +15,7 @@ namespace RecipeFinder.Core.Models.CommentModels
     public class CommentsInfoViewModel
     {
         public int Id { get; set; }
+
         [Display( Name ="Title")]
         public string Title { get; set; } = string.Empty;
 
@@ -32,6 +33,14 @@ namespace RecipeFinder.Core.Models.CommentModels
 
         [Display(Name = "Posted Date")]
         public string PostedOn { get; set; } = null!;
+
+        [Display(Name = "Recipe Id")]
         public int RecipeId {  get; set; }
+
+        [Display(Name = "Recipe Name")]
+        public string RecipeName { get; set; } = null!;
+
+        [Display(Name = "Author Id")]
+        public string AuthorId { get; set; } = null!;
     }
 }

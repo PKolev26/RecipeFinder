@@ -52,5 +52,64 @@ namespace RecipeFinder.Controllers
             await commentService.AddAsync(model, currentUser, id);
             return RedirectToAction("Details", "Recipe", new {id, name = recipe.Name});
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (await recipeService.ExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            var comment = await commentService.CommentInformationByIdAsync(id);
+
+            if (currentUser.Id != comment.AuthorId && User.IsAdmin() == false)
+            {
+                return Unauthorized();
+            }
+
+            var model = new CommentsInfoViewModel()
+            {
+                Id = id,
+                Title = comment.Title,
+                Description = comment.Description,
+                AuthorFirstName = comment.AuthorFirstName,
+                AuthorLastName = comment.AuthorLastName,
+                AuthorProfilePicture = comment.AuthorProfilePicture,
+                PostedOn = comment.PostedOn,
+                RecipeId = comment.RecipeId,
+                AuthorId = comment.AuthorId
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(CommentsInfoViewModel model)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (await commentService.ExistsAsync(model.Id) == false)
+            {
+                return BadRequest();
+            }
+
+            var comment = await commentService.CommentInformationByIdAsync(model.Id);
+
+            if (currentUser.Id != comment.AuthorId && User.IsAdmin() == false)
+            {
+                return Unauthorized();
+            }
+
+            await commentService.DeleteAsync(model.Id);
+
+            if (User.IsAdmin())
+            {
+                return RedirectToAction("ManageComments", "Management", new { area = "Administrator" });
+            }
+            return RedirectToAction("Details", "Recipe", new { model.RecipeId, name = model.RecipeName });
+        }
     }
 }

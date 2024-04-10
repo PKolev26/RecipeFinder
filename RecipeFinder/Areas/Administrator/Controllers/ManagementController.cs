@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RecipeFinder.Core.Contracts.Comment;
 using RecipeFinder.Core.Contracts.Recipe;
 using RecipeFinder.Core.Models.RecipeModels;
 
@@ -8,10 +9,12 @@ namespace RecipeFinder.Areas.Administrator.Controllers
     public class ManagementController : AdminBaseController
     {
         private readonly IRecipeService recipeService;
+        private readonly ICommentService commentService;
 
-        public ManagementController(IRecipeService recipeService)
+        public ManagementController(IRecipeService recipeService, ICommentService commentService)
         {
             this.recipeService = recipeService;
+            this.commentService = commentService;
         }
 
         public IActionResult ManageUsers()
@@ -48,9 +51,10 @@ namespace RecipeFinder.Areas.Administrator.Controllers
         {
             return View();
         }
-        public IActionResult ManageComments()
+        public async Task<IActionResult> ManageComments()
         {
-            return View();
+            var model = await commentService.AllCommentsAsync();
+            return View(model);
         }
     }
 }

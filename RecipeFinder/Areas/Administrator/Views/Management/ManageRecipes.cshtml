@@ -1,0 +1,294 @@
+﻿@using RecipeFinder.Core.Models.RecipeModels
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model AllRecipesQueryModel
+
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+<link rel="stylesheet" href="~/css/adminpanel.css" />
+<title>RecipeFinder - Admin Panel</title>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#sidebar"
+                    aria-controls="offcanvasExample">
+                <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
+            </button>
+            <a asp-area="Administrator" asp-action="AdminPanel" asp-controller="Home" class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold">RecipeFinder Admin Panel</a>
+        </div>
+    </nav>
+    <div class="offcanvas offcanvas-start sidebar-nav bg-dark"
+         tabindex="-1"
+         id="sidebar">
+        <div class="offcanvas-body p-0" style="display:flex;flex-direction:column;justify-content:space-between;">
+            <nav class="navbar-dark">
+                <ul class="navbar-nav">
+                    <li>
+                        <a asp-area="Administrator" asp-action="AdminPanel" asp-controller="Home" class="nav-link px-3 sidebar-link">
+                            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                            <span> Panel</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link px-3 sidebar-link"
+                           data-bs-toggle="collapse"
+                           href="#layouts">
+                            <span class="me-2"><i class="bi bi-layout-split"></i></span>
+                            <span>Management</span>
+                            <span class="ms-auto">
+                                <span class="right-icon">
+                                    <i class="bi bi-chevron-down"></i>
+                                </span>
+                            </span>
+                        </a>
+                        <div id="layouts">
+                            <ul class="navbar-nav ps-3">
+                                <li>
+                                    <a asp-area="Administrator" asp-action="ManageUsers" asp-controller="Management" class="nav-link px-3 sidebar-link">
+                                        <span class="me-2"><i class="bi bi-people-fill"></i></span>
+                                        <span> Manage Users</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="Administrator" asp-action="ManageRecipes" asp-controller="Management" class="nav-link px-3 sidebar-link">
+                                        <span class="me-2"><i class="bi bi-egg-fried"></i></span>
+                                        <span> Manage Recipes</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="Administrator" asp-action="ManageComments" asp-controller="Management" class="nav-link px-3 sidebar-link">
+                                        <span class="me-2"><i class="bi bi-bookmark"></i></span>
+                                        <span> Manage Comments</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="Administrator" asp-action="ManageCategories" asp-controller="Management" class="nav-link px-3 sidebar-link">
+                                        <span class="me-2"><i class="bi bi-border-all"></i></span>
+                                        <span> Manage Categories</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="Administrator" asp-action="ManageDifficulties" asp-controller="Management" class="nav-link px-3 sidebar-link">
+                                        <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                                        Manage Difficulties
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <a asp-area="" asp-action="Index" asp-controller="Home" name="btn" class="btn btn-danger mx-3 my-3" style="width:85%;">Exit</a>
+        </div>
+    </div>
+    <main class="mt-5 pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Dashboard</h4>
+                </div>
+            </div>
+        </div>
+        <form method="get">
+            <div class="container">
+                <div class="search-filter-sort row align-items-center">
+                    <div class="form-group col-md-3">
+                        <label asp-for="Search"></label>
+                        <input asp-for="Search" class="form-control" placeholder="Type here....">
+                    </div>
+                    <div class="col-md-2">
+                        <label asp-for="Category"></label>
+                        <select asp-for="Category" class="form-control">
+                            <option value="">All</option>
+                            @foreach (var category in Model.Categories)
+                            {
+                                <option value="@category">@category</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label asp-for="Difficulty"></label>
+                        <select asp-for="Difficulty" class="form-control">
+                            <option value="">All</option>
+                            @foreach (var difficulty in Model.Difficulties)
+                            {
+                                <option value="@difficulty">@difficulty</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mt-4 p-2">
+                            <input type="submit" value="Search" class="btn btn-success" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label asp-for="Sorting"></label>
+                        <select asp-for="Sorting" class="form-control">
+                            <option value="0">Newest</option>
+                            <option value="1">Oldest</option>
+                            <option value="2">Popular</option>
+                            <option value="3">Ingredients count (Ascending)</option>
+                            <option value="4">Ingredients count (Descending)</option>
+                            <option value="5">Preparation time (Ascending)</option>
+                            <option value="6">Preparation time (Descending)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="bi bi-table me-2"></i></span> Data Table
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example"
+                                   class="table table-striped data-table"
+                                   style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>Cook name</th>
+                                        <th>Recipe name</th>
+                                        <th>Category</th>
+                                        <th>Difficulty</th>
+                                        <th>Posted on</th>
+                                        <th>Comments</th>
+                                        <th>Ingredients</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Recipes)
+                                    {
+                                        <tr>
+                                            <td>@item.CookFirstName @item.CookLastName</td>
+                                            <td>@item.Name</td>
+                                            <td>@item.CategoryName</td>
+                                            <td>@item.DifficultyName</td>
+                                            <td>@item.PostedOn</td>
+                                            <td>@item.CommentCount</td>
+                                            <td>@item.IngredientCount</td>
+                                            <td> <form method="post" asp-area="" asp-controller="Recipe" asp-action="Delete" asp-route-id="@item.Id" style="margin-bottom:auto;">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                 </form>
+                                            </td>
+                                            <td><a asp-area="" asp-action="Edit" asp-controller="Recipe" asp-route-id="@item.Id" class="btn btn-warning">Edit</a></td>
+                                        </tr> 
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Cook name</th>
+                                        <th>Recipe name</th>
+                                        <th>Category</th>
+                                        <th>Difficulty</th>
+                                        <th>Posted on</th>
+                                        <th>Comments</th>
+                                        <th>Ingredients</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        @if (Model.Recipes.Any())
+        {
+            <nav aria-label="Page navigation" style="padding-top:2px;display:flex;justify-content:center;">
+
+                <ul class="pagination">
+                    <li class="page-item">
+                        @{
+                            var previousPage = Model.CurrentPage - 1;
+                            if (previousPage < 1)
+                            {
+                                previousPage = 1;
+                            }
+
+                            var maxPage = Math.Ceiling((double)Model.TotalRecipesCount /
+                            Model.RecipesPerPage);
+                        }
+
+                        <a class="btn btn-dark @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+                           asp-controller="Management"
+                           asp-action="ManageRecipes"
+                           asp-route-currentPage="@previousPage"
+                           asp-route-category="@Model.Category"
+                           asp-route-searchTerm="@Model.Search"
+                           asp-route-sorting="@((int)Model.Sorting)">Previous</a>
+
+
+                        @{
+                            var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
+                            !Model.Recipes.Any();
+                        }
+
+
+
+                    </li>
+                    <li class="page-item">
+
+                        <a class="btn btn-dark
+           @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
+                           asp-controller="Management"
+                           asp-action="ManageRecipes"
+                           asp-route-currentPage="@(Model.CurrentPage)"
+                           asp-route-category="@Model.Category"
+                           asp-route-searchTerm="@Model.Search"
+                           asp-route-sorting="@((int)Model.Sorting)">@Model.CurrentPage</a>
+
+                    </li>
+
+                    <li class="page-item">
+
+                        <a class="btn btn-dark
+           @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
+                           asp-controller="Management"
+                           asp-action="ManageRecipes"
+                           asp-route-currentPage="@(Model.CurrentPage + 1)"
+                           asp-route-category="@Model.Category"
+                           asp-route-searchTerm="@Model.Search"
+                           asp-route-sorting="@((int)Model.Sorting)">@(Model.CurrentPage + 1)</a>
+
+                    </li>
+                    <li class="page-item">
+
+                        <a class="btn btn-dark
+           @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
+                           asp-controller="Management"
+                           asp-action="ManageRecipes"
+                           asp-route-currentPage="@(Model.CurrentPage + 2)"
+                           asp-route-category="@Model.Category"
+                           asp-route-searchTerm="@Model.Search"
+                           asp-route-sorting="@((int)Model.Sorting)">@(Model.CurrentPage + 2)</a>
+
+                    </li>
+                    <li class="page-item">
+
+                        <a class="btn btn-dark
+           @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
+                           asp-controller="Management"
+                           asp-action="ManageRecipes"
+                           asp-route-currentPage="@(Model.CurrentPage + 1)"
+                           asp-route-category="@Model.Category"
+                           asp-route-searchTerm="@Model.Search"
+                           asp-route-sorting="@((int)Model.Sorting)">Next</a>
+
+                    </li>
+                </ul>
+
+            </nav>
+        }
+    </main>
+</body>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="./js/adminpage.js></script>

@@ -68,7 +68,9 @@
 <div class="row">
     @foreach (var recipe in Model.Recipes)
     {
-        <div class="card col-4" style="width: 20rem;">
+            if(recipe.IngredientCount > 0){
+            
+            <div class="card col-4" style="width: 20rem;">
             <div class="card-body">
                 <section class="main-info">
                     <h3 class="card-title">@recipe.Name</h3>
@@ -113,6 +115,7 @@
                 </section>
             </div>
         </div>
+        }
     }
 </div>
 

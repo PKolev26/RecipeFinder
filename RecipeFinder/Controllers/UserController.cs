@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using RecipeFinder.Core.Contracts.Recipe;
 using RecipeFinder.Core.Contracts.User;
 using RecipeFinder.Core.Models.ApplicationUserModels;
 using RecipeFinder.Core.Models.RecipeModels;
@@ -18,6 +19,25 @@ namespace RecipeFinder.Controllers
             this.applicationUserService = applicationUserService;
             this._userManager = userManager;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> All([FromQuery] AllUsersQueryModel model)
+        {
+            var users = await applicationUserService.AllUsersAsync(
+                model.Id,
+                model.FirstName,
+                model.LastName,
+                model.Sorting,
+                model.CurrentPage,
+                model.UsersPerPage);
+
+            model.TotalUsersCount = users.TotalUsersCount;
+
+            model.Users = users.Users;
+
+            return View(model);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
@@ -34,7 +54,7 @@ namespace RecipeFinder.Controllers
 
             var userToDelete = await applicationUserService.UserDetailsAsync(id);
 
-            var model = new ApplicationUserDetailsServiceModel()
+            var model = new UsersDetailsServiceModel()
             {
                 Id = userToDelete.Id,
                 UserName = userToDelete.UserName,
@@ -46,7 +66,7 @@ namespace RecipeFinder.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(ApplicationUserDetailsServiceModel model)
+        public async Task<IActionResult> Delete(UsersDetailsServiceModel model)
         {
             if (await applicationUserService.ExistsAsync(model.Id) == false)
             {
@@ -79,7 +99,7 @@ namespace RecipeFinder.Controllers
 
             var userToPromote = await applicationUserService.UserDetailsAsync(id);
 
-            var model = new ApplicationUserDetailsServiceModel()
+            var model = new UsersDetailsServiceModel()
             {
                 Id = userToPromote.Id,
                 UserName = userToPromote.UserName,
@@ -91,7 +111,7 @@ namespace RecipeFinder.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Promote(ApplicationUserDetailsServiceModel model)
+        public async Task<IActionResult> Promote(UsersDetailsServiceModel model)
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
@@ -126,7 +146,7 @@ namespace RecipeFinder.Controllers
 
             var userToDemote = await applicationUserService.UserDetailsAsync(id);
 
-            var model = new ApplicationUserDetailsServiceModel()
+            var model = new UsersDetailsServiceModel()
             {
                 Id = userToDemote.Id,
                 UserName = userToDemote.UserName,
@@ -139,7 +159,7 @@ namespace RecipeFinder.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Demote(ApplicationUserDetailsServiceModel model)
+        public async Task<IActionResult> Demote(UsersDetailsServiceModel model)
         {
             var currentUser = await _userManager.GetUserAsync(User);
             if (await applicationUserService.ExistsAsync(model.Id) == false)

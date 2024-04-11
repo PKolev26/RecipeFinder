@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RecipeFinder.Core.Models.ApplicationUserModels
 {
-    public class ApplicationUserDetailsServiceModel
+    public class UsersDetailsServiceModel
     {
         [Display(Name = "User Id")]
         public string Id { get; set; } = null!;

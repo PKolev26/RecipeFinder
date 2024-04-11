@@ -143,6 +143,7 @@
                        asp-action="All"
                        asp-route-currentPage="@previousPage"
                        asp-route-category="@Model.Category"
+                       asp-route-difficulty="@Model.Difficulty"
                        asp-route-searchTerm="@Model.Search"
                        asp-route-sorting="@((int)Model.Sorting)">Previous</a>
 
@@ -163,6 +164,7 @@
                    asp-action="All"
                    asp-route-currentPage="@(Model.CurrentPage)"
                    asp-route-category="@Model.Category"
+                       asp-route-difficulty="@Model.Difficulty"
                    asp-route-searchTerm="@Model.Search"
                    asp-route-sorting="@((int)Model.Sorting)">@Model.CurrentPage</a>
 
@@ -176,6 +178,7 @@
                    asp-action="All"
                    asp-route-currentPage="@(Model.CurrentPage + 1)"
                    asp-route-category="@Model.Category"
+                       asp-route-difficulty="@Model.Difficulty"
                    asp-route-searchTerm="@Model.Search"
                    asp-route-sorting="@((int)Model.Sorting)">@(Model.CurrentPage + 1)</a>
 
@@ -188,6 +191,7 @@
                    asp-action="All"
                    asp-route-currentPage="@(Model.CurrentPage + 2)"
                    asp-route-category="@Model.Category"
+                   asp-route-difficulty="@Model.Difficulty"
                    asp-route-searchTerm="@Model.Search"
                    asp-route-sorting="@((int)Model.Sorting)">@(Model.CurrentPage + 2)</a>
 
@@ -200,6 +204,7 @@
                    asp-action="All"
                    asp-route-currentPage="@(Model.CurrentPage + 1)"
                    asp-route-category="@Model.Category"
+                   asp-route-difficulty="@Model.Difficulty"
                    asp-route-searchTerm="@Model.Search"
                    asp-route-sorting="@((int)Model.Sorting)">Next</a>
 

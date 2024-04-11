@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RecipeFinder.Core.Contracts.Comment;
 using RecipeFinder.Core.Contracts.Recipe;
 using RecipeFinder.Core.Contracts.User;
+using RecipeFinder.Core.Models.ApplicationUserModels;
 using RecipeFinder.Core.Models.RecipeModels;
 
 namespace RecipeFinder.Areas.Administrator.Controllers
@@ -10,8 +11,8 @@ namespace RecipeFinder.Areas.Administrator.Controllers
     public class ManagementController : AdminBaseController
     {
         private readonly IRecipeService recipeService;
-        private readonly ICommentService commentService;
         private readonly IApplicationUserService applicationUserService;
+        private readonly ICommentService commentService;
 
         public ManagementController(IRecipeService recipeService, ICommentService commentService, IApplicationUserService applicationUserService)
         {
@@ -20,9 +21,21 @@ namespace RecipeFinder.Areas.Administrator.Controllers
             this.applicationUserService = applicationUserService;
         }
 
-        public async Task<IActionResult> ManageUsers()
+        [HttpGet]
+        public async Task<IActionResult> ManageUsers([FromQuery] AllUsersQueryModel model)
         {
-            var model = await applicationUserService.AllUsersAsync();
+            var user = await applicationUserService.AllUsersAsync(
+                model.Id,
+                model.FirstName,
+                model.LastName,
+                model.Sorting,
+                model.CurrentPage,
+                model.UsersPerPage);
+
+            model.TotalUsersCount = user.TotalUsersCount;
+
+            model.Users = user.Users;
+
             return View(model);
         }
 

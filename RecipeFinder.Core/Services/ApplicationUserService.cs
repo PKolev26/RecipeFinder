@@ -15,6 +15,7 @@ using RecipeFinder.Infrastructure.Constants;
 using System.Runtime.CompilerServices;
 using System.Data;
 using static RecipeFinder.Core.Constants.RoleConstants;
+using RecipeFinder.Core.Enumerations;
 
 namespace RecipeFinder.Core.Services
 {
@@ -28,18 +29,69 @@ namespace RecipeFinder.Core.Services
             this.repository = repository;
             this._userManager = userManager;
         }
-        public async Task<IEnumerable<AllUsersSerivceModel>> AllUsersAsync()
+        public async Task<UserQueryServiceModel> AllUsersAsync(string? id = null, string? firstname = null, string? lastname = null, UserSorting sorting = UserSorting.EmailAscending, int currentPage = 1, int usersPerPage = 1)
         {
-            return await repository.AllReadOnly<ApplicationUser>()
-                .Select(u => new AllUsersSerivceModel
+            var users = repository.AllReadOnly<ApplicationUser>();
+
+            if (id != null)
+            {
+                users = users
+                   .Where(u => u.Id == id);
+            }
+
+            if (firstname != null)
+            {
+                users = users
+                   .Where(u => u.FirstName == firstname);
+            }
+
+            if (lastname != null)
+            {
+                users = users
+                   .Where(u => u.LastName == lastname);
+            }
+
+            users = sorting switch
+            {
+                UserSorting.EmailAscending => users
+                    .OrderBy(u => u.Email),
+                UserSorting.EmailDescending => users
+                .OrderByDescending(u => u.Email),
+                UserSorting.FirstNameAscending => users
+                    .OrderBy(u => u.FirstName),
+                    UserSorting.FirstNameDescending => users
+                    .OrderByDescending(u => u.FirstName),
+                    UserSorting.LastNameAscending => users
+                    .OrderBy(u => u.LastName),
+                    UserSorting.LastNameDescending => users
+                    .OrderByDescending(u => u.LastName),
+                    UserSorting.IdAscending => users
+                    .OrderBy(u => u.Id),
+                    UserSorting.IdDescending => users
+                    .OrderByDescending(u => u.Id),
+                _ => users
+                    .OrderByDescending(h => h.Id)
+            };
+
+            var AllUsers = await users
+                .Skip((currentPage - 1) * usersPerPage)
+                .Take(usersPerPage)
+                .Select(e => new AllUsersSerivceModel()
                 {
-                    Id = u.Id,
-                    UserName = u.UserName,
-                    Email = u.Email,
-                    FirstName = u.FirstName,
-                    LastName = u.LastName
+                    Id = e.Id,
+                    Email = e.Email,
+                    FirstName = e.FirstName,
+                    LastName = e.LastName
                 })
                 .ToListAsync();
+
+            int usersCount = await users.CountAsync();
+
+            return new UserQueryServiceModel()
+            {
+                TotalUsersCount = usersCount,
+                Users = AllUsers,
+            };
         }
 
 
@@ -114,11 +166,11 @@ namespace RecipeFinder.Core.Services
                .AnyAsync(r => r.Id == id);
         }
 
-        public async Task<ApplicationUserDetailsServiceModel> UserDetailsAsync(string id)
+        public async Task<UsersDetailsServiceModel> UserDetailsAsync(string id)
         {
             return await repository.AllReadOnly<ApplicationUser>()
                 .Where(r => r.Id == id)
-                .Select(r => new ApplicationUserDetailsServiceModel()
+                .Select(r => new UsersDetailsServiceModel()
                 {
                     Id = id,
                     Email = r.Email,
@@ -129,19 +181,16 @@ namespace RecipeFinder.Core.Services
                 .FirstAsync();
         }
 
-        public Task IsAdminAsync(string id)
+        public async Task<bool> IsAdminAsync(string id)
         {
-            return Task.Run(() =>
+            var user = repository.All<ApplicationUser>().FirstOrDefault(u => u.Id == id);
+
+            if (user != null)
             {
-                var user = repository.All<ApplicationUser>().FirstOrDefault(u => u.Id == id);
+                return await _userManager.IsInRoleAsync(user, AdminRole);
+            }
 
-                if (user != null)
-                {
-                    return _userManager.IsInRoleAsync(user, AdminRole).Result;
-                }
-
-                return false;
-            });
+            return false;
         }
     }
 }

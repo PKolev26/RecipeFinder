@@ -1,4 +1,6 @@
-﻿using RecipeFinder.Core.Models.ApplicationUserModels;
+﻿using RecipeFinder.Core.Enumerations;
+using RecipeFinder.Core.Models.ApplicationUserModels;
+using RecipeFinder.Core.Models.RecipeModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,15 @@ namespace RecipeFinder.Core.Contracts.User
 {
     public interface IApplicationUserService
     {
-        Task<IEnumerable<AllUsersSerivceModel>> AllUsersAsync();
+        Task<UserQueryServiceModel> AllUsersAsync(
+            string? id = null,
+            string? firstName = null,
+            string? lastName = null,
+            UserSorting sorting = UserSorting.EmailDescending,
+            int currentPage = 1,
+            int recipesPerPage = 1);
 
-        Task<ApplicationUserDetailsServiceModel> UserDetailsAsync(string id);
+        Task<UsersDetailsServiceModel> UserDetailsAsync(string id);
 
         Task PromoteUserAsync(string id);
 
@@ -21,6 +29,6 @@ namespace RecipeFinder.Core.Contracts.User
 
         Task<bool> ExistsAsync(string id);
 
-        Task IsAdminAsync(string id);
+        Task<bool> IsAdminAsync(string id);
     }
 }

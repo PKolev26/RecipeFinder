@@ -5,6 +5,7 @@ using RecipeFinder.Core.Contracts.Comment;
 using RecipeFinder.Core.Contracts.Home;
 using RecipeFinder.Core.Contracts.Ingredient;
 using RecipeFinder.Core.Contracts.Recipe;
+using RecipeFinder.Core.Contracts.User;
 using RecipeFinder.Core.Services;
 using RecipeFinder.Data;
 using RecipeFinder.Infrastructure.Common;
@@ -22,6 +23,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IAdminService, AdminService>();
+            services.AddScoped<IApplicationUserService, ApplicationUserService>(); 
             services.AddSignalR();
             return services;
         }

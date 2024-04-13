@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RecipeFinder.Core.Contracts.Comment;
 using RecipeFinder.Core.Contracts.Recipe;
+using RecipeFinder.Core.Extensions;
 using RecipeFinder.Core.Models.CommentModels;
 using RecipeFinder.Core.Models.RecipeModels;
 using RecipeFinder.Core.Services;
@@ -50,7 +51,7 @@ namespace RecipeFinder.Controllers
             }
 
             await commentService.AddAsync(model, currentUser, id);
-            return RedirectToAction("Details", "Recipe", new {id, name = recipe.Name});
+            return RedirectToAction("Details", "Recipe", new {id, name = recipe.GetName()});
         }
 
         [HttpGet]

@@ -1,0 +1,28 @@
+﻿<head>
+    <link rel="stylesheet" href="~/css/errors.css">
+</head>
+@{
+    ViewBag.Title = "Error 500";
+}
+<style>
+    header {
+        display: none;
+    }
+</style>
+
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pull-right" style="margin-top:10px;">
+                <div class="col-md-10 col-md-offset-1 pull-right">
+                    <img class="img-error" src="https://bootdey.com/img/Content/fdfadfadsfadoh.png">
+                    <h2>500 Internal Server Error</h2>
+                    <p>Sorry, an error has occured! Please contact our Administrator providing what action cause the error!</p>
+                    <div class="error-actions">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-primary mb-2 w-100 p-3 fw-bold">Go back to home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

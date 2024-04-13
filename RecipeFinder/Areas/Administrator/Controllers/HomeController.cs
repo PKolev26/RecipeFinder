@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RecipeFinder.Core.Contracts.Admin;
 using RecipeFinder.Core.Contracts.Recipe;
 
 namespace RecipeFinder.Areas.Administrator.Controllers
 {
+    [Area("Administrator")]
+    [Authorize(Roles = "Administrator")]
     public class HomeController : AdminBaseController
     {
         private readonly IAdminService adminService;

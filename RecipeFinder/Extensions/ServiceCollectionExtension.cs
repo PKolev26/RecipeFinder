@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RecipeFinder.Core.Contracts.Admin;
+using RecipeFinder.Core.Contracts.Category;
 using RecipeFinder.Core.Contracts.Comment;
 using RecipeFinder.Core.Contracts.Home;
 using RecipeFinder.Core.Contracts.Ingredient;
@@ -24,6 +25,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<IApplicationUserService, ApplicationUserService>(); 
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddSignalR();
             return services;
         }

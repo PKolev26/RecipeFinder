@@ -33,7 +33,6 @@ namespace RecipeFinder.Core.Contracts.Recipe
         Task<IEnumerable<string>> AllCategoriesNamesAsync();
         Task<IEnumerable<DifficultyViewModel>> AllDifficultiesAsync();
         Task<IEnumerable<string>> AllDifficultiesNamesAsync();
-        Task<string?> GetCookIdAsync(string cookId);
         Task EditAsync(int recipeId, RecipeFormViewModel model);
         Task<RecipeFormViewModel?> GetRecipeFormViewModelByIdAsync(int id);
         Task AddToRecipeUsersAsync(int recipeId, ApplicationUser userId);

@@ -18,12 +18,10 @@ namespace RecipeFinder.Core.Services
     public class CommentService : ICommentService
     {
         private readonly IRepository repository;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public CommentService(IRepository repository, UserManager<ApplicationUser> userManager)
+        public CommentService(IRepository repository)
         {
             this.repository = repository;
-            this._userManager = userManager;
         }
 
         public async Task AddAsync(CommentAddViewModel model, ApplicationUser authorId, int recipeId)

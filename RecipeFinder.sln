@@ -12,6 +12,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecipeFinder.Core", "Recipe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecipeFinder.Infrastructure", "RecipeFinder.Infrastructure\RecipeFinder.Infrastructure.csproj", "{DAC186C6-6404-4CB2-927A-D46D61249E9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeFinder.Tests", "RecipeFinder.Tests\RecipeFinder.Tests.csproj", "{3FFA3DB4-19EC-46B6-A8DC-7C7C36C832BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{DAC186C6-6404-4CB2-927A-D46D61249E9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAC186C6-6404-4CB2-927A-D46D61249E9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAC186C6-6404-4CB2-927A-D46D61249E9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FFA3DB4-19EC-46B6-A8DC-7C7C36C832BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FFA3DB4-19EC-46B6-A8DC-7C7C36C832BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FFA3DB4-19EC-46B6-A8DC-7C7C36C832BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FFA3DB4-19EC-46B6-A8DC-7C7C36C832BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -19,16 +19,14 @@ namespace RecipeFinder.Core.Services
     public class AdminService : IAdminService
     {
         private readonly IRepository repository;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AdminService(IRepository repository, UserManager<ApplicationUser> userManager)
+        public AdminService(IRepository repository)
         {
             this.repository = repository;
-            this._userManager = userManager;
         }
         public async Task<AdminPanelServiceModel> PanelInformationAsync()
         {
-            var usersCount = await _userManager.Users.CountAsync();
+            var usersCount = await repository.All<ApplicationUser>().CountAsync();
             var recipesCount = await repository.All<Recipe>().CountAsync();
             var commentsCount = await repository.All<Comment>().CountAsync();
 

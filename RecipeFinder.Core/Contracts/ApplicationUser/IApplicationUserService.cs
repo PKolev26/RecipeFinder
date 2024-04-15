@@ -17,7 +17,7 @@ namespace RecipeFinder.Core.Contracts.User
             string? lastName = null,
             UserSorting sorting = UserSorting.EmailDescending,
             int currentPage = 1,
-            int recipesPerPage = 1);
+            int usersPerPage = 1);
 
         Task<UsersDetailsServiceModel> UserDetailsAsync(string id);
 

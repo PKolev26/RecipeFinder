@@ -268,13 +268,6 @@ namespace RecipeFinder.Core.Services
                .AnyAsync(r => r.Id == id);
         }
 
-        public async Task<string?> GetCookIdAsync(string cookId)
-        {
-            return (await repository
-                .AllReadOnly<ApplicationUser>()
-                .FirstOrDefaultAsync(iu => iu.Id == cookId))?.Id;
-        }
-
         public async Task<RecipeFormViewModel?> GetRecipeFormViewModelByIdAsync(int id)
         {
             var recipe = await repository.AllReadOnly<Recipe>()

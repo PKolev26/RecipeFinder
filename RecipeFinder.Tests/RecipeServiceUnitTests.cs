@@ -7,11 +7,6 @@ using RecipeFinder.Core.Services;
 using RecipeFinder.Data;
 using RecipeFinder.Infrastructure.Common;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeFinder.Tests
 {
@@ -21,7 +16,7 @@ namespace RecipeFinder.Tests
 
         private IRepository repository;
         private IRecipeService recipeService;
-        private UserManager<ApplicationUser> userManager;
+        private UserManager<ApplicationUser> userManager = null!;
 
         private ApplicationUser User1;
 
@@ -312,13 +307,14 @@ namespace RecipeFinder.Tests
 
             // Assert
 
-            Assert.AreEqual(1, recipe.Id);
-            Assert.AreEqual("Recipe1", recipe.Name);
-            Assert.AreEqual("Instructions", recipe.Instructions);
-            Assert.AreEqual(1, recipe.CategoryId);
-            Assert.AreEqual(User1.Id, recipe.CookId);
-            Assert.AreEqual(1, recipe.DifficultyId);
-            Assert.AreEqual("https://www.allrecipes.com/thmb/xGrOGKAfjs7YhRUGXFi71ZMpoSc=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/410873_Judys-Strawberry-Pretzel-Salad-4x3-758ada2d0d794541b04d4ff9bad788ee.jpg", recipe.ImageUrl);
+            Assert.IsNotNull(recipe);
+            Assert.That(recipe.Id, Is.EqualTo(1));
+            Assert.That(recipe.Name, Is.EqualTo("Recipe1"));
+            Assert.That(recipe.Instructions, Is.EqualTo("Instructions"));
+            Assert.That(recipe.CategoryId, Is.EqualTo(1));
+            Assert.That(recipe.CookId, Is.EqualTo(User1.Id));
+            Assert.That(recipe.DifficultyId, Is.EqualTo(1));
+            Assert.That(recipe.ImageUrl, Is.EqualTo("https://www.allrecipes.com/thmb/xGrOGKAfjs7YhRUGXFi71ZMpoSc=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/410873_Judys-Strawberry-Pretzel-Salad-4x3-758ada2d0d794541b04d4ff9bad788ee.jpg"));
         }
 
         [Test]
@@ -329,14 +325,14 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipe);
-            Assert.AreEqual(1, recipe.Id);
-            Assert.AreEqual("Recipe1", recipe.Name);
-            Assert.AreEqual("Instructions", recipe.Instructions);
-            Assert.AreEqual("Category1", recipe.CategoryName);
-            Assert.AreEqual("Difficulty1", recipe.DifficultyName);
-            Assert.AreEqual(15, recipe.PreparationTime);
-            Assert.AreEqual(User1.Id, recipe.CookId);
-            Assert.AreEqual("https://www.allrecipes.com/thmb/xGrOGKAfjs7YhRUGXFi71ZMpoSc=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/410873_Judys-Strawberry-Pretzel-Salad-4x3-758ada2d0d794541b04d4ff9bad788ee.jpg", recipe.ImageUrl);
+            Assert.That(recipe.Id, Is.EqualTo(1));
+            Assert.That(recipe.Name, Is.EqualTo("Recipe1"));
+            Assert.That(recipe.Instructions, Is.EqualTo("Instructions"));
+            Assert.That(recipe.CategoryName, Is.EqualTo("Category1"));
+            Assert.That(recipe.DifficultyName, Is.EqualTo("Difficulty1"));
+            Assert.That(recipe.PreparationTime, Is.EqualTo(15));
+            Assert.That(recipe.CookId, Is.EqualTo(User1.Id));
+            Assert.That(recipe.ImageUrl, Is.EqualTo("https://www.allrecipes.com/thmb/xGrOGKAfjs7YhRUGXFi71ZMpoSc=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/410873_Judys-Strawberry-Pretzel-Salad-4x3-758ada2d0d794541b04d4ff9bad788ee.jpg"));
         }
 
         [Test]
@@ -353,8 +349,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipeUser);
-            Assert.AreEqual(Recipe1.Id, recipeUser.RecipeId);
-            Assert.AreEqual(User1.Id, recipeUser.UserId);
+            Assert.That(recipeUser.RecipeId, Is.EqualTo(Recipe1.Id));
+            Assert.That(recipeUser.UserId, Is.EqualTo(User1.Id));
         }
 
         [Test]
@@ -365,7 +361,7 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(categories);
-            Assert.AreEqual(2, categories.Count());
+            Assert.That(categories.Count(), Is.EqualTo(2));
         }
 
         [Test]
@@ -376,9 +372,9 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(categories);
-            Assert.AreEqual(2, categories.Count());
-            Assert.AreEqual("Category1", categories.First());
-            Assert.AreEqual("Category2", categories.Last());
+            Assert.That(categories.Count(), Is.EqualTo(2));
+            Assert.That(categories.First(), Is.EqualTo("Category1"));
+            Assert.That(categories.Last(), Is.EqualTo("Category2"));
         }
 
         [Test]
@@ -389,7 +385,7 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(difficulties);
-            Assert.AreEqual(5, difficulties.Count());
+            Assert.That(difficulties.Count(), Is.EqualTo(5));
         }
 
         [Test]
@@ -400,9 +396,9 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(difficulties);
-            Assert.AreEqual(5, difficulties.Count());
-            Assert.AreEqual("Difficulty1", difficulties.First());
-            Assert.AreEqual("Difficulty5", difficulties.Last());
+            Assert.That(difficulties.Count(), Is.EqualTo(5));
+            Assert.That(difficulties.First(), Is.EqualTo("Difficulty1"));
+            Assert.That(difficulties.Last(), Is.EqualTo("Difficulty5"));
         }
 
         [Test]
@@ -416,7 +412,7 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipes);
-            Assert.AreEqual(2, recipes.TotalRecipesCount);
+            Assert.That(recipes.TotalRecipesCount, Is.EqualTo(2));
         }
 
         [Test]
@@ -430,7 +426,7 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipes);
-            Assert.AreEqual(2, recipes.TotalRecipesCount);
+            Assert.That(recipes.TotalRecipesCount, Is.EqualTo(2));
         }
 
         [Test]
@@ -444,8 +440,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipes);
-            Assert.AreEqual(1, recipes.TotalRecipesCount);
-            Assert.AreEqual("Recipe1", recipes.Recipes.First().Name);
+            Assert.That(recipes.TotalRecipesCount, Is.EqualTo(1));
+            Assert.That(recipes.Recipes.First().Name, Is.EqualTo("Recipe1"));
         }
 
         [Test]
@@ -459,8 +455,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipes);
-            Assert.AreEqual(4, recipes.TotalRecipesCount);
-            Assert.AreEqual("Recipe4", recipes.Recipes.First().Name);
+            Assert.That(recipes.TotalRecipesCount, Is.EqualTo(4));
+            Assert.That(recipes.Recipes.First().Name, Is.EqualTo("Recipe4"));
         }
 
         [Test]
@@ -474,8 +470,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipes);
-            Assert.AreEqual(4, recipes.TotalRecipesCount);
-            Assert.AreEqual("Recipe1", recipes.Recipes.First().Name);
+            Assert.That(recipes.TotalRecipesCount, Is.EqualTo(4));
+            Assert.That(recipes.Recipes.First().Name, Is.EqualTo("Recipe1"));
         }
 
         [Test]
@@ -497,8 +493,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipes);
-            Assert.AreEqual(4, recipes.TotalRecipesCount);
-            Assert.AreEqual(new List<int> { 1, 0, 0 , 0 }, recipeSort);
+            Assert.That(recipes.TotalRecipesCount, Is.EqualTo(4));
+            Assert.That(recipeSort, Is.EqualTo(new List<int> { 1, 0, 0, 0 }));
         }
 
         [Test]
@@ -520,8 +516,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipes);
-            Assert.AreEqual(4, recipes.TotalRecipesCount);
-            Assert.AreEqual(new List<int> { 10, 15, 20, 25 }, recipeSort);
+            Assert.That(recipes.TotalRecipesCount, Is.EqualTo(4));
+            Assert.That(recipeSort, Is.EqualTo(new List<int> { 10, 15, 20, 25 }));
         }
 
         [Test]
@@ -543,8 +539,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipes);
-            Assert.AreEqual(4, recipes.TotalRecipesCount);
-            Assert.AreEqual(new List<int> { 25, 20, 15, 10 }, recipeSort);
+            Assert.That(recipes.TotalRecipesCount, Is.EqualTo(4));
+            Assert.That(recipeSort, Is.EqualTo(new List<int> { 25, 20, 15, 10 }));
         }
 
         [Test]
@@ -566,8 +562,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipes);
-            Assert.AreEqual(4, recipes.TotalRecipesCount);
-            Assert.AreEqual(new List<int> { 1, 1, 1, 2 }, recipeSort);
+            Assert.That(recipes.TotalRecipesCount, Is.EqualTo(4));
+            Assert.That(recipeSort, Is.EqualTo(new List<int> { 1, 1, 1, 2 }));
         }
 
         [Test]
@@ -588,8 +584,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipes);
-            Assert.AreEqual(4, recipes.TotalRecipesCount);
-            Assert.AreEqual(new List<int> { 2, 1, 1, 1 }, recipeSort);
+            Assert.That(recipes.TotalRecipesCount, Is.EqualTo(4));
+            Assert.That(recipeSort, Is.EqualTo(new List<int> { 2, 1, 1, 1 }));
         }
 
         [Test]
@@ -636,16 +632,16 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipe);
-            Assert.AreEqual(1, recipe.First().Id);
-            Assert.AreEqual("Recipe1", recipe.First().Name);
-            Assert.AreEqual("Instructions", recipe.First().Instructions);
-            Assert.AreEqual("Category1", recipe.First().CategoryName);
-            Assert.AreEqual("Difficulty1", recipe.First().DifficultyName);
-            Assert.AreEqual(15, recipe.First().PreparationTime);
-            Assert.AreEqual("User", recipe.First().CookFirstName);
-            Assert.AreEqual("User", recipe.First().CookLastName);
-            Assert.AreEqual(2, recipe.First().Ingredients.Count());
-            Assert.AreEqual(0, recipe.First().MadeByCount);
+            Assert.That(recipe.First().Id, Is.EqualTo(1));
+            Assert.That(recipe.First().Name, Is.EqualTo("Recipe1"));
+            Assert.That(recipe.First().Instructions, Is.EqualTo("Instructions"));
+            Assert.That(recipe.First().CategoryName, Is.EqualTo("Category1"));
+            Assert.That(recipe.First().DifficultyName, Is.EqualTo("Difficulty1"));
+            Assert.That(recipe.First().PreparationTime, Is.EqualTo(15));
+            Assert.That(recipe.First().CookFirstName, Is.EqualTo("User"));
+            Assert.That(recipe.First().CookLastName, Is.EqualTo("User"));
+            Assert.That(recipe.First().Ingredients.Count(), Is.EqualTo(2));
+            Assert.That(recipe.First().MadeByCount, Is.EqualTo(0));
         }
 
         [Test]
@@ -705,23 +701,23 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipes);
-            Assert.AreEqual(1, recipes.Count());
-            Assert.AreEqual(3, recipes.First().Id);
-            Assert.AreEqual("Recipe3", recipes.First().Name);
-            Assert.AreEqual("Category1", recipes.First().CategoryName);
-            Assert.AreEqual("Difficulty1", recipes.First().DifficultyName);
-            Assert.AreEqual(20, recipes.First().PreparationTime);
-            Assert.AreEqual("User", recipes.First().CookFirstName);
-            Assert.AreEqual("User", recipes.First().CookLastName);
-            Assert.AreEqual(1, recipes.First().IngredientCount);
-            Assert.AreEqual(1, recipes.First().MadeByCount);
+            Assert.That(recipes.Count(), Is.EqualTo(1));
+            Assert.That(recipes.First().Id, Is.EqualTo(3));
+            Assert.That(recipes.First().Name, Is.EqualTo("Recipe3"));
+            Assert.That(recipes.First().CategoryName, Is.EqualTo("Category1"));
+            Assert.That(recipes.First().DifficultyName, Is.EqualTo("Difficulty1"));
+            Assert.That(recipes.First().PreparationTime, Is.EqualTo(20));
+            Assert.That(recipes.First().CookFirstName, Is.EqualTo("User"));
+            Assert.That(recipes.First().CookLastName, Is.EqualTo("User"));
+            Assert.That(recipes.First().IngredientCount, Is.EqualTo(1));
+            Assert.That(recipes.First().MadeByCount, Is.EqualTo(1));
         }
 
         [Test]
         public async Task RecipeBookAsyncShouldReturnEmptyListIfNoRecipes()
         {
             // Arrange
-            var currentUser = (ApplicationUser)null;
+            var currentUser = null as ApplicationUser;
 
             // Act
             var recipes = await recipeService.RecipeBookAsync(currentUser);
@@ -742,14 +738,14 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipes);
-            Assert.AreEqual(4, recipes.Count());
+            Assert.That(recipes.Count(), Is.EqualTo(4));
         }
 
         [Test]
         public async Task MineRecipesShouldReturnEmptyListIfNoRecipes()
         {
             // Arrange
-            var currentUser = (ApplicationUser)null;
+            var currentUser = null as ApplicationUser;
 
             // Act
             var recipes = await recipeService.MineRecipesAsync(currentUser);
@@ -770,13 +766,13 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(model);
-            Assert.AreEqual("Recipe1", model.Name);
-            Assert.AreEqual("Instructions", model.Instructions);
-            Assert.AreEqual(1, model.CategoryId);
-            Assert.AreEqual(15, model.PreparationTime);
-            Assert.AreEqual(User1.Id, model.CookId);
-            Assert.AreEqual(1, model.DifficultyId);
-            Assert.AreEqual("https://www.allrecipes.com/thmb/xGrOGKAfjs7YhRUGXFi71ZMpoSc=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/410873_Judys-Strawberry-Pretzel-Salad-4x3-758ada2d0d794541b04d4ff9bad788ee.jpg", model.ImageUrl);
+            Assert.That(model.Name, Is.EqualTo("Recipe1"));
+            Assert.That(model.Instructions, Is.EqualTo("Instructions"));
+            Assert.That(model.CategoryId, Is.EqualTo(1));
+            Assert.That(model.PreparationTime, Is.EqualTo(15));
+            Assert.That(model.CookId, Is.EqualTo(User1.Id));
+            Assert.That(model.DifficultyId, Is.EqualTo(1));
+            Assert.That(model.ImageUrl, Is.EqualTo("https://www.allrecipes.com/thmb/xGrOGKAfjs7YhRUGXFi71ZMpoSc=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/410873_Judys-Strawberry-Pretzel-Salad-4x3-758ada2d0d794541b04d4ff9bad788ee.jpg"));
         }
 
         [Test]
@@ -802,8 +798,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipes);
-            Assert.AreEqual(1, recipes.Count());
-            Assert.AreEqual("Difficulty5", recipes.First().DifficultyName);
+            Assert.That(recipes.Count(), Is.EqualTo(1));
+            Assert.That(recipes.First().DifficultyName, Is.EqualTo("Difficulty5"));
         }
 
         [Test]
@@ -816,7 +812,7 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipe);
-            Assert.AreEqual(4, recipe.First().Id);
+            Assert.That(recipe.First().Id, Is.EqualTo(4));
         }
 
         [Test]
@@ -829,13 +825,13 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(recipes);
-            Assert.AreEqual(3, recipes.Count());
-            Assert.AreEqual(1, recipes.First().MadeByCount);
-            Assert.AreEqual(0, recipes.Skip(1).First().MadeByCount);
-            Assert.AreEqual(0, recipes.Last().MadeByCount);
-            Assert.AreEqual("Recipe3", recipes.First().Name);
-            Assert.AreEqual("Recipe1", recipes.Skip(1).First().Name);
-            Assert.AreEqual("Recipe2", recipes.Last().Name);
+            Assert.That(recipes.Count(), Is.EqualTo(3));
+            Assert.That(recipes.First().MadeByCount, Is.EqualTo(1));
+            Assert.That(recipes.Skip(1).First().MadeByCount, Is.EqualTo(0));
+            Assert.That(recipes.Last().MadeByCount, Is.EqualTo(0));
+            Assert.That(recipes.First().Name, Is.EqualTo("Recipe3"));
+            Assert.That(recipes.Skip(1).First().Name, Is.EqualTo("Recipe1"));
+            Assert.That(recipes.Last().Name, Is.EqualTo("Recipe2"));
         }
     }
 

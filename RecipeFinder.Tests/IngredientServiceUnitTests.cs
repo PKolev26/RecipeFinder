@@ -1,18 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RecipeFinder.Core.Contracts.Comment;
 using RecipeFinder.Core.Models.IngredientModels;
-using RecipeFinder.Core.Models.RecipeModels;
 using RecipeFinder.Core.Services;
 using RecipeFinder.Data;
 using RecipeFinder.Infrastructure.Common;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Intrinsics.X86;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeFinder.Tests
 {
@@ -86,10 +77,10 @@ namespace RecipeFinder.Tests
             var ingredient = await dbContext.Ingredients.FirstOrDefaultAsync(i => i.Name == "Ingredient3");
 
             Assert.IsNotNull(ingredient);
-            Assert.AreEqual("Ingredient3", ingredient.Name);
-            Assert.AreEqual(1, ingredient.Quantity);
-            Assert.AreEqual("kg", ingredient.Unit);
-            Assert.AreEqual(Recipe1.Id, ingredient.RecipeId);
+            Assert.That(ingredient.Name, Is.EqualTo("Ingredient3"));
+            Assert.That(ingredient.Quantity, Is.EqualTo(1));
+            Assert.That(ingredient.Unit, Is.EqualTo("kg"));
+            Assert.That(ingredient.RecipeId, Is.EqualTo(Recipe1.Id));
         }
     }
 }

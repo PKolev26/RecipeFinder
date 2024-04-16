@@ -6,11 +6,6 @@ using RecipeFinder.Core.Services;
 using RecipeFinder.Data;
 using RecipeFinder.Infrastructure.Common;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeFinder.Tests
 {
@@ -22,7 +17,7 @@ namespace RecipeFinder.Tests
         private IRepository repository;
         private ICategoryService categoryService;
         private IRecipeService recipeService;
-        private UserManager<ApplicationUser> userManager;
+        private UserManager<ApplicationUser> userManager = null!;
 
         private Category Category0;
         private Category Category1;
@@ -239,7 +234,7 @@ namespace RecipeFinder.Tests
             var result = await categoryService.AllCategoriesAsync();
 
             // Assert
-            Assert.AreEqual(5, result.Count());
+            Assert.That(result.Count(), Is.EqualTo(5));
             Assert.IsNotNull(result);
         }
 
@@ -354,8 +349,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(Category1.Name, result.Name);
-            Assert.AreEqual(Category1.Id, result.Id);
+            Assert.That(result.Name, Is.EqualTo(Category1.Name));
+            Assert.That(result.Id, Is.EqualTo(Category1.Id));
         }
     }
 }

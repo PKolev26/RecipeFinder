@@ -1,18 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RecipeFinder.Core.Contracts.Admin;
-using RecipeFinder.Core.Contracts.Home;
 using RecipeFinder.Core.Models.AdminModels;
 using RecipeFinder.Core.Services;
 using RecipeFinder.Data;
 using RecipeFinder.Infrastructure.Common;
 using RecipeFinder.Infrastructure.Constants;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeFinder.Tests
 {
@@ -208,13 +201,13 @@ namespace RecipeFinder.Tests
 
             Assert.IsNotNull(result.Latest);
 
-            Assert.AreEqual(panelInformation.TotalUsers, result.TotalUsers);
+            Assert.That(result.TotalUsers, Is.EqualTo(panelInformation.TotalUsers));
 
-            Assert.AreEqual(panelInformation.TotalComments, result.TotalComments);
+            Assert.That(result.TotalComments, Is.EqualTo(panelInformation.TotalComments));
 
-            Assert.AreEqual(panelInformation.TotalRecipes, result.TotalRecipes);
+            Assert.That(result.TotalRecipes, Is.EqualTo(panelInformation.TotalRecipes));
 
-            Assert.AreEqual(panelInformation.Latest.Count, result.Latest.Count);
+            Assert.That(result.Latest.Count, Is.EqualTo(panelInformation.Latest.Count));
         }
     }
 }

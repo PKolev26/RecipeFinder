@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using Moq;
+using RecipeFinder.Core.Constants;
 using RecipeFinder.Core.Contracts.Recipe;
 using RecipeFinder.Core.Contracts.User;
 using RecipeFinder.Core.Enumerations;
@@ -9,11 +9,6 @@ using RecipeFinder.Core.Services;
 using RecipeFinder.Data;
 using RecipeFinder.Infrastructure.Common;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeFinder.Tests
 {
@@ -25,21 +20,31 @@ namespace RecipeFinder.Tests
         private IRepository repository;
         private IApplicationUserService applicationUserService;
         private IRecipeService recipeService;
-        private UserManager<ApplicationUser> userManager;
+
+        private Mock<UserManager<ApplicationUser>> userManagerMock;
+        private Mock<RoleManager<IdentityRole>> roleManagerMock;
 
         private ApplicationUser User1;
         private ApplicationUser User2;
         private ApplicationUser User3;
 
         private Recipe Recipe1;
+        private Recipe Recipe2;
+        private Recipe Recipe3;
 
         private Ingredient Ingredient1;
+        private Ingredient Ingredient2;
+        private Ingredient Ingredient3;
 
         private Comment Comment1;
 
         private RecipeUser RecipeUser1;
+        private RecipeUser RecipeUser2;
+        private RecipeUser RecipeUser3;
 
         private ApplicationUser Admin1;
+
+        private IdentityRole AdminRole;
 
         [SetUp]
         public async Task SetUp()
@@ -100,6 +105,30 @@ namespace RecipeFinder.Tests
                 ImageUrl = "https://www.allrecipes.com/thmb/xGrOGKAfjs7YhRUGXFi71ZMpoSc=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/410873_Judys-Strawberry-Pretzel-Salad-4x3-758ada2d0d794541b04d4ff9bad788ee.jpg"
             };
 
+            Recipe2 = new Recipe
+            {
+                Id = 2,
+                Name = "Recipe2",
+                Instructions = "Instructions",
+                CategoryId = 1,
+                CookId = User2.Id,
+                PostedOn = DateTime.Now,
+                DifficultyId = 1,
+                ImageUrl = "https://www.allrecipes.com/thmb/xGrOGKAfjs7YhRUGXFi71ZMpoSc=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/410873_Judys-Strawberry-Pretzel-Salad-4x3-758ada2d0d794541b04d4ff9bad788ee.jpg"
+            };
+
+            Recipe3 = new Recipe
+            {
+                Id = 3,
+                Name = "Recipe3",
+                Instructions = "Instructions",
+                CategoryId = 1,
+                CookId = User3.Id,
+                PostedOn = DateTime.Now,
+                DifficultyId = 1,
+                ImageUrl = "https://www.allrecipes.com/thmb/xGrOGKAfjs7YhRUGXFi71ZMpoSc=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/410873_Judys-Strawberry-Pretzel-Salad-4x3-758ada2d0d794541b04d4ff9bad788ee.jpg"
+            };
+
             Ingredient1 = new Ingredient
             {
                 Id = 1,
@@ -109,19 +138,56 @@ namespace RecipeFinder.Tests
                 Unit = "kg"
             };
 
+            Ingredient2 = new Ingredient
+            {
+                Id = 2,
+                Name = "Ingredient2",
+                RecipeId = 2,
+                Quantity = 1,
+                Unit = "kg"
+            };
+
+            Ingredient3 = new Ingredient
+            {
+                Id = 3,
+                Name = "Ingredient3",
+                RecipeId = 3,
+                Quantity = 1,
+                Unit = "kg"
+            };
+
             Comment1 = new Comment
             {
                 Id = 1,
                 Title = "Title",
                 Description = "Comment1",
-                RecipeId = 1,
+                RecipeId = 3,
                 PostedOn = DateTime.Now
             };
 
             RecipeUser1 = new RecipeUser
             {
                 RecipeId = 1,
+                UserId = User3.Id
+            };
+
+            RecipeUser2 = new RecipeUser
+            {
+                RecipeId = 1,
                 UserId = User2.Id
+            };
+
+            RecipeUser3 = new RecipeUser
+            {
+                RecipeId = 2,
+                UserId = User2.Id
+            };
+
+            AdminRole = new IdentityRole
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Administrator",
+                NormalizedName = "ADMINISTRATOR"
             };
 
             var options = new DbContextOptionsBuilder<RecipeFinderDbContext>()
@@ -136,16 +202,29 @@ namespace RecipeFinder.Tests
             await dbContext.AddAsync(Admin1);
 
             await dbContext.AddAsync(Recipe1);
+            await dbContext.AddAsync(Recipe2);
+            await dbContext.AddAsync(Recipe3);
 
             await dbContext.AddAsync(Ingredient1);
+            await dbContext.AddAsync(Ingredient2);
+            await dbContext.AddAsync(Ingredient3);
 
             await dbContext.AddAsync(Comment1);
 
-            await dbContext.SaveChangesAsync();
+            await dbContext.AddAsync(AdminRole);
 
+            await dbContext.AddAsync(RecipeUser1);
+            await dbContext.AddAsync(RecipeUser2);
+            await dbContext.AddAsync(RecipeUser3);
+
+            await dbContext.SaveChangesAsync();
             repository = new Repository(dbContext);
-            applicationUserService = new ApplicationUserService(repository, userManager);
-            recipeService = new RecipeService(repository, userManager);
+            userManagerMock = new Mock<UserManager<ApplicationUser>>(Mock.Of<IUserStore<ApplicationUser>>(), null, null, null, null, null, null, null, null);
+            roleManagerMock = new Mock<RoleManager<IdentityRole>>(Mock.Of<IRoleStore<IdentityRole>>(), null, null, null, null);
+
+            applicationUserService = new ApplicationUserService(repository, userManagerMock.Object);
+
+            recipeService = new RecipeService(repository, userManagerMock.Object);
         }
 
         [TearDown]
@@ -164,7 +243,7 @@ namespace RecipeFinder.Tests
             var result = await applicationUserService.AllUsersAsync(firstName: firstname);
 
             // Assert
-            Assert.AreEqual(2, result.TotalUsersCount);
+            Assert.That(result.TotalUsersCount , Is.EqualTo(2));
         }
 
         [Test]
@@ -177,7 +256,7 @@ namespace RecipeFinder.Tests
             var result = await applicationUserService.AllUsersAsync(id);
 
             // Assert
-            Assert.AreEqual(1, result.TotalUsersCount);
+            Assert.That(result.TotalUsersCount, Is.EqualTo(1));
         }
 
         [Test]
@@ -190,7 +269,7 @@ namespace RecipeFinder.Tests
             var result = await applicationUserService.AllUsersAsync(lastName: lastName);
 
             // Assert
-            Assert.AreEqual(1, result.TotalUsersCount);
+            Assert.That(result.TotalUsersCount, Is.EqualTo(1));
         }
 
         [Test]
@@ -209,8 +288,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(sortingbyEmailAscending.Users);
-            Assert.AreEqual(4, sortingbyEmailAscending.TotalUsersCount);
-            Assert.AreEqual(new List<string>() { "admin@gmail.com", "user@gmail.com", "user2@gmail.com", "user3@gmail.com" }, users);
+            Assert.That(sortingbyEmailAscending.TotalUsersCount, Is.EqualTo(4));
+            Assert.That(users, Is.EqualTo(new List<string>() { "admin@gmail.com", "user@gmail.com", "user2@gmail.com", "user3@gmail.com" }));
         }
 
         [Test]
@@ -230,8 +309,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(sortingbyEmailDescending.Users);
-            Assert.AreEqual(4, sortingbyEmailDescending.TotalUsersCount);
-            Assert.AreEqual(new List<string>() { "user3@gmail.com" , "user2@gmail.com", "user@gmail.com", "admin@gmail.com" }, users);
+            Assert.That(sortingbyEmailDescending.TotalUsersCount, Is.EqualTo(4));
+            Assert.That(users, Is.EqualTo(new List<string>() { "user3@gmail.com", "user2@gmail.com", "user@gmail.com", "admin@gmail.com" }));
         }
 
         [Test]
@@ -250,8 +329,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(sortingbyFirstNameAscending.Users);
-            Assert.AreEqual(4, sortingbyFirstNameAscending.TotalUsersCount);
-            Assert.AreEqual(new List<string>() { "Admin", "User", "User", "User3" }, users);
+            Assert.That(sortingbyFirstNameAscending.TotalUsersCount, Is.EqualTo(4));
+            Assert.That(users, Is.EqualTo(new List<string>() { "Admin", "User", "User", "User3" }));
         }
 
         [Test]
@@ -270,8 +349,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(sortingbyFirstNameDescending.Users);
-            Assert.AreEqual(4, sortingbyFirstNameDescending.TotalUsersCount);
-            Assert.AreEqual(new List<string>() { "User3", "User", "User", "Admin" }, users);
+            Assert.That(sortingbyFirstNameDescending.TotalUsersCount, Is.EqualTo(4));
+            Assert.That(users, Is.EqualTo(new List<string>() { "User3", "User", "User", "Admin" }));
         }
 
         [Test]
@@ -290,8 +369,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(sortingbyLastNameAscending.Users);
-            Assert.AreEqual(4, sortingbyLastNameAscending.TotalUsersCount);
-            Assert.AreEqual(new List<string>() { "Admin", "User", "User2", "User3" }, users);
+            Assert.That(sortingbyLastNameAscending.TotalUsersCount, Is.EqualTo(4));
+            Assert.That(users, Is.EqualTo(new List<string>() { "Admin", "User", "User2", "User3" }));
         }
 
         [Test]
@@ -310,8 +389,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(sortingbyLastNameDescending.Users);
-            Assert.AreEqual(4, sortingbyLastNameDescending.TotalUsersCount);
-            Assert.AreEqual(new List<string>() { "User3", "User2", "User", "Admin" }, users);
+            Assert.That(sortingbyLastNameDescending.TotalUsersCount, Is.EqualTo(4));
+            Assert.That(users, Is.EqualTo(new List<string>() { "User3", "User2", "User", "Admin" }));
         }
 
         [Test]
@@ -330,8 +409,8 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(sortingbyIdAscending.Users);
-            Assert.AreEqual(4, sortingbyIdAscending.TotalUsersCount);
-            Assert.AreEqual(new List<string>() { "180e0cf6-0f20-46d6-9020-74da9738296f", "8b1348e7-1596-40f1-98ee-06a3ccf20feb", "ba5ef817-fc4c-4c34-bf61-b1f495b010fd", "d49eecf0-fc59-4922-8618-b527b767468b" }, users);
+            Assert.That(sortingbyIdAscending.TotalUsersCount, Is.EqualTo(4));
+            Assert.That(users, Is.EqualTo(new List<string>() { "180e0cf6-0f20-46d6-9020-74da9738296f", "8b1348e7-1596-40f1-98ee-06a3ccf20feb", "ba5ef817-fc4c-4c34-bf61-b1f495b010fd", "d49eecf0-fc59-4922-8618-b527b767468b" }));
         }
 
         [Test]
@@ -350,15 +429,15 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNotNull(sortingbyIdDescending.Users);
-            Assert.AreEqual(4, sortingbyIdDescending.TotalUsersCount);
-            Assert.AreEqual(new List<string>() { "d49eecf0-fc59-4922-8618-b527b767468b", "ba5ef817-fc4c-4c34-bf61-b1f495b010fd", "8b1348e7-1596-40f1-98ee-06a3ccf20feb", "180e0cf6-0f20-46d6-9020-74da9738296f" }, users);
+            Assert.That(sortingbyIdDescending.TotalUsersCount, Is.EqualTo(4));
+            Assert.That(users, Is.EqualTo(new List<string>() { "d49eecf0-fc59-4922-8618-b527b767468b", "ba5ef817-fc4c-4c34-bf61-b1f495b010fd", "8b1348e7-1596-40f1-98ee-06a3ccf20feb", "180e0cf6-0f20-46d6-9020-74da9738296f" }));
         }
 
         [Test]
         public async Task DeleteAsync_ShouldDeleteUser()
         {
             // Arrange
-            var userId = User1.Id;
+            var userId = User3.Id;
 
             // Act
             await applicationUserService.DeleteAsync(userId);
@@ -367,7 +446,7 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNull(user);
-            Assert.AreEqual(3, dbContext.Users.Count());
+            Assert.That(dbContext.Users.Count(), Is.EqualTo(3));
             Assert.IsTrue(await applicationUserService.ExistsAsync(userId) == false);
         }
 
@@ -375,7 +454,7 @@ namespace RecipeFinder.Tests
         public async Task DeleteAsync_ShouldDeleteUserAndRecipes()
         {
             // Arrange
-            var userId = User1.Id;
+            var userId = User3.Id;
 
             // Act
             await applicationUserService.DeleteAsync(userId);
@@ -384,16 +463,16 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNull(user);
-            Assert.AreEqual(3, dbContext.Users.Count());
+            Assert.That(dbContext.Users.Count(), Is.EqualTo(3));
             Assert.IsTrue(await applicationUserService.ExistsAsync(userId) == false);
-            Assert.IsTrue(await recipeService.ExistsAsync(1) == false);
+            Assert.IsTrue(await recipeService.ExistsAsync(3) == false);
         }
 
         [Test]
         public async Task DeleteAsync_ShouldDeleteUserAndRecipesAndComments()
         {
             // Arrange
-            var userId = User1.Id;
+            var userId = User3.Id;
 
             // Act
             await applicationUserService.DeleteAsync(userId);
@@ -402,9 +481,9 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNull(user);
-            Assert.AreEqual(3, dbContext.Users.Count());
+            Assert.That(dbContext.Users.Count(), Is.EqualTo(3));
             Assert.IsTrue(await applicationUserService.ExistsAsync(userId) == false);
-            Assert.IsTrue(await recipeService.ExistsAsync(1) == false);
+            Assert.IsTrue(await recipeService.ExistsAsync(3) == false);
             Assert.IsTrue(await dbContext.Comments.FirstOrDefaultAsync(c => c.Id == 1) == null);
         }
 
@@ -412,7 +491,7 @@ namespace RecipeFinder.Tests
         public async Task DeleteAsync_ShouldDeleteUserAndRecipesAndIngredients()
         {
             // Arrange
-            var userId = User1.Id;
+            var userId = User3.Id;
 
             // Act
             await applicationUserService.DeleteAsync(userId);
@@ -421,30 +500,12 @@ namespace RecipeFinder.Tests
 
             // Assert
             Assert.IsNull(user);
-            Assert.AreEqual(3, dbContext.Users.Count());
+            Assert.That(dbContext.Users.Count(), Is.EqualTo(3));
             Assert.IsTrue(await applicationUserService.ExistsAsync(userId) == false);
-            Assert.IsTrue(await recipeService.ExistsAsync(1) == false);
-            Assert.IsTrue(await dbContext.Ingredients.FirstOrDefaultAsync(i => i.Id == 1) == null);
+            Assert.IsTrue(await recipeService.ExistsAsync(3) == false);
+            Assert.IsTrue(await dbContext.Ingredients.FirstOrDefaultAsync(i => i.Id == 3) == null);
         }
 
-        [Test]
-        public async Task DeleteAsync_ShouldDeleteUserAndRecipesAndRecipeUser()
-        {
-            // Arrange
-            var userId = User1.Id;
-
-            // Act
-            await applicationUserService.DeleteAsync(userId);
-
-            var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
-
-            // Assert
-            Assert.IsNull(user);
-            Assert.AreEqual(3, dbContext.Users.Count());
-            Assert.IsTrue(await applicationUserService.ExistsAsync(userId) == false);
-            Assert.IsTrue(await recipeService.ExistsAsync(1) == false);
-            Assert.IsTrue(await dbContext.RecipesUsers.FirstOrDefaultAsync(ru => ru.RecipeId == 1) == null);
-        }
 
         [Test]
         public async Task ExistsAsync_UserExists_ShouldReturnTrue()
@@ -482,11 +543,72 @@ namespace RecipeFinder.Tests
             var result = await applicationUserService.UserDetailsAsync(userId);
 
             // Assert
-            Assert.AreEqual(User1.Id, result.Id);
-            Assert.AreEqual(User1.Email, result.Email);
-            Assert.AreEqual(User1.UserName, result.UserName);
-            Assert.AreEqual(User1.FirstName, result.FirstName);
-            Assert.AreEqual(User1.LastName, result.LastName);
+            Assert.That(result.Id, Is.EqualTo(User1.Id));
+            Assert.That(result.Email, Is.EqualTo(User1.Email));
+            Assert.That(result.UserName, Is.EqualTo(User1.UserName));
+            Assert.That(result.FirstName, Is.EqualTo(User1.FirstName));
+            Assert.That(result.LastName, Is.EqualTo(User1.LastName));
+        }
+
+        [Test]
+        public async Task IsAdminShouldReturnTrueIfUserIsAdmin()
+        {
+            // Arrange
+            var adminId = Admin1.Id;
+
+            var admin = Admin1;
+
+            userManagerMock
+    .       Setup(m => m.IsInRoleAsync(It.IsAny<ApplicationUser>(), RoleConstants.AdminRole))
+    .       ReturnsAsync(true); 
+
+
+            // Assert
+            Assert.IsTrue(await applicationUserService.IsAdminAsync(User1.Id));
+        }
+
+        [Test]
+        public async Task IsAdminShouldReturnFalseIfUserIsNull()
+        {
+            // Arrange
+            var userId = "1";
+
+            // Assert
+            Assert.IsFalse(await applicationUserService.IsAdminAsync(userId));
+        }
+
+        [Test]
+        public async Task PromoteUserAsync_ShouldPromoteUserToAdmin()
+        {
+            // Arrange
+            var userId = User1.Id;
+
+            userManagerMock
+                .Setup(m => m.AddToRoleAsync(It.IsAny<ApplicationUser>(), RoleConstants.AdminRole))
+                .ReturnsAsync(IdentityResult.Success);
+
+            // Act
+            await applicationUserService.PromoteUserAsync(userId);
+
+            // Assert
+            userManagerMock.Verify(m => m.AddToRoleAsync(It.IsAny<ApplicationUser>(), RoleConstants.AdminRole), Times.Once);
+        }
+
+        [Test]
+        public async Task DemoteUserAsync_ShouldDemoteUserFromAdmin()
+        {
+            // Arrange
+            var userId = Admin1.Id;
+
+            userManagerMock
+                .Setup(m => m.RemoveFromRoleAsync(It.IsAny<ApplicationUser>(), RoleConstants.AdminRole))
+                .ReturnsAsync(IdentityResult.Success);
+
+            // Act
+            await applicationUserService.DemoteUserAsync(userId);
+
+            // Assert
+            userManagerMock.Verify(m => m.RemoveFromRoleAsync(It.IsAny<ApplicationUser>(), RoleConstants.AdminRole), Times.Once);
         }
     }
 }

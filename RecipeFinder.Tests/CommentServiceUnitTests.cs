@@ -1,22 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using RecipeFinder.Core.Contracts.Category;
+﻿using Microsoft.EntityFrameworkCore;
 using RecipeFinder.Core.Contracts.Comment;
-using RecipeFinder.Core.Contracts.Recipe;
-using RecipeFinder.Core.Contracts.User;
 using RecipeFinder.Core.Models.CommentModels;
 using RecipeFinder.Core.Services;
 using RecipeFinder.Data;
 using RecipeFinder.Infrastructure.Common;
 using RecipeFinder.Infrastructure.Constants;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Intrinsics.X86;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace RecipeFinder.Tests
 {
@@ -139,11 +128,11 @@ namespace RecipeFinder.Tests
             var comment = repository.AllReadOnly<Comment>().First(c => c.Id == 3);
 
             // Assert
-            Assert.AreEqual(3, comment.Id);
-            Assert.AreEqual("Test Title", comment.Title);
-            Assert.AreEqual("Test Description", comment.Description);
-            Assert.AreEqual(User1.Id, comment.AuthorId);
-            Assert.AreEqual(1, comment.RecipeId);
+            Assert.That(comment.Id, Is.EqualTo(3));
+            Assert.That(comment.Title, Is.EqualTo("Test Title"));
+            Assert.That(comment.Description, Is.EqualTo("Test Description"));
+            Assert.That(comment.AuthorId, Is.EqualTo(User1.Id));
+            Assert.That(comment.RecipeId, Is.EqualTo(1));
         }
 
         [Test]
@@ -194,15 +183,15 @@ namespace RecipeFinder.Tests
             var result = await commentService.CommentInformationByIdAsync(1);
 
             // Assert
-            Assert.AreEqual(1, result.Id);
-            Assert.AreEqual("Title", result.Title);
-            Assert.AreEqual("Comment1", result.Description);
-            Assert.AreEqual(User1.FirstName, result.AuthorFirstName);
-            Assert.AreEqual(User1.LastName, result.AuthorLastName);
-            Assert.AreEqual(User1.ProfilePicture, result.AuthorProfilePicture);
-            Assert.AreEqual(DateTime.Now.ToString(RecipeDataConstants.DateAndTimeFormat), result.PostedOn);
-            Assert.AreEqual(1, result.RecipeId);
-            Assert.AreEqual(User1.Id, result.AuthorId);
+            Assert.That(result.Id, Is.EqualTo(1));
+            Assert.That(result.Title, Is.EqualTo("Title"));
+            Assert.That(result.Description, Is.EqualTo("Comment1"));
+            Assert.That(result.AuthorFirstName, Is.EqualTo(User1.FirstName));
+            Assert.That(result.AuthorLastName, Is.EqualTo(User1.LastName));
+            Assert.That(result.AuthorProfilePicture, Is.EqualTo(User1.ProfilePicture));
+            Assert.That(result.PostedOn, Is.EqualTo(DateTime.Now.ToString(RecipeDataConstants.DateAndTimeFormat)));
+            Assert.That(result.RecipeId, Is.EqualTo(1));
+            Assert.That(result.AuthorId, Is.EqualTo(User1.Id));
         }
 
         [Test]
@@ -212,7 +201,7 @@ namespace RecipeFinder.Tests
             var result = await commentService.AllCommentsAsync();
 
             // Assert
-            Assert.AreEqual(2, result.Count());
+            Assert.That(result.Count(), Is.EqualTo(2));
             Assert.IsNotNull(result);
         }
     }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using RecipeFinder.Infrastructure.Data.Models;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using static RecipeFinder.Infrastructure.Constants.ApplicationUserDataConstants;
@@ -94,6 +95,7 @@ namespace RecipeFinder.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
             [Display(Name = "Profile picture")]
+            [DefaultValue("https://p7.hiclipart.com/preview/355/848/997/computer-icons-user-profile-google-account-photos-icon-account.jpg")]
             public string ProfilePicture { get; set; }
         }
 
@@ -112,6 +114,10 @@ namespace RecipeFinder.Areas.Identity.Pages.Account
 
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
+                if (Input.ProfilePicture == null)
+                {
+                    Input.ProfilePicture = "https://p7.hiclipart.com/preview/355/848/997/computer-icons-user-profile-google-account-photos-icon-account.jpg";
+                }
                 user.ProfilePicture = Input.ProfilePicture;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);

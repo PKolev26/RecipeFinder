@@ -1,148 +1,66 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@{
+     ViewData["Title"] = "Manage Comments";
+}
 
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
-<link rel="stylesheet" href="~/css/adminpanel.css" />
-<title>RecipeFinder - Admin Panel</title>
+<div class="row">
+    <div class="col-md-12 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <span><i class="bi bi-table me-2"></i></span> Data Table
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example"
+                           class="table table-striped data-table"
+                           style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Author name</th>
+                                <th>Author Id</th>
+                                <th>Recipe name</th>
+                                <th>Title</th>
+                                <th>Posted on</th>
+                            </tr>
+                        </thead>
+                        @if (Model.Count > 0)
+                        {
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.AuthorFirstName @item.AuthorLastName</td>
+                                        <td>@item.AuthorId</td>
+                                        <td>@item.RecipeName</td>
+                                        <td>@item.Title</td>
+                                        <td>@item.PostedOn</td>
+                                        <td>
+                                            <form method="post" asp-area="" asp-controller="Comment" asp-action="Delete" asp-route-id="@item.Id" style="margin-bottom:auto;">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5">No data found</td>
+                            </tr>
+                        }
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container-fluid">
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#sidebar"
-                    aria-controls="offcanvasExample">
-                <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
-            </button>
-            <a asp-area="Administrator" asp-action="AdminPanel" asp-controller="Home" class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold">RecipeFinder Admin Panel</a>
-        </div>
-    </nav>
-    <div class="offcanvas offcanvas-start sidebar-nav bg-dark"
-         tabindex="-1"
-         id="sidebar">
-        <div class="offcanvas-body p-0" style="display:flex;flex-direction:column;justify-content:space-between;">
-            <nav class="navbar-dark">
-                <ul class="navbar-nav">
-                    <li>
-                        <a asp-area="Administrator" asp-action="AdminPanel" asp-controller="Home" class="nav-link px-3 sidebar-link">
-                            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-                            <span> Panel</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link px-3 sidebar-link"
-                           data-bs-toggle="collapse"
-                           href="#layouts">
-                            <span class="me-2"><i class="bi bi-layout-split"></i></span>
-                            <span>Management</span>
-                            <span class="ms-auto">
-                                <span class="right-icon">
-                                    <i class="bi bi-chevron-down"></i>
-                                </span>
-                            </span>
-                        </a>
-                        <div id="layouts">
-                            <ul class="navbar-nav ps-3">
-                                <li>
-                                    <a asp-area="Administrator" asp-action="ManageUsers" asp-controller="Management" class="nav-link px-3 sidebar-link">
-                                        <span class="me-2"><i class="bi bi-people-fill"></i></span>
-                                        <span> Manage Users</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a asp-area="Administrator" asp-action="ManageRecipes" asp-controller="Management" class="nav-link px-3 sidebar-link">
-                                        <span class="me-2"><i class="bi bi-egg-fried"></i></span>
-                                        <span> Manage Recipes</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a asp-area="Administrator" asp-action="ManageComments" asp-controller="Management" class="nav-link px-3 sidebar-link">
-                                        <span class="me-2"><i class="bi bi-bookmark"></i></span>
-                                        <span> Manage Comments</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a asp-area="Administrator" asp-action="ManageCategories" asp-controller="Management" class="nav-link px-3 sidebar-link">
-                                        <span class="me-2"><i class="bi bi-border-all"></i></span>
-                                        <span> Manage Categories</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-            <a asp-area="" asp-action="Index" asp-controller="Home" name="btn" class="btn btn-danger mx-3 my-3" style="width:85%;">Exit</a>
-        </div>
-    </div>
-    <main class="mt-5 pt-3">
-        <div class="row">
-            <div class="col-md-12 mb-3">
-                <div class="card">
-                    <div class="card-header">
-                        <span><i class="bi bi-table me-2"></i></span> Data Table
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="example"
-                                   class="table table-striped data-table"
-                                   style="width: 100%">
-                                <thead>
-                                    <tr>
-                                        <th>Author name</th>
-                                        <th>Author Id</th>
-                                        <th>Recipe name</th>
-                                        <th>Title</th>
-                                        <th>Posted on</th>
-                                    </tr>
-                                </thead>
-                                    @if (Model.Count > 0)
-                                    {
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
-                                            <tr>
-                                                <td>@item.AuthorFirstName @item.AuthorLastName</td>
-                                                <td>@item.AuthorId</td>
-                                                <td>@item.RecipeName</td>
-                                                <td>@item.Title</td>
-                                                <td>@item.PostedOn</td>
-                                                <td>
-                                                    <form method="post" asp-area="" asp-controller="Comment" asp-action="Delete" asp-route-id="@item.Id" style="margin-bottom:auto;">
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                    }
-                                    else
-                                    {
-                                        <tr>
-                                            <td colspan="5">No data found</td>
-                                        </tr>
-                                    }
-                               
-                                <tfoot>
-                                    <tr>
-                                        <th>Author name</th>
-                                        <th>Author Id</th>
-                                        <th>Recipe name</th>
-                                        <th>Title</th>
-                                        <th>Posted on</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
+                        <tfoot>
+                            <tr>
+                                <th>Author name</th>
+                                <th>Author Id</th>
+                                <th>Recipe name</th>
+                                <th>Title</th>
+                                <th>Posted on</th>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
-        </div>
-    </main>
-</body>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="./js/adminpage.js"></script>
+    </div>
+</div>

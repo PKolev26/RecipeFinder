@@ -6,28 +6,62 @@
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
+<link rel="stylesheet" href="~/css/design.css">
+<link rel="stylesheet" href="~/css/site.css">
 
 <div class="text-center row">
     @foreach (var e in Model)
     {
-        <div class="card col-4" style="width: 27rem; ">
-            <div class="card-body">
-                <img class="card-imgurl" style="width: 25rem; height: 18rem;" src="@e.ImageUrl" alt="recipe image" />
-                <h4 class="card-title">@e.Name</h4>
-                <h5 class="card-cook">Cooked by: @e.CookFirstName @e.CookLastName</h5>
-                <br />
-                <p class="mb-0"><span class="fw-bold">Preparation time: </span>@e.PreparationTime</p>
-                <p class="mb-0"><span class="fw-bold">Category: </span>@e.CategoryName</p>
-                <p class="mb-0"><span class="fw-bold">Difficulty level: </span>@e.DifficultyName</p>
-                <p class="mb-0"><span class="fw-bold">Ingredients: </span>@e.IngredientCount</p>
-                <p class="mb-0"><span class="fw-bold">Comments: </span>@e.CommentCount</p>
-                <p class="mb-0"><span class="fw-bold">Made by: </span>@e.MadeByCount <span class="fw-bold">users</span></p>
-                <br />
-                <p class="mb-0"><span class="fw-bold">Posted on: </span>@e.PostedOn</p>
-            </div>
-            <a asp-controller="Recipe" asp-action="Details" asp-route-id="@e.Id" asp-route-name="@e.GetName()" class="btn btn-outline-warning mb-2 w-100 p-3 fw-bold">More info</a>
+        <div class="details-body">
+            <section>
+                <div class="title" style="align-self: center">
+                    <p>@e.Name</p>
+
+                </div>
+                <article>
+                    <div class="image">
+                        <img src="@e.ImageUrl" alt="Recipe image">
+                    </div>
+                    <header style="align-self: center; ">
+                        <div class="details" style="border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;">
+                            <div class="icon">
+                                <i class="fa-solid fa-person"></i>
+                                <p><strong>Chef</strong></p>
+                                <p>@e.CookFirstName @e.CookLastName</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa-solid fa-users"></i>
+                                <p><strong>Made by</strong></p>
+                                <p>@e.MadeByCount users</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <p><strong>Posted on</strong></p>
+                                <p>@e.PostedOn</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa-solid fa-bars"></i>
+                                <p><strong>Category</strong></p>
+                                <p>@e.CategoryName</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa-solid fa-signal"></i>
+                                <p><strong>Difficulty level</strong></p>
+                                <p>@e.DifficultyName</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa-regular fa-clock"></i>
+                                <p><strong>Time</strong></p>
+                                <p>@e.PreparationTime min</p>
+                            </div>
+                        </div>
+                    </header>
+                    
+
+                </article>
         </div>
     }
+
 </div>
 
 @section Scripts {

@@ -7,9 +7,6 @@
     padding: 0;
 }
 
-
-
-
 .details-body img {
     width: 100%;
     height: auto;
@@ -80,8 +77,8 @@ header {
     font-style: italic;
     background-color: #FFC107;
     padding: 2em 0 1.5em 0;
-    border-top-left-radius: 0.5em;
-    border-top-right-radius: 0.5em;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
     border-bottom: 5px solid white;
     color: black;
     /* text-shadow: 0 0 0.1em black; */

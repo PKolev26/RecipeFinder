@@ -64,6 +64,7 @@ namespace RecipeFinder.Core.Services
                     AuthorProfilePicture = r.Author.ProfilePicture,
                     PostedOn = r.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
                     RecipeId = r.RecipeId,
+                    RecipeName = r.Recipe.Name,
                     AuthorId = r.AuthorId
                 })
                 .FirstAsync();

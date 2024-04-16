@@ -41,8 +41,9 @@ namespace RecipeFinder.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
+            var userToDelete = await applicationUserService.UserDetailsAsync(id);
 
-            if (await applicationUserService.ExistsAsync(id) == false)
+            if (await applicationUserService.ExistsAsync(id) == false || User.Id() == userToDelete.Id)
             {
                 return BadRequest();
             }
@@ -51,8 +52,6 @@ namespace RecipeFinder.Controllers
             {
                 return Unauthorized();
             }
-
-            var userToDelete = await applicationUserService.UserDetailsAsync(id);
 
             var model = new UsersDetailsServiceModel()
             {
@@ -68,7 +67,7 @@ namespace RecipeFinder.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(UsersDetailsServiceModel model)
         {
-            if (await applicationUserService.ExistsAsync(model.Id) == false)
+            if (await applicationUserService.ExistsAsync(model.Id) == false || User.Id() == model.Id)
             {
                 return BadRequest();
             }

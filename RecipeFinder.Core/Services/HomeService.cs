@@ -1,13 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RecipeFinder.Core.Contracts.Home;
 using RecipeFinder.Infrastructure.Common;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeFinder.Core.Services
 {
@@ -19,6 +13,9 @@ namespace RecipeFinder.Core.Services
         {
             this.repository = repository;
         }
+
+        // UserHasUnfinishedRecipeAsync method is used to check if a user has an unfinished recipe(recipes with no ingredients). It takes an ApplicationUser as a parameter and returns a boolean.
+
         public async Task<bool> UserHasUnfinishedRecipeAsync(ApplicationUser user)
         {
             var hasUnfinishedRecipeList = await repository.AllReadOnly<Recipe>()

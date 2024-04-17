@@ -1,12 +1,7 @@
 ﻿using RecipeFinder.Core.Contracts.Recipe;
 using RecipeFinder.Core.Models.CommentModels;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeFinder.Core.Models.RecipeModels
 {

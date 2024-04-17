@@ -1,21 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using RecipeFinder.Core.Contracts.User;
+using RecipeFinder.Core.Enumerations;
 using RecipeFinder.Core.Models.ApplicationUserModels;
 using RecipeFinder.Infrastructure.Common;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RecipeFinder.Core.Extensions;
-using Microsoft.EntityFrameworkCore;
-using RecipeFinder.Core.Models.RecipeModels;
-using RecipeFinder.Infrastructure.Constants;
-using System.Runtime.CompilerServices;
 using System.Data;
 using static RecipeFinder.Core.Constants.RoleConstants;
-using RecipeFinder.Core.Enumerations;
 
 namespace RecipeFinder.Core.Services
 {
@@ -29,6 +20,9 @@ namespace RecipeFinder.Core.Services
             this.repository = repository;
             this._userManager = userManager;
         }
+        
+        // AllUsersAsync method is used to get all users in the database. It can filter users by id, firstname, and lastname. It can also sort users by email, firstname, lastname, and id. It returns a UserQueryServiceModel.
+
         public async Task<UserQueryServiceModel> AllUsersAsync(string? id = null, string? firstname = null, string? lastname = null, UserSorting sorting = UserSorting.EmailAscending, int currentPage = 1, int usersPerPage = 1)
         {
             var users = repository.AllReadOnly<ApplicationUser>();
@@ -94,6 +88,7 @@ namespace RecipeFinder.Core.Services
             };
         }
 
+        // DeleteAsync method is used to delete a user from the database. It also deletes all recipes, comments, ingredients, and recipe users that are related to the user.
 
         public async Task DeleteAsync(string userId)
         {
@@ -140,6 +135,8 @@ namespace RecipeFinder.Core.Services
             await repository.SaveChangesAsync();
         }
 
+        // DemoteUserAsync method is used to remove the admin role from a user.
+
         public async Task DemoteUserAsync(string id)
         {
             var user = repository.All<ApplicationUser>().FirstOrDefault(u => u.Id == id);
@@ -150,6 +147,8 @@ namespace RecipeFinder.Core.Services
             }
         }
 
+        // PromoteUserAsync method is used to add the admin role to a user.
+        
         public async Task PromoteUserAsync(string id)
         {
             var user = repository.All<ApplicationUser>().FirstOrDefault(u => u.Id == id);
@@ -160,11 +159,15 @@ namespace RecipeFinder.Core.Services
             }
         }
 
+        // ExistsAsync method is used to check if a user exists in the database.
+
         public async Task<bool> ExistsAsync(string id)
         {
             return await repository.AllReadOnly<ApplicationUser>()
                .AnyAsync(r => r.Id == id);
         }
+
+        // UserDetailsAsync method is used to get the details of a user by id. It returns a UsersDetailsServiceModel.
 
         public async Task<UsersDetailsServiceModel> UserDetailsAsync(string id)
         {
@@ -180,6 +183,8 @@ namespace RecipeFinder.Core.Services
                 })
                 .FirstAsync();
         }
+
+        // IsAdminAsync method is used to check if a user is an admin.
 
         public async Task<bool> IsAdminAsync(string id)
         {

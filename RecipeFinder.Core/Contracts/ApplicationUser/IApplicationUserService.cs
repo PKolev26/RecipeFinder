@@ -1,11 +1,5 @@
 ﻿using RecipeFinder.Core.Enumerations;
 using RecipeFinder.Core.Models.ApplicationUserModels;
-using RecipeFinder.Core.Models.RecipeModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeFinder.Core.Contracts.User
 {

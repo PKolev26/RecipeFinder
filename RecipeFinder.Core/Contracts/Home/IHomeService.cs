@@ -1,10 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RecipeFinder.Infrastructure.Data.Models;
 
 namespace RecipeFinder.Core.Contracts.Home
 {

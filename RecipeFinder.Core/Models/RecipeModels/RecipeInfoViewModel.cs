@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using RecipeFinder.Core.Contracts.Recipe;
+﻿using RecipeFinder.Core.Contracts.Recipe;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RecipeFinder.Core.Models.RecipeModels

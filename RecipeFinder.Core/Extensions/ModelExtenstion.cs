@@ -1,16 +1,11 @@
-﻿using RecipeFinder.Core.Contracts.Home;
-using RecipeFinder.Core.Contracts.Recipe;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using RecipeFinder.Core.Contracts.Recipe;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace RecipeFinder.Core.Extensions
 {
     public static class ModelExtenstion
     {
+        // This method is used to get the name of the recipe and remove any special characters. Used for URLs.
         public static string GetName(this IRecipeModel recipeName)
         {
             string info = recipeName.Name;

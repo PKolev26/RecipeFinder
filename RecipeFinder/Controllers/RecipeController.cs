@@ -27,6 +27,7 @@ namespace RecipeFinder.Controllers
         {
             return View();
         }
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> All([FromQuery] AllRecipesQueryModel model)

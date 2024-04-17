@@ -1,17 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RecipeFinder.Core.Contracts.Comment;
 using RecipeFinder.Core.Models.CommentModels;
-using RecipeFinder.Core.Models.RecipeModels;
 using RecipeFinder.Infrastructure.Common;
 using RecipeFinder.Infrastructure.Constants;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeFinder.Core.Services
 {
@@ -23,6 +15,8 @@ namespace RecipeFinder.Core.Services
         {
             this.repository = repository;
         }
+
+        // AddAsync method is used to add a comment to a recipe. It takes a CommentAddViewModel, ApplicationUser, and recipeId as parameters. It creates a new Comment object and adds it to the database.
 
         public async Task AddAsync(CommentAddViewModel model, ApplicationUser authorId, int recipeId)
         {
@@ -39,17 +33,24 @@ namespace RecipeFinder.Core.Services
             await repository.SaveChangesAsync();
         }
 
+        // DeleteAsync method is used to delete a comment from the database. It takes a commentId as a parameter and deletes the comment.
+
         public async Task DeleteAsync(int commentId)
         {
             await repository.DeleteAsync<Comment>(commentId);
             await repository.SaveChangesAsync();
         }
 
+        // ExistsAsync method is used to check if a comment exists in the database. It takes a commentId as a parameter and returns a boolean.
+
         public async Task<bool> ExistsAsync(int id)
         {
             return await repository.AllReadOnly<Comment>()
                .AnyAsync(r => r.Id == id);
         }
+
+        // CommentInformationByIdAsync method is used to get information about a comment by its id. It takes a commentId as a parameter and returns a CommentsInfoViewModel.
+
         public async Task<CommentsInfoViewModel> CommentInformationByIdAsync(int id)
         {
             return await repository.AllReadOnly<Comment>()
@@ -69,6 +70,8 @@ namespace RecipeFinder.Core.Services
                 })
                 .FirstAsync();
         }
+
+        // AllCommentsAsync method is used to get all comments in the database. It returns an IEnumerable of CommentsInfoViewModel.
 
         public async Task<IEnumerable<CommentsInfoViewModel>> AllCommentsAsync()
         {

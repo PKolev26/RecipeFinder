@@ -42,6 +42,9 @@
                                 <button type="submit" class="btn btn-outline-danger mb-2 w-100 p-3 fw-bold">Delete</button>
                             </form>
                         </div>
+                        <div>
+                            <a asp-controller="Recipe" asp-action="Edit" asp-route-id="@e.Id" class="btn btn-outline-dark mb-2 w-100 p-3 fw-bold">Edit</a>
+                        </div>
                     </section>
                 </div>
             </div>
@@ -74,6 +77,9 @@
                             <form method="post" asp-controller="Recipe" asp-action="Delete" asp-route-id="@e.Id">
                                 <button type="submit" class="btn btn-outline-danger mb-2 w-100 p-3 fw-bold">Delete</button>
                             </form>
+                        </div>
+                        <div>
+                            <a asp-controller="Recipe" asp-action="Edit" asp-route-id="@e.Id" class="btn btn-outline-dark mb-2 w-100 p-3 fw-bold">Edit</a>
                         </div>
                     </section>
                 </div>

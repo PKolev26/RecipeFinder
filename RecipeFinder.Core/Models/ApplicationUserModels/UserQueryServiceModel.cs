@@ -1,11 +1,4 @@
-﻿using RecipeFinder.Core.Models.RecipeModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RecipeFinder.Core.Models.ApplicationUserModels
+﻿namespace RecipeFinder.Core.Models.ApplicationUserModels
 {
     public class UserQueryServiceModel
     {

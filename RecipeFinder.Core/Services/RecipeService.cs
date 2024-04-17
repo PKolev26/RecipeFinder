@@ -1,23 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using RecipeFinder.Core.Contracts.Recipe;
 using RecipeFinder.Core.Enumerations;
 using RecipeFinder.Core.Models.CategoryModels;
 using RecipeFinder.Core.Models.CommentModels;
 using RecipeFinder.Core.Models.DifficultyModels;
-using RecipeFinder.Core.Models.IngredientModels;
 using RecipeFinder.Core.Models.RecipeModels;
 using RecipeFinder.Infrastructure.Common;
 using RecipeFinder.Infrastructure.Constants;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
 
 namespace RecipeFinder.Core.Services
 {
@@ -31,6 +22,8 @@ namespace RecipeFinder.Core.Services
             this.repository = repository;
             this._userManager = userManager;
         }
+
+        // AddAsync method is used to add a recipe to the database. It takes a RecipeFormViewModel and ApplicationUser as parameters. It creates a new Recipe object and adds it to the database.
 
         public async Task<int> AddAsync(RecipeFormViewModel model, ApplicationUser cookId)
         {
@@ -52,6 +45,7 @@ namespace RecipeFinder.Core.Services
             return newRecipe.Id;
         }
 
+        // AddToRecipeUsersAsync method is used to add a recipe to a user's recipe book. It takes a recipeId and ApplicationUser as parameters. It creates a new RecipeUser object and adds it to the database.
         public async Task AddToRecipeUsersAsync(int recipeId, ApplicationUser userId)
         {
             RecipeUser recipeUser = new RecipeUser
@@ -64,6 +58,8 @@ namespace RecipeFinder.Core.Services
 
         }
 
+        // AllCategoriesAsync method is used to get all categories in the database. It returns a list of CategoryViewModel.
+
         public async Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync()
         {
             return await repository.AllReadOnly<Category>()
@@ -75,6 +71,8 @@ namespace RecipeFinder.Core.Services
                 .ToListAsync();
         }
 
+        // AllCategoriesNamesAsync method is used to get all category names in the database. It returns a list of strings.
+
         public async Task<IEnumerable<string>> AllCategoriesNamesAsync()
         {
             return await repository.AllReadOnly<Category>()
@@ -82,6 +80,7 @@ namespace RecipeFinder.Core.Services
                 .ToListAsync();
         }
 
+        // AllDifficultiesAsync method is used to get all difficulties in the database. It returns a list of DifficultyViewModel.
         public async Task<IEnumerable<DifficultyViewModel>> AllDifficultiesAsync()
         {
             return await repository.AllReadOnly<Difficulty>()
@@ -93,6 +92,7 @@ namespace RecipeFinder.Core.Services
                 .ToListAsync();
         }
 
+        // AllDifficultiesNamesAsync method is used to get all difficulty names in the database. It returns a list of strings.
         public async Task<IEnumerable<string>> AllDifficultiesNamesAsync()
         {
             return await repository.AllReadOnly<Difficulty>()
@@ -100,9 +100,10 @@ namespace RecipeFinder.Core.Services
                .ToListAsync();
         }
 
+        // AllRecipesAsync method is used to get all recipes in the database. It takes optional parameters for search, sorting, currentPage, recipesPerPage, category, and difficulty. It returns a RecipeQueryServiceModel.
         public async Task<RecipeQueryServiceModel> AllRecipesAsync(string? search = null, RecipeSorting sorting = RecipeSorting.Newest, int currentPage = 1, int recipesPerPage = 1, string? category = null, string? difficulty = null)
         {
-            var recipes = repository.AllReadOnly<Recipe>();
+            var recipes = repository.AllReadOnly<Recipe>().Where(r => r.Ingredients.Count > 0);
 
             if (category != null)
             {
@@ -142,7 +143,6 @@ namespace RecipeFinder.Core.Services
             };
 
             var AllRecipes = await recipes
-                .Where(r => r.Ingredients.Count > 0)
                 .Skip((currentPage - 1) * recipesPerPage)
                 .Take(recipesPerPage)
                 .Select(e => new RecipeServiceModel()
@@ -175,6 +175,7 @@ namespace RecipeFinder.Core.Services
             };
         }
 
+        // DeleteAsync method is used to delete a recipe from the database. It first gets all ingredients, comments, and recipeUsers that are in the recipe and deletes them, then deletes the recipe.
         public async Task DeleteAsync(int recipeId)
         {
             var ingredientsToRemove = await repository.AllReadOnly<Ingredient>()
@@ -212,6 +213,7 @@ namespace RecipeFinder.Core.Services
             await repository.SaveChangesAsync();
         }
 
+        // DetailsAsync method is used to get details about a recipe by its id. It takes a recipeId as a parameter and returns a RecipeDetailsServiceModel.
         public async Task<IEnumerable<RecipeDetailsServiceModel>> DetailsAsync(int id)
         {
             return await repository.AllReadOnly<Recipe>()
@@ -246,6 +248,7 @@ namespace RecipeFinder.Core.Services
                 .ToListAsync();
         }
 
+        // EditAsync method is used to edit a recipe in the database. It takes a recipeId and RecipeFormViewModel as parameters. It gets the recipe by its id and updates its properties.
         public async Task EditAsync(int recipeId, RecipeFormViewModel model)
         {
             var recipe = await repository.GetByIdAsync<Recipe>(recipeId);
@@ -263,12 +266,14 @@ namespace RecipeFinder.Core.Services
             }
         }
 
+        // ExistsAsync method is used to check if a recipe exists in the database. It takes a recipeId as a parameter and returns a boolean.
         public async Task<bool> ExistsAsync(int id)
         {
             return await repository.AllReadOnly<Recipe>()
                .AnyAsync(r => r.Id == id);
         }
 
+        // GetRecipeFormViewModelByIdAsync method is used to get a RecipeFormViewModel by its id. It takes a recipeId as a parameter and returns a RecipeFormViewModel.
         public async Task<RecipeFormViewModel?> GetRecipeFormViewModelByIdAsync(int id)
         {
             var recipe = await repository.AllReadOnly<Recipe>()
@@ -294,6 +299,7 @@ namespace RecipeFinder.Core.Services
             return recipe;
         }
 
+        // MineRecipesAsync method is used to get all recipes that belong to a user. It takes an ApplicationUser as a parameter and returns a list of RecipeInfoViewModel.
         public async Task<IEnumerable<RecipeInfoViewModel>> MineRecipesAsync(ApplicationUser currentUser)
         {
             if (currentUser == null)
@@ -321,6 +327,7 @@ namespace RecipeFinder.Core.Services
               .ToListAsync();
         }
 
+        // RecipeBookAsync method is used to get all recipes that belong to a user's recipe book. It takes an ApplicationUser as a parameter and returns a list of RecipeInfoViewModel.
         public async Task<IEnumerable<RecipeInfoViewModel>> RecipeBookAsync(ApplicationUser currentUser)
         {
             if (currentUser == null)
@@ -349,6 +356,7 @@ namespace RecipeFinder.Core.Services
               .ToListAsync();
         }
 
+        // RecipeDetailsByIdAsync method is used to get details about a recipe by its id. It takes a recipeId as a parameter and returns a RecipeDetailsServiceModel.
         public async Task<RecipeDetailsServiceModel> RecipeDetailsByIdAsync(int id)
         {
             return await repository.AllReadOnly<Recipe>()
@@ -370,7 +378,7 @@ namespace RecipeFinder.Core.Services
                 .FirstAsync();
         }
 
-
+        // RecipesInMasterChefDifficultyAsync method is used to get all recipes that are in the Master Chef difficulty. It returns a list of RecipeInfoViewModel.
         public async Task<IEnumerable<RecipeInfoViewModel>> RecipesInMasterChefDifficultyAsync()
         {
             return await repository.AllReadOnly<Recipe>()
@@ -394,6 +402,7 @@ namespace RecipeFinder.Core.Services
               .ToListAsync();
         }
 
+        // RemoveFromRecipeUsersAsync method is used to remove a recipe from a user's recipe book. It takes a recipeId and ApplicationUser as parameters. It creates a new RecipeUser object and removes it from the database.
         public async Task RemoveFromRecipeUsersAsync(int recipeId, ApplicationUser userId)
         {
             RecipeUser recipeUser = new RecipeUser
@@ -407,6 +416,7 @@ namespace RecipeFinder.Core.Services
 
         }
 
+        // TheLastedRecipeAsync method is used to get the last recipe posted. It returns a list of RecipeInfoViewModel.
         public async Task<IEnumerable<RecipeInfoViewModel>> TheLastedRecipeAsync()
         {
             return await repository.AllReadOnly<Recipe>()
@@ -430,6 +440,7 @@ namespace RecipeFinder.Core.Services
                .ToListAsync();
         }
 
+        // Top3RecipesAsync method is used to get the top 3 recipes that have been made by the most users. It returns a list of RecipeInfoViewModel.
         public async Task<IEnumerable<RecipeInfoViewModel>> Top3RecipesAsync()
         {
             return await repository.AllReadOnly<Recipe>()

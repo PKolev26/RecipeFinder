@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static RecipeFinder.Infrastructure.Constants.IngredientDataConstants;
-using static RecipeFinder.Infrastructure.Constants.ErrorsConstants;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static RecipeFinder.Infrastructure.Constants.ErrorsConstants;
+using static RecipeFinder.Infrastructure.Constants.IngredientDataConstants;
 
 
 namespace RecipeFinder.Core.Models.IngredientModels
@@ -14,6 +9,7 @@ namespace RecipeFinder.Core.Models.IngredientModels
     public class IngredientsAddViewModel
     {
         public int Id { get; set; }
+
         [Required(ErrorMessage = RequiredErrorMessage)]
         [StringLength(IngredientNameMaxLength, MinimumLength = IngredientNameMinLength, ErrorMessage = LengthErrorMessage)]
         [Display(Name = "Ingredient name")]

@@ -1,15 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RecipeFinder.Core.Contracts.Category;
 using RecipeFinder.Core.Models.CategoryModels;
-using RecipeFinder.Core.Models.CommentModels;
 using RecipeFinder.Infrastructure.Common;
-using RecipeFinder.Infrastructure.Constants;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeFinder.Core.Services
 {
@@ -21,6 +14,8 @@ namespace RecipeFinder.Core.Services
         {
             this.repository = repository;
         }
+
+        // AllCategoriesAsync method is used to get all categories in the database. It returns a list of CategoryViewModel.
 
         public async Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync()
         {
@@ -34,6 +29,8 @@ namespace RecipeFinder.Core.Services
                 })
                 .ToListAsync();
         }
+
+        // DeleteAsync method is used to delete a category from the database. It first gets all recipes that are in the category and deletes them, then deletes the category.
 
         public async Task DeleteAsync(int categoryId)
         {
@@ -80,11 +77,15 @@ namespace RecipeFinder.Core.Services
             await repository.SaveChangesAsync();
         }
 
+        // ExistsAsync method is used to check if a category exists in the database. It returns a true or false.
+
         public async Task<bool> ExistsAsync(int categoryId)
         {
             return await repository.AllReadOnly<Category>()
                .AnyAsync(c => c.Id == categoryId);
         }
+
+        // CategoryInformationByIdAsync method is used to get the information of a category by its id. It returns a CategoryViewModel.
 
         public async Task<CategoryViewModel> CategoryInformationByIdAsync(int categoryId)
         {

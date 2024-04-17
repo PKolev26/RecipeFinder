@@ -1,14 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using RecipeFinder.Core.Contracts.Ingredient;
+﻿using RecipeFinder.Core.Contracts.Ingredient;
 using RecipeFinder.Core.Models.IngredientModels;
-using RecipeFinder.Core.Models.RecipeModels;
 using RecipeFinder.Infrastructure.Common;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeFinder.Core.Services
 {
@@ -21,6 +14,7 @@ namespace RecipeFinder.Core.Services
             this.repository = repository;
         }
 
+        // AddAsync method is used to add an ingredient to a recipe. It takes an IngredientsAddViewModel and recipeId as parameters. It creates a new Ingredient object and adds it to the database.
         public async Task AddAsync(IngredientsAddViewModel model, int id)
         {
             Ingredient newIngredient = new Ingredient

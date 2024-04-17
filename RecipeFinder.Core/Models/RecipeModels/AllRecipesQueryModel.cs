@@ -1,16 +1,12 @@
 ﻿using RecipeFinder.Core.Enumerations;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeFinder.Core.Models.RecipeModels
 {
     public class AllRecipesQueryModel
     {
         public string Category { get; init; } = null!;
+
         public string Difficulty { get; init; } = null!;
 
         [Display(Name = "Search by text")]
@@ -27,6 +23,7 @@ namespace RecipeFinder.Core.Models.RecipeModels
         public IEnumerable<string> Difficulties { get; set; } = null!;
 
         public IEnumerable<RecipeServiceModel> Recipes { get; set; } = new List<RecipeServiceModel>();
+
         public int RecipesPerPage { get; set; } = 12;
 
     }

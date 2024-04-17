@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static RecipeFinder.Infrastructure.Constants.RecipeDataConstants;
-using static RecipeFinder.Infrastructure.Constants.ErrorsConstants;
-using System.ComponentModel;
+﻿using RecipeFinder.Core.Contracts.Recipe;
 using RecipeFinder.Core.Models.CategoryModels;
 using RecipeFinder.Core.Models.DifficultyModels;
-using RecipeFinder.Core.Models.IngredientModels;
-using RecipeFinder.Core.Contracts.Recipe;
+using System.ComponentModel.DataAnnotations;
+using static RecipeFinder.Infrastructure.Constants.ErrorsConstants;
+using static RecipeFinder.Infrastructure.Constants.RecipeDataConstants;
 
 namespace RecipeFinder.Core.Models.RecipeModels
 {

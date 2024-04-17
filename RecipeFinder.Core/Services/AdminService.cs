@@ -1,18 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RecipeFinder.Core.Contracts.Admin;
-using RecipeFinder.Core.Enumerations;
 using RecipeFinder.Core.Models.AdminModels;
-using RecipeFinder.Core.Models.RecipeModels;
 using RecipeFinder.Infrastructure.Common;
 using RecipeFinder.Infrastructure.Constants;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeFinder.Core.Services
 {
@@ -24,6 +15,9 @@ namespace RecipeFinder.Core.Services
         {
             this.repository = repository;
         }
+
+        // PanelInformationAsync method is used to get the total number of users, recipes, and comments in the database. It also gets the latest 10 recipes posted.
+
         public async Task<AdminPanelServiceModel> PanelInformationAsync()
         {
             var usersCount = await repository.All<ApplicationUser>().CountAsync();

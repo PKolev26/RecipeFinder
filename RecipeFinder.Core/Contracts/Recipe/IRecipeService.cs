@@ -1,15 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using RecipeFinder.Core.Enumerations;
+﻿using RecipeFinder.Core.Enumerations;
 using RecipeFinder.Core.Models.CategoryModels;
 using RecipeFinder.Core.Models.DifficultyModels;
-using RecipeFinder.Core.Models.IngredientModels;
 using RecipeFinder.Core.Models.RecipeModels;
 using RecipeFinder.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeFinder.Core.Contracts.Recipe
 {

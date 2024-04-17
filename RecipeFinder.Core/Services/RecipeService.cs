@@ -453,6 +453,7 @@ namespace RecipeFinder.Core.Services
                    PostedOn = e.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
                    CategoryName = e.Category.Name,
                    DifficultyName = e.Difficulty.Name,
+                   CookUserName = e.Cook.UserName,
                    CookFirstName = e.Cook.FirstName,
                    CookLastName = e.Cook.LastName,
                    IngredientCount = e.Ingredients.Count(),

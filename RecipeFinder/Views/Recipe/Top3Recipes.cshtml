@@ -11,57 +11,62 @@
 
 <div class="text-center row" style="justify-content: space-evenly">
     @foreach (var recipe in Model)
-{
-        if(recipe.IngredientCount > 0){
-        
-        <div class="card col-4" style="width: 20rem;">
-        <div class="card-body">
-            <section class="main-info">
-                <h3 class="card-title">@recipe.Name</h3>
-                <img class="card-imgurl" style="height:15rem;" src="@recipe.ImageUrl" alt="recipe image" />
-                <h5 class="card-cook"><span class="fw-bold">Cooked by:</span> Chef @recipe.CookLastName</h5>
-            </section>
-            <br />
-            <section class="additional-info">
-                <p class="mb-0"><span class="fw-bold">Preparation time: </span>@recipe.PreparationTime min</p>
-                <p class="mb-0"><span class="fw-bold">Category: </span> @recipe.CategoryName </p>
-                <p class="mb-0"><span class="fw-bold">Difficulty level: </span>@recipe.DifficultyName </p>
-                <p class="mb-0"><span class="fw-bold">Ingredients: </span>@recipe.IngredientCount</p>
-                <p class="mb-0"><span class="fw-bold">Comments: </span>@recipe.CommentCount</p>
-                <p class="mb-0"><span class="fw-bold">Made by: </span>@recipe.MadeByCount<span class="fw-bold"> users</span></p>
-                <br />
-            </section>
-            <section class="date-and-buttons">
-                <div class="date">
-                    <p class="mb-0"><span class="fw-bold">Posted on: </span></p>
-                    <p>@recipe.PostedOn</p>
+    {
+        if (recipe.IngredientCount > 0)
+        {
+
+            <div class="card col-4" style="width: 20rem;">
+                <div class="card-body">
+                    <section class="main-info">
+                        <h3 class="card-title">@recipe.Name</h3>
+                        <img class="card-imgurl" style="height:15rem;" src="@recipe.ImageUrl" alt="recipe image" />
+                        <h5 class="card-cook"><span class="fw-bold">Cooked by:</span> Chef @recipe.CookLastName</h5>
+                    </section>
+                    <br />
+                    <section class="additional-info">
+                        <p class="mb-0"><span class="fw-bold">Preparation time: </span>@recipe.PreparationTime min</p>
+                        <p class="mb-0"><span class="fw-bold">Category: </span> @recipe.CategoryName </p>
+                        <p class="mb-0"><span class="fw-bold">Difficulty level: </span>@recipe.DifficultyName </p>
+                        <p class="mb-0"><span class="fw-bold">Ingredients: </span>@recipe.IngredientCount</p>
+                        <p class="mb-0"><span class="fw-bold">Comments: </span>@recipe.CommentCount</p>
+                        <p class="mb-0"><span class="fw-bold">Made by: </span>@recipe.MadeByCount<span class="fw-bold"> users</span></p>
+                        <br />
+                    </section>
+                    <section class="date-and-buttons">
+                        <div class="date">
+                            <p class="mb-0"><span class="fw-bold">Posted on: </span></p>
+                            <p>@recipe.PostedOn</p>
+                        </div>
+                        <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id" asp-route-name="@recipe.GetName()" name="moreinfo" class="btn btn-outline-warning mb-2 w-100 p-3 fw-bold">More info</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.Identity.Name == recipe.CookUserName)
+                            {
+                                <a asp-controller="Recipe" asp-action="Edit" asp-route-id="@recipe.Id" class="btn btn-outline-dark mb-2 w-100 p-3 fw-bold">Edit</a>
+                            }
+                            else
+                            {
+                                if (@recipe.RecipeUser != null && recipe.RecipeUser.RecipeId == recipe.Id && recipe.RecipeUser.UserId == User.Id())
+                                {
+                                    <form method="post" asp-controller="Recipe" asp-action="AddToRecipeBook" asp-route-id="@recipe.Id">
+                                        <button type="submit" class="btn btn-success mb-2 w-100 p-3 fw-bold">Added to Recipe Book</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form method="post" asp-controller="Recipe" asp-action="AddToRecipeBook" asp-route-id="@recipe.Id">
+                                        <button type="submit" class="btn btn-outline-success mb-2 w-100 p-3 fw-bold">Add to Recipe Book</button>
+                                    </form>
+                                }
+                            }
+                        }
+
+                    </section>
                 </div>
-            <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id" asp-route-name="@recipe.GetName()" name="moreinfo" class="btn btn-outline-warning mb-2 w-100 p-3 fw-bold">More info</a>
-            @if (User.Identity.Name == recipe.CookUserName)
-            {
-                <a asp-controller="Recipe" asp-action="Edit" asp-route-id="@recipe.Id"  class="btn btn-outline-dark mb-2 w-100 p-3 fw-bold">Edit</a>
-            }
-            else
-            {
-                if (@recipe.RecipeUser != null && recipe.RecipeUser.RecipeId == recipe.Id && recipe.RecipeUser.UserId == User.Id())
-                {
-                    <form method="post" asp-controller="Recipe" asp-action="AddToRecipeBook" asp-route-id="@recipe.Id">
-                        <button type="submit" class="btn btn-success mb-2 w-100 p-3 fw-bold">Added to Recipe Book</button>
-                    </form>
-                }
-                else
-                {
-                    <form method="post" asp-controller="Recipe" asp-action="AddToRecipeBook" asp-route-id="@recipe.Id">
-                        <button type="submit" class="btn btn-outline-success mb-2 w-100 p-3 fw-bold">Add to Recipe Book</button>
-                    </form>
-                }
-            }
-            </section>
-        </div>
-    </div>
-    }
+            </div>
+        }
     }
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }

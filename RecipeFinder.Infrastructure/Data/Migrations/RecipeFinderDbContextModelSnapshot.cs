@@ -315,8 +315,8 @@ namespace RecipeFinder.Data.Migrations
                             Id = 1,
                             AuthorId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             Description = "I made this moussaka with your recipe and its awesome.",
-                            PostedOn = new DateTime(2024, 4, 17, 11, 4, 20, 927, DateTimeKind.Local).AddTicks(9581),
-                            RecipeId = 3,
+                            PostedOn = new DateTime(2024, 4, 9, 10, 14, 27, 972, DateTimeKind.Local).AddTicks(2968),
+                            RecipeId = 1,
                             Title = "Very good Moussaka!"
                         });
                 });
@@ -437,99 +437,75 @@ namespace RecipeFinder.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 10,
-                            Name = "chicken thighs",
-                            Quantity = 1.5m,
-                            RecipeId = 5,
+                            Id = 1,
+                            Name = "potato",
+                            Quantity = 4m,
+                            RecipeId = 1,
                             Unit = "kg"
                         },
                         new
                         {
-                            Id = 12,
-                            Name = "cheese",
-                            Quantity = 0.5m,
-                            RecipeId = 6,
+                            Id = 2,
+                            Name = "minced meat",
+                            Quantity = 3m,
+                            RecipeId = 1,
                             Unit = "kg"
                         },
                         new
                         {
-                            Id = 11,
-                            Name = "macaroni",
+                            Id = 7,
+                            Name = "white sugar",
                             Quantity = 1m,
-                            RecipeId = 6,
-                            Unit = "kg"
+                            RecipeId = 2,
+                            Unit = "tablespoon"
                         },
                         new
                         {
-                            Id = 13,
-                            Name = "cream cheese",
-                            Quantity = 0.5m,
-                            RecipeId = 7,
-                            Unit = "kg"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Name = "chocolate",
-                            Quantity = 0.5m,
-                            RecipeId = 8,
-                            Unit = "kg"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Name = "chocolate",
-                            Quantity = 0.5m,
-                            RecipeId = 9,
-                            Unit = "kg"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Name = "avocado",
+                            Id = 9,
+                            Name = "salt",
                             Quantity = 1m,
-                            RecipeId = 10,
-                            Unit = "kg"
+                            RecipeId = 2,
+                            Unit = "tablespoon"
                         },
                         new
                         {
-                            Id = 17,
+                            Id = 4,
+                            Name = "milk",
+                            Quantity = 1.75m,
+                            RecipeId = 2,
+                            Unit = "cups"
+                        },
+                        new
+                        {
+                            Id = 3,
                             Name = "flour",
-                            Quantity = 1m,
-                            RecipeId = 13,
-                            Unit = "kg"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Name = "cornbread",
-                            Quantity = 1m,
-                            RecipeId = 11,
-                            Unit = "kg"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Name = "beef",
                             Quantity = 1.5m,
-                            RecipeId = 14,
-                            Unit = "kg"
+                            RecipeId = 2,
+                            Unit = "cups"
                         },
                         new
                         {
-                            Id = 20,
-                            Name = "fish",
-                            Quantity = 1.5m,
-                            RecipeId = 15,
-                            Unit = "kg"
-                        },
-                        new
-                        {
-                            Id = 21,
-                            Name = "flour",
+                            Id = 5,
+                            Name = "egg",
                             Quantity = 1m,
-                            RecipeId = 12,
-                            Unit = "kg"
+                            RecipeId = 2,
+                            Unit = "count"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "melted butter",
+                            Quantity = 1m,
+                            RecipeId = 2,
+                            Unit = "cup"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "baking powder",
+                            Quantity = 2m,
+                            RecipeId = 2,
+                            Unit = "tablespoons"
                         });
                 });
 
@@ -593,159 +569,27 @@ namespace RecipeFinder.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 3,
+                            Id = 1,
                             CategoryId = 2,
                             CookId = "dea12856-c198-4129-b3f3-b893d8395082",
                             DifficultyId = 2,
                             ImageUrl = "https://assets.kulinaria.bg/attachments/pictures-images/0000/1918/MAIN-vegetarianska-musaka.jpg?1431936459",
                             Instructions = "1. Preheat oven to 180°C.\r\n2. Slice potatoes & eggplants\r\n3. Heat olive oil. Cook onions until soft. Add ground beef, garlic, tomato paste, diced tomatoes, oregano, cinnamon, salt & pepper. Simmer.\r\n4. Fry potato slices until golden brown.\r\n5. Layer potatoes, eggplants, & meat mixture. Repeat layers.\r\n6. Whisk eggs & yogurt. Pour over meat.\r\n7. Bake at 180°C (350°F) for 45 minutes to 1 hour.\r\n8. Cool before serving. Enjoy!\r\n",
                             Name = "Moussaka",
-                            PostedOn = new DateTime(2024, 4, 17, 11, 4, 20, 981, DateTimeKind.Local).AddTicks(1697),
+                            PostedOn = new DateTime(2024, 4, 9, 10, 14, 28, 20, DateTimeKind.Local).AddTicks(8067),
                             PreparationTime = 60
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 2,
                             CategoryId = 3,
                             CookId = "dea12856-c198-4129-b3f3-b893d8395082",
                             DifficultyId = 1,
                             ImageUrl = "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F7929481.jpg&q=60&c=sc&poi=auto&orient=true&h=512",
                             Instructions = "Mix flour, milk, egg, butter, sugar, baking powder, and salt together.\r\n\r\nHeat a lightly oiled griddle over low heat. Scoop 1/4 cup batter onto the griddle and cook until top and edges are dry, 3 to 4 minutes. Flip and cook until lightly browned on the other side, 2 to 3 minutes. Repeat with remaining batter.",
                             Name = "Homemade Pancakes",
-                            PostedOn = new DateTime(2024, 4, 17, 11, 4, 20, 981, DateTimeKind.Local).AddTicks(1755),
+                            PostedOn = new DateTime(2024, 4, 9, 10, 14, 28, 20, DateTimeKind.Local).AddTicks(8118),
                             PreparationTime = 35
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryId = 2,
-                            CookId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            DifficultyId = 4,
-                            ImageUrl = "https://www.allrecipes.com/thmb/Z4Mdrd87chexT64ykV5o1cK0ZKM=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/231939_Honey-Glazed-Chicken_Adam-Vaccarezza_4564886_original-4x3-1-acb1de801b6541b69e06bf7b731c1b60.jpg",
-                            Instructions = "1. Preheat oven to 180°C.\r\n2. Season chicken with salt & pepper.\r\n3. Heat oil in a skillet. Brown chicken on both sides.\r\n4. Mix honey, soy sauce, garlic, & ginger. Pour over chicken.\r\n5. Bake for 30 minutes.\r\n6. Baste chicken with sauce. Bake for another 15 minutes.\r\n7. Serve with rice or vegetables. Enjoy!\r\n",
-                            Name = "Honey Glazed Chicken",
-                            PostedOn = new DateTime(2024, 4, 17, 11, 4, 20, 981, DateTimeKind.Local).AddTicks(1761),
-                            PreparationTime = 20
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CategoryId = 1,
-                            CookId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            DifficultyId = 1,
-                            ImageUrl = "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F43%2F2022%2F03%2F19%2F238691-Simple-Macaroni-And-Cheese-mfs_006.jpg&q=60&c=sc&poi=auto&orient=true&h=512",
-                            Instructions = "1. Preheat oven to 180°C.\r\n2. Cook macaroni according to package instructions.\r\n3. Melt butter in a saucepan. Stir in flour, salt, pepper, & mustard.\r\n4. Add milk. Cook & stir until thickened.\r\n5. Add cheese. Stir until melted.\r\n6. Combine macaroni & cheese sauce.\r\n7. Pour into a baking dish. Top with breadcrumbs.\r\n8. Bake for 30 minutes. Enjoy!\r\n",
-                            Name = "Macaroni and Cheese",
-                            PostedOn = new DateTime(2024, 4, 17, 11, 4, 20, 981, DateTimeKind.Local).AddTicks(1765),
-                            PreparationTime = 15
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CategoryId = 3,
-                            CookId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            DifficultyId = 2,
-                            ImageUrl = "https://www.allrecipes.com/thmb/dys0tqgU7Sow1d_DS_S9Jf6NeAI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/AllRecipes_Grandmothers_Cheesecake_0003-2000-06db8cb260484b81aa1dbd0d904603a1.jpg",
-                            Instructions = "1. Preheat oven to 180°C.\r\n2. Mix graham cracker crumbs, sugar, & butter. Press into a pan.\r\n3. Beat cream cheese, sugar, & vanilla until smooth.\r\n4. Add eggs one at a time. Beat well.\r\n5. Pour over crust. Bake for 1 hour.\r\n6. Cool. Chill for 4 hours. Enjoy!\r\n",
-                            Name = "Classic Cheesecake",
-                            PostedOn = new DateTime(2024, 4, 17, 11, 4, 20, 981, DateTimeKind.Local).AddTicks(1770),
-                            PreparationTime = 15
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CategoryId = 3,
-                            CookId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            DifficultyId = 2,
-                            ImageUrl = "https://www.allrecipes.com/thmb/BVIa5dKfGQlpQJ_epc6wH6Vm990=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/IMG_8145_Chocolate-Mousse-for-Beginners-4x3-cropped-757ae43035ff48cc8bc9ccffbd6cf3b7.jpg",
-                            Instructions = "1. Melt chocolate & butter. Cool.\r\n2. Beat egg yolks & sugar. Add chocolate mixture.\r\n3. Beat egg whites & sugar until stiff peaks form.\r\n4. Fold into chocolate mixture.\r\n5. Pour into cups. Chill for 4 hours. Enjoy!\r\n",
-                            Name = "Chocolate Mousse",
-                            PostedOn = new DateTime(2024, 4, 17, 11, 4, 20, 981, DateTimeKind.Local).AddTicks(1792),
-                            PreparationTime = 15
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CategoryId = 3,
-                            CookId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            DifficultyId = 1,
-                            ImageUrl = "https://www.allrecipes.com/thmb/iyfZNNm7WSl-1HVUzWjF9SpRST8=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/8551641-CopycatCosmicBrownie_DDMFS-248-4x3-566596741ece4186b38d600960c75502.jpg",
-                            Instructions = "1. Preheat oven to 180°C.\r\n2. Melt butter & chocolate. Cool.\r\n3. Beat eggs, sugar, & vanilla. Add chocolate mixture.\r\n4. Mix in flour, salt, & baking powder.\r\n5. Pour into a pan. Bake for 30 minutes.\r\n6. Cool. Cut into squares. Enjoy!\r\n",
-                            Name = "Brownies",
-                            PostedOn = new DateTime(2024, 4, 17, 11, 4, 20, 981, DateTimeKind.Local).AddTicks(1802),
-                            PreparationTime = 15
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CategoryId = 1,
-                            CookId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            DifficultyId = 4,
-                            ImageUrl = "https://www.allrecipes.com/thmb/4oKhDBSBYC3abBYCbYB-IhGOWt4=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/4521556_Guacamole4x3photobybd.weld-c81ae0bd3f2b4893a8e309365dda023b.jpg",
-                            Instructions = "1. Mash avocados in a bowl.\r\n2. Stir in onion, garlic, tomato, lime juice, salt, & pepper.\r\n3. Chill for 30 minutes. Enjoy!\r\n",
-                            Name = "Guacamole",
-                            PostedOn = new DateTime(2024, 4, 17, 11, 4, 20, 981, DateTimeKind.Local).AddTicks(1806),
-                            PreparationTime = 25
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CategoryId = 1,
-                            CookId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            DifficultyId = 2,
-                            ImageUrl = "https://www.allrecipes.com/thmb/qQ6I8RE2ywUQqLKn9Kwz3TODXKo=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/8426520_Buffalo-Wing-Pretzels_Nicole-Russell_4x3-bb2e8f6880cc4415bd724088f946a871.jpg",
-                            Instructions = "1. Mix warm water, yeast, sugar, & salt. Add flour. Knead.\r\n2. Let dough rise for 1 hour.\r\n3. Divide dough into pieces. Roll into ropes. Shape into pretzels.\r\n4. Dip in baking soda water. Bake at 230°C (450°F) for 10 minutes.\r\n5. Brush with melted butter. Enjoy!\r\n",
-                            Name = "Pretzels",
-                            PostedOn = new DateTime(2024, 4, 17, 11, 4, 20, 981, DateTimeKind.Local).AddTicks(1828),
-                            PreparationTime = 15
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CategoryId = 2,
-                            CookId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            DifficultyId = 3,
-                            ImageUrl = "https://www.allrecipes.com/thmb/IsH0QXPRWAr8fCiwgmPxoL2SovE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/8623032_Cornbread-Taco-Bake_TheDailyGourmet_4x3-dc4b1ba794194b4f88eb9de04db33fd7.jpg",
-                            Instructions = "1. Preheat oven to 180°C.\r\n2. Cook beef, onion, & garlic. Drain.\r\n3. Stir in beans, tomatoes, corn, & taco seasoning.\r\n4. Mix cornbread. Pour over beef mixture.\r\n5. Bake for 20 minutes.\r\n6. Top with cheese. Bake for another 10 minutes.\r\n7. Serve with sour cream & salsa. Enjoy!\r\n",
-                            Name = "Cornbread Taco Bake",
-                            PostedOn = new DateTime(2024, 4, 17, 11, 4, 20, 981, DateTimeKind.Local).AddTicks(1811),
-                            PreparationTime = 30
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CategoryId = 2,
-                            CookId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            DifficultyId = 5,
-                            ImageUrl = "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F43%2F2022%2F05%2F30%2F236992-santa-maria-grilled-tri-tip-beef-ddmfs-1x1-1.jpg&q=60&c=sc&poi=auto&orient=true&h=512",
-                            Instructions = "1. Preheat grill to high heat.\r\n2. Season beef with salt, pepper, & garlic powder.\r\n3. Grill beef for 5 minutes per side.\r\n4. Reduce heat. Grill for 20 minutes.\r\n5. Let beef rest for 10 minutes. Slice & serve. Enjoy!\r\n",
-                            Name = "Grilled Tri-Tip Beef",
-                            PostedOn = new DateTime(2024, 4, 17, 11, 4, 20, 981, DateTimeKind.Local).AddTicks(1832),
-                            PreparationTime = 60
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CategoryId = 2,
-                            CookId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            DifficultyId = 5,
-                            ImageUrl = "https://www.allrecipes.com/thmb/ywnMvmkYn5obresV_z3-oSW_wac=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/8611251_Fish-Puttanesca_Brenda-Venable_4x3-b51d77e6c84440609a3c8faf183dc8d2.jpg",
-                            Instructions = "1. Preheat oven to 180°C.\r\n2. Season fish with salt & pepper.\r\n3. Heat oil in a skillet. Brown fish on both sides.\r\n4. Add garlic, anchovies, capers, olives, & tomatoes. Simmer.\r\n5. Bake for 20 minutes.\r\n6. Serve with pasta or bread. Enjoy!\r\n",
-                            Name = "Fish Puttanesca",
-                            PostedOn = new DateTime(2024, 4, 17, 11, 4, 20, 981, DateTimeKind.Local).AddTicks(1836),
-                            PreparationTime = 30
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CategoryId = 3,
-                            CookId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            DifficultyId = 5,
-                            ImageUrl = "https://www.allrecipes.com/thmb/L8M8tLuZhT5iZshsHoLh6KTwuC8=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/9224625_EasyVanillaCake4x3-bf9a73c9f6024e9286d96e8f0b59d35d.jpg",
-                            Instructions = "1. Preheat oven to 180°C.\r\n2. Mix flour, baking powder, & salt.\r\n3. Beat butter & sugar. Add eggs & vanilla.\r\n4. Add flour mixture & milk. Mix well.\r\n5. Pour into pans. Bake for 30 minutes.\r\n6. Cool. Frost with buttercream. Enjoy!\r\n",
-                            Name = "Vanilla Cake",
-                            PostedOn = new DateTime(2024, 4, 17, 11, 4, 20, 981, DateTimeKind.Local).AddTicks(1815),
-                            PreparationTime = 30
                         });
                 });
 
@@ -791,15 +635,15 @@ namespace RecipeFinder.Data.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "59356cc6-cefb-4c63-bc00-28fe2f63f0ee",
+                            ConcurrencyStamp = "edae1ca8-eef3-46b3-8b49-95176f9a7389",
                             Email = "user@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "user@gmail.com",
                             NormalizedUserName = "user@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJLGrb2nvW13PBXmjDoXa24xxQfueJ/6PwIErAbdAOsh7iTeAyvUFSWr9tITpxvSVA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO/ObkDg19DEPiTFSFUpbWlDj9R1bTthlyGQP0OMaTWiaIVhID1T7ADJ+YCWCOaEqA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "25934b24-664e-4608-b836-8cda3ff854d5",
+                            SecurityStamp = "ac89e1e0-edc4-4448-8c22-c859f5c5def6",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com",
                             FirstName = "Test",
@@ -810,15 +654,15 @@ namespace RecipeFinder.Data.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "17090939-5000-4ab3-8786-27212e39686a",
+                            ConcurrencyStamp = "5e0fe925-6ef7-46c6-88f2-24501a96c5a9",
                             Email = "guest@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@gmail.com",
                             NormalizedUserName = "guest@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPUrawiRiMnW4ZLo+hSqlgteII7X7lL+qr5IVp7s2NP+t8saNe8Qb8iPaz66QIm0ZA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFIu5WvOKe188tLgUbOxkDHx89SP9M0D0qigq0hwWkJgjx4SFcBBNreCta8qGpbinA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "220d2e06-a5aa-4006-8710-3aa25f948e54",
+                            SecurityStamp = "bf64cb73-6399-42d8-9e5b-249b900bf70c",
                             TwoFactorEnabled = false,
                             UserName = "guest@gmail.com",
                             FirstName = "Test",
@@ -829,15 +673,15 @@ namespace RecipeFinder.Data.Migrations
                         {
                             Id = "8acdd283-300d-4ef1-a83f-813efc164767",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "32b92630-4f0b-4e5d-86e1-dd75fab20023",
+                            ConcurrencyStamp = "37ed8dfb-1179-4d9c-a7ef-60d41820b340",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "admin@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF0TudidrojbJOAvkO0BEOEs8KUKvEDjCysTl23UVYDjfF/cjD+WKXwUFH0dxVaTww==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPw3mXbS18zE2OPKND2RflDAwWxIFaGbUBhlcRqAn+tzULW56w991NbEw8OQMEtWbA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0765e814-bc15-4b6c-be49-c4ad00568a3e",
+                            SecurityStamp = "f4f55b87-6616-47fd-8564-a02bcb828a31",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             FirstName = "Admin",

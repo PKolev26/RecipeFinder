@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using RecipeFinder.Infrastructure.Data.Models;
 using RecipeFinder.Infrastructure.Data.SeedDatabase;
-using System.Reflection.Emit;
 
 namespace RecipeFinder.Data
 {

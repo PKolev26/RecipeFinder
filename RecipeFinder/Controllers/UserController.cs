@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using RecipeFinder.Core.Contracts.Recipe;
+using RecipeFinder.Core.Constants;
 using RecipeFinder.Core.Contracts.User;
 using RecipeFinder.Core.Models.ApplicationUserModels;
-using RecipeFinder.Core.Models.RecipeModels;
-using RecipeFinder.Core.Services;
 using RecipeFinder.Extensions;
 using RecipeFinder.Infrastructure.Data.Models;
 
 namespace RecipeFinder.Controllers
 {
+    [Authorize(Roles = RoleConstants.AdminRole)]
     public class UserController : Controller
     {
         private IApplicationUserService applicationUserService;

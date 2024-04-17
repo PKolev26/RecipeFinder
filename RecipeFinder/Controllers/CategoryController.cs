@@ -1,17 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using RecipeFinder.Core.Constants;
 using RecipeFinder.Core.Contracts.Category;
 using RecipeFinder.Core.Models.CategoryModels;
-using RecipeFinder.Core.Models.CommentModels;
-using RecipeFinder.Core.Models.RecipeModels;
-using RecipeFinder.Core.Services;
 using RecipeFinder.Extensions;
-using RecipeFinder.Infrastructure.Data.Models;
 
 namespace RecipeFinder.Controllers
 {
-    [Authorize (Roles = "Administrator")]
+    [Authorize(Roles = RoleConstants.AdminRole)]
     public class CategoryController : Controller
     {
 

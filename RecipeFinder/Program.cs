@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using RecipeFinder.Extensions;
 using RecipeFinder.Hubs;
 using RecipeFinder.ModelBinders;
 

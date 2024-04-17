@@ -5,9 +5,7 @@ using RecipeFinder.Core.Contracts.Comment;
 using RecipeFinder.Core.Contracts.Recipe;
 using RecipeFinder.Core.Contracts.User;
 using RecipeFinder.Core.Models.ApplicationUserModels;
-using RecipeFinder.Core.Models.CategoryModels;
 using RecipeFinder.Core.Models.RecipeModels;
-using System.Drawing.Printing;
 
 namespace RecipeFinder.Areas.Administrator.Controllers
 {

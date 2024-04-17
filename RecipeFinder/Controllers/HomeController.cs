@@ -2,11 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RecipeFinder.Core.Contracts.Home;
-using RecipeFinder.Core.Contracts.Ingredient;
-using RecipeFinder.Core.Services;
 using RecipeFinder.Infrastructure.Data.Models;
-using RecipeFinder.Models;
-using System.Diagnostics;
 
 namespace RecipeFinder.Controllers
 {

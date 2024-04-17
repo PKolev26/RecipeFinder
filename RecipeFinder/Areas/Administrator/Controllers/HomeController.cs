@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RecipeFinder.Core.Contracts.Admin;
-using RecipeFinder.Core.Contracts.Recipe;
 
 namespace RecipeFinder.Areas.Administrator.Controllers
 {

@@ -2,12 +2,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RecipeFinder.Core.Contracts.Recipe;
-using RecipeFinder.Core.Models.IngredientModels;
+using RecipeFinder.Core.Extensions;
 using RecipeFinder.Core.Models.RecipeModels;
-using RecipeFinder.Core.Services;
 using RecipeFinder.Extensions;
 using RecipeFinder.Infrastructure.Data.Models;
-using RecipeFinder.Core.Extensions;
 
 namespace RecipeFinder.Controllers
 {
@@ -99,6 +97,7 @@ namespace RecipeFinder.Controllers
             }
             return View(model);
         }
+
         [HttpGet]
         public async Task<IActionResult> Add()
         {

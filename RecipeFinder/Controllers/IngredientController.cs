@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using RecipeFinder.Core.Contracts.Ingredient;
 using RecipeFinder.Core.Contracts.Recipe;
 using RecipeFinder.Core.Models.IngredientModels;
-using RecipeFinder.Core.Models.RecipeModels;
-using RecipeFinder.Core.Services;
 using RecipeFinder.Infrastructure.Data.Models;
 
 namespace RecipeFinder.Controllers
@@ -28,6 +26,7 @@ namespace RecipeFinder.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public async Task<IActionResult> AddIngredients(int id)
         {

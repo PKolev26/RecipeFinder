@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace RecipeFinder.Controllers
 {
-	public class ChatController : Controller
+    [Authorize]
+    public class ChatController : Controller
 	{
 		public IActionResult ChatWithOthers()
 		{

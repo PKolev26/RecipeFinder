@@ -81,6 +81,7 @@ namespace RecipeFinder.Controllers
                 AuthorProfilePicture = comment.AuthorProfilePicture,
                 PostedOn = comment.PostedOn,
                 RecipeId = comment.RecipeId,
+                RecipeName = comment.RecipeName,
                 AuthorId = comment.AuthorId
             };
 
@@ -104,13 +105,15 @@ namespace RecipeFinder.Controllers
                 return Unauthorized();
             }
 
+            var recipeToRedirect = await recipeService.RecipeDetailsByIdAsync(comment.RecipeId);
+
             await commentService.DeleteAsync(model.Id);
 
             if (User.IsAdmin())
             {
                 return RedirectToAction("ManageComments", "Management", new { area = "Administrator" });
             }
-            return RedirectToAction("Details", "Recipe", new { model.RecipeId, name = model.RecipeName });
+            return RedirectToAction("Details", "Recipe", new { recipeToRedirect.Id, name = recipeToRedirect.GetName() });
         }
     }
 }

@@ -24,13 +24,14 @@
             <div class="mb-3">
                 <label asp-for="@Model.Unit" class="form-label-add-edit">Quantity unit</label>
                 <input asp-for="@Model.Unit" class="form-control" aria-required="true" />
+                <span asp-validation-for="@Model.Unit" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <input class="btn btn-warning mb-2 w-100 p-3 fw-bold" type="submit" value="Add" />
             </div>
         </form>
         <div class="mb-3">
-            <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Id" asp-route-name="@recipe.Result.GetName()" class="btn btn-success mb-2 w-100 p-3 fw-bold">Finish</a>
+            <a asp-controller="Recipe" asp-action="Details" asp-route-id="@recipe.Result.Id" asp-route-name="@recipe.Result.GetName()" class="btn btn-success mb-2 w-100 p-3 fw-bold">Finish</a>
         </div>
         <p>Note: You can finish your recipe in "My recipes", when you want!</p>
         <p>Unfinished recipes won't be shown in "All recipes"</p>

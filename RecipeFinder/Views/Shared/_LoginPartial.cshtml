@@ -9,7 +9,7 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @currentUser.FirstName @currentUser.LastName</a>
+            <p style="margin-bottom: 0" class="nav-link text-dark">Hello @currentUser.FirstName @currentUser.LastName</p>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

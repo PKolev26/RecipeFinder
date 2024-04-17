@@ -142,6 +142,7 @@ namespace RecipeFinder.Core.Services
             };
 
             var AllRecipes = await recipes
+                .Where(r => r.Ingredients.Count > 0)
                 .Skip((currentPage - 1) * recipesPerPage)
                 .Take(recipesPerPage)
                 .Select(e => new RecipeServiceModel()
@@ -165,7 +166,7 @@ namespace RecipeFinder.Core.Services
                 })
                 .ToListAsync();
 
-            int recipesCount = await recipes.CountAsync() - recipes.Where(c => c.Ingredients.Count() == 0).Count();
+            int recipesCount = await recipes.CountAsync();
 
             return new RecipeQueryServiceModel()
             {
@@ -383,6 +384,7 @@ namespace RecipeFinder.Core.Services
                   PostedOn = e.PostedOn.ToString(RecipeDataConstants.DateAndTimeFormat),
                   CategoryName = e.Category.Name,
                   DifficultyName = e.Difficulty.Name,
+                  CookUserName = e.Cook.UserName,
                   CookFirstName = e.Cook.FirstName,
                   CookLastName = e.Cook.LastName,
                   IngredientCount = e.Ingredients.Count(),

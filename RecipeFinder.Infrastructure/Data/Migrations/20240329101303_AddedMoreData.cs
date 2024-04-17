@@ -68,57 +68,57 @@ namespace RecipeFinder.Data.Migrations
                 columns: new[] { "Id", "CategoryId", "CookId", "DifficultyId", "ImageUrl", "Instructions", "Name", "PostedOn", "PreparationTime" },
                 values: new object[] { 2, 3, "dea12856-c198-4129-b3f3-b893d8395082", 1, "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F7929481.jpg&q=60&c=sc&poi=auto&orient=true&h=512", "Mix flour, milk, egg, butter, sugar, baking powder, and salt together.\r\n\r\nHeat a lightly oiled griddle over low heat. Scoop 1/4 cup batter onto the griddle and cook until top and edges are dry, 3 to 4 minutes. Flip and cook until lightly browned on the other side, 2 to 3 minutes. Repeat with remaining batter.", "Homemade Pancakes", new DateTime(2024, 3, 29, 12, 13, 2, 287, DateTimeKind.Local).AddTicks(5070), 35 });
 
-            migrationBuilder.InsertData(
-                table: "Ingredients",
-                columns: new[] { "Id", "Name", "Quantity", "RecipeId", "Unit" },
-                values: new object[,]
-                {
-                    { 3, "flour", 1.5m, 2, "cups" },
-                    { 4, "milk", 1.75m, 2, "cups" },
-                    { 5, "egg", 1m, 2, "count" },
-                    { 6, "melted butter", 1m, 2, "cup" },
-                    { 7, "white sugar", 1m, 2, "tablespoon" },
-                    { 8, "baking powder", 2m, 2, "tablespoons" },
-                    { 9, "salt", 1m, 2, "tablespoon" }
-                });
+            //migrationBuilder.InsertData(
+            //    table: "Ingredients",
+            //    columns: new[] { "Id", "Name", "Quantity", "RecipeId", "Unit" },
+            //    values: new object[,]
+            //    {
+            //        { 3, "flour", 1.5m, 2, "cups" },
+            //        { 4, "milk", 1.75m, 2, "cups" },
+            //        { 5, "egg", 1m, 2, "count" },
+            //        { 6, "melted butter", 1m, 2, "cup" },
+            //        { 7, "white sugar", 1m, 2, "tablespoon" },
+            //        { 8, "baking powder", 2m, 2, "tablespoons" },
+            //        { 9, "salt", 1m, 2, "tablespoon" }
+            //    });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "Ingredients",
-                keyColumn: "Id",
-                keyValue: 3);
+            //migrationBuilder.DeleteData(
+            //    table: "Ingredients",
+            //    keyColumn: "Id",
+            //    keyValue: 3);
 
-            migrationBuilder.DeleteData(
-                table: "Ingredients",
-                keyColumn: "Id",
-                keyValue: 4);
+            //migrationBuilder.DeleteData(
+            //    table: "Ingredients",
+            //    keyColumn: "Id",
+            //    keyValue: 4);
 
-            migrationBuilder.DeleteData(
-                table: "Ingredients",
-                keyColumn: "Id",
-                keyValue: 5);
+            //migrationBuilder.DeleteData(
+            //    table: "Ingredients",
+            //    keyColumn: "Id",
+            //    keyValue: 5);
 
-            migrationBuilder.DeleteData(
-                table: "Ingredients",
-                keyColumn: "Id",
-                keyValue: 6);
+            //migrationBuilder.DeleteData(
+            //    table: "Ingredients",
+            //    keyColumn: "Id",
+            //    keyValue: 6);
 
-            migrationBuilder.DeleteData(
-                table: "Ingredients",
-                keyColumn: "Id",
-                keyValue: 7);
+            //migrationBuilder.DeleteData(
+            //    table: "Ingredients",
+            //    keyColumn: "Id",
+            //    keyValue: 7);
 
-            migrationBuilder.DeleteData(
-                table: "Ingredients",
-                keyColumn: "Id",
-                keyValue: 8);
+            //migrationBuilder.DeleteData(
+            //    table: "Ingredients",
+            //    keyColumn: "Id",
+            //    keyValue: 8);
 
-            migrationBuilder.DeleteData(
-                table: "Ingredients",
-                keyColumn: "Id",
-                keyValue: 9);
+            //migrationBuilder.DeleteData(
+            //    table: "Ingredients",
+            //    keyColumn: "Id",
+            //    keyValue: 9);
 
             migrationBuilder.DeleteData(
                 table: "Recipes",

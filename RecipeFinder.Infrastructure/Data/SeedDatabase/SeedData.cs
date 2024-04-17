@@ -87,7 +87,8 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
                 Email = "user@gmail.com",
                 NormalizedEmail = "user@gmail.com",
                 FirstName = "Test",
-                LastName = "User"
+                LastName = "User",
+                ProfilePicture = "https://p7.hiclipart.com/preview/355/848/997/computer-icons-user-profile-google-account-photos-icon-account.jpg"
             };
 
             User1.PasswordHash =

@@ -31,21 +31,43 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
         // Recipes
         public Recipe Moussaka {  get; set; }
         public Recipe Pancakes { get; set; }
+        public Recipe HoneyGlazedChicken { get; set; }
+        public Recipe MacaroniAndCheese { get; set; }
+        public Recipe Cheesecake { get; set; }
+        public Recipe ChocolateMousse { get; set; }
+        public Recipe Brownies { get; set; }
+        public Recipe Guacamole { get; set; }
+        public Recipe Pretzels { get; set; }
+        public Recipe CornbreadTacoBake { get; set; }
+        public Recipe GrilledTriTipBeef { get; set; }
+        public Recipe FishPuttanesca { get; set; }
+        public Recipe VanillaCake { get; set; }
 
         // Comment
-        public Comment MoussakaComment { get; set; }
+        public Comment BrowniesComment { get; set; }
 
         // Ingredient
-        public Ingredient MoussakaPotato { get; set; }
-        public Ingredient MoussakaМeat { get; set; }
+        public Ingredient HoneyGlazedChickenChicken { get; set; }
+        public Ingredient MakaroniAndCheeseMakaroni { get; set; }
+        public Ingredient MakaroniAndCheeseCheese { get; set; }
 
-        public Ingredient PancakesFlour { get; set; }
-        public Ingredient PancakesMilk { get; set; }
-        public Ingredient PancakesEgg { get; set; }
-        public Ingredient PancakesButter { get; set; }
-        public Ingredient PancakesSugar { get; set; }
-        public Ingredient PancakesBakingPowder { get; set; }
-        public Ingredient PancakesSalt { get; set; }
+        public Ingredient CheesecakeCreamCheese { get; set; }
+
+        public Ingredient ChocolateMousseChocolate { get; set; }
+
+        public Ingredient BrowniesChocolate { get; set; }
+
+        public Ingredient GuacamoleAvocado { get; set; }
+
+        public Ingredient PretzelsFlour { get; set; }
+
+        public Ingredient CornbreadTacoBakeCornbread { get; set; }
+
+        public Ingredient GrilledTriTipBeefBeef { get; set; }
+
+        public Ingredient FishPuttanescaFish { get; set; }
+
+        public Ingredient VanillaCakeFlour { get; set; }
 
 
         public SeedData()
@@ -180,7 +202,7 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
         {
             Moussaka = new Recipe()
             {
-                Id = 1,
+                Id = 3,
                 Name = "Moussaka",
                 Instructions = "1. Preheat oven to 180°C.\r\n2. Slice potatoes & eggplants\r\n3. Heat olive oil. Cook onions until soft. Add ground beef, garlic, tomato paste, diced tomatoes, oregano, cinnamon, salt & pepper. Simmer.\r\n4. Fry potato slices until golden brown.\r\n5. Layer potatoes, eggplants, & meat mixture. Repeat layers.\r\n6. Whisk eggs & yogurt. Pour over meat.\r\n7. Bake at 180°C (350°F) for 45 minutes to 1 hour.\r\n8. Cool before serving. Enjoy!\r\n",
                 ImageUrl = "https://assets.kulinaria.bg/attachments/pictures-images/0000/1918/MAIN-vegetarianska-musaka.jpg?1431936459",
@@ -193,7 +215,7 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
 
             Pancakes = new Recipe()
             {
-                Id = 2,
+                Id = 4,
                 Name = "Homemade Pancakes",
                 Instructions = "Mix flour, milk, egg, butter, sugar, baking powder, and salt together.\r\n\r\nHeat a lightly oiled griddle over low heat. Scoop 1/4 cup batter onto the griddle and cook until top and edges are dry, 3 to 4 minutes. Flip and cook until lightly browned on the other side, 2 to 3 minutes. Repeat with remaining batter.",
                 ImageUrl = "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F7929481.jpg&q=60&c=sc&poi=auto&orient=true&h=512",
@@ -203,95 +225,270 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
                 DifficultyId = Beginner.Id,
                 CookId = User1.Id
             };
+
+            HoneyGlazedChicken = new Recipe()
+            {
+                Id = 5,
+                Name = "Honey Glazed Chicken",
+                Instructions = "1. Preheat oven to 180°C.\r\n2. Season chicken with salt & pepper.\r\n3. Heat oil in a skillet. Brown chicken on both sides.\r\n4. Mix honey, soy sauce, garlic, & ginger. Pour over chicken.\r\n5. Bake for 30 minutes.\r\n6. Baste chicken with sauce. Bake for another 15 minutes.\r\n7. Serve with rice or vegetables. Enjoy!\r\n",
+                ImageUrl = "https://www.allrecipes.com/thmb/Z4Mdrd87chexT64ykV5o1cK0ZKM=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/231939_Honey-Glazed-Chicken_Adam-Vaccarezza_4564886_original-4x3-1-acb1de801b6541b69e06bf7b731c1b60.jpg",
+                PreparationTime = 20,
+                PostedOn = DateTime.Now,
+                CategoryId = SecondCategory.Id,
+                DifficultyId = Expert.Id,
+                CookId = User1.Id
+            };
+
+            MacaroniAndCheese = new Recipe()
+            {
+                Id = 6,
+                Name = "Macaroni and Cheese",
+                Instructions = "1. Preheat oven to 180°C.\r\n2. Cook macaroni according to package instructions.\r\n3. Melt butter in a saucepan. Stir in flour, salt, pepper, & mustard.\r\n4. Add milk. Cook & stir until thickened.\r\n5. Add cheese. Stir until melted.\r\n6. Combine macaroni & cheese sauce.\r\n7. Pour into a baking dish. Top with breadcrumbs.\r\n8. Bake for 30 minutes. Enjoy!\r\n",
+                ImageUrl = "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F43%2F2022%2F03%2F19%2F238691-Simple-Macaroni-And-Cheese-mfs_006.jpg&q=60&c=sc&poi=auto&orient=true&h=512",
+                PreparationTime = 15,
+                PostedOn = DateTime.Now,
+                CategoryId = FirstCategory.Id,
+                DifficultyId = Beginner.Id,
+                CookId = User1.Id
+            };
+
+            Cheesecake = new Recipe()
+            {
+                Id = 7,
+                Name = "Classic Cheesecake",
+                Instructions = "1. Preheat oven to 180°C.\r\n2. Mix graham cracker crumbs, sugar, & butter. Press into a pan.\r\n3. Beat cream cheese, sugar, & vanilla until smooth.\r\n4. Add eggs one at a time. Beat well.\r\n5. Pour over crust. Bake for 1 hour.\r\n6. Cool. Chill for 4 hours. Enjoy!\r\n",
+                ImageUrl = "https://www.allrecipes.com/thmb/dys0tqgU7Sow1d_DS_S9Jf6NeAI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/AllRecipes_Grandmothers_Cheesecake_0003-2000-06db8cb260484b81aa1dbd0d904603a1.jpg",
+                PreparationTime = 15,
+                PostedOn = DateTime.Now,
+                CategoryId = ThirdCategory.Id,
+                DifficultyId = Intermediate.Id,
+                CookId = User1.Id
+            };
+
+            ChocolateMousse = new Recipe()
+            {
+                Id = 8,
+                Name = "Chocolate Mousse",
+                Instructions = "1. Melt chocolate & butter. Cool.\r\n2. Beat egg yolks & sugar. Add chocolate mixture.\r\n3. Beat egg whites & sugar until stiff peaks form.\r\n4. Fold into chocolate mixture.\r\n5. Pour into cups. Chill for 4 hours. Enjoy!\r\n",
+                ImageUrl = "https://www.allrecipes.com/thmb/BVIa5dKfGQlpQJ_epc6wH6Vm990=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/IMG_8145_Chocolate-Mousse-for-Beginners-4x3-cropped-757ae43035ff48cc8bc9ccffbd6cf3b7.jpg",
+                PreparationTime = 15,
+                PostedOn = DateTime.Now,
+                CategoryId = ThirdCategory.Id,
+                DifficultyId = Intermediate.Id,
+                CookId = User1.Id
+            };
+
+            Brownies = new Recipe()
+            {
+                Id = 9,
+                Name = "Brownies",
+                Instructions = "1. Preheat oven to 180°C.\r\n2. Melt butter & chocolate. Cool.\r\n3. Beat eggs, sugar, & vanilla. Add chocolate mixture.\r\n4. Mix in flour, salt, & baking powder.\r\n5. Pour into a pan. Bake for 30 minutes.\r\n6. Cool. Cut into squares. Enjoy!\r\n",
+                ImageUrl = "https://www.allrecipes.com/thmb/iyfZNNm7WSl-1HVUzWjF9SpRST8=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/8551641-CopycatCosmicBrownie_DDMFS-248-4x3-566596741ece4186b38d600960c75502.jpg",
+                PreparationTime = 15,
+                PostedOn = DateTime.Now,
+                CategoryId = ThirdCategory.Id,
+                DifficultyId = Beginner.Id,
+                CookId = User1.Id
+            };
+
+            Guacamole = new Recipe()
+            {
+                Id = 10,
+                Name = "Guacamole",
+                Instructions = "1. Mash avocados in a bowl.\r\n2. Stir in onion, garlic, tomato, lime juice, salt, & pepper.\r\n3. Chill for 30 minutes. Enjoy!\r\n",
+                ImageUrl = "https://www.allrecipes.com/thmb/4oKhDBSBYC3abBYCbYB-IhGOWt4=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/4521556_Guacamole4x3photobybd.weld-c81ae0bd3f2b4893a8e309365dda023b.jpg",
+                PreparationTime = 25,
+                PostedOn = DateTime.Now,
+                CategoryId = FirstCategory.Id,
+                DifficultyId = Expert.Id,
+                CookId = User1.Id
+            };
+
+            CornbreadTacoBake = new Recipe()
+            {
+                Id = 11,
+                Name = "Cornbread Taco Bake",
+                Instructions = "1. Preheat oven to 180°C.\r\n2. Cook beef, onion, & garlic. Drain.\r\n3. Stir in beans, tomatoes, corn, & taco seasoning.\r\n4. Mix cornbread. Pour over beef mixture.\r\n5. Bake for 20 minutes.\r\n6. Top with cheese. Bake for another 10 minutes.\r\n7. Serve with sour cream & salsa. Enjoy!\r\n",
+                ImageUrl = "https://www.allrecipes.com/thmb/IsH0QXPRWAr8fCiwgmPxoL2SovE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/8623032_Cornbread-Taco-Bake_TheDailyGourmet_4x3-dc4b1ba794194b4f88eb9de04db33fd7.jpg",
+                PreparationTime = 30,
+                PostedOn = DateTime.Now,
+                CategoryId = SecondCategory.Id,
+                DifficultyId = Advanced.Id,
+                CookId = User1.Id
+            };
+
+            VanillaCake = new Recipe()
+            {
+                Id = 12,
+                Name = "Vanilla Cake",
+                Instructions = "1. Preheat oven to 180°C.\r\n2. Mix flour, baking powder, & salt.\r\n3. Beat butter & sugar. Add eggs & vanilla.\r\n4. Add flour mixture & milk. Mix well.\r\n5. Pour into pans. Bake for 30 minutes.\r\n6. Cool. Frost with buttercream. Enjoy!\r\n",
+                ImageUrl = "https://www.allrecipes.com/thmb/L8M8tLuZhT5iZshsHoLh6KTwuC8=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/9224625_EasyVanillaCake4x3-bf9a73c9f6024e9286d96e8f0b59d35d.jpg",
+                PreparationTime = 30,
+                PostedOn = DateTime.Now,
+                CategoryId = ThirdCategory.Id,
+                DifficultyId = MasterChef.Id,
+                CookId = User1.Id
+            };
+
+            Pretzels = new Recipe()
+            {
+                Id = 13,
+                Name = "Pretzels",
+                Instructions = "1. Mix warm water, yeast, sugar, & salt. Add flour. Knead.\r\n2. Let dough rise for 1 hour.\r\n3. Divide dough into pieces. Roll into ropes. Shape into pretzels.\r\n4. Dip in baking soda water. Bake at 230°C (450°F) for 10 minutes.\r\n5. Brush with melted butter. Enjoy!\r\n",
+                ImageUrl = "https://www.allrecipes.com/thmb/qQ6I8RE2ywUQqLKn9Kwz3TODXKo=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/8426520_Buffalo-Wing-Pretzels_Nicole-Russell_4x3-bb2e8f6880cc4415bd724088f946a871.jpg",
+                PreparationTime = 15,
+                PostedOn = DateTime.Now,
+                CategoryId = FirstCategory.Id,
+                DifficultyId = Intermediate.Id,
+                CookId = User1.Id
+            };
+
+            GrilledTriTipBeef = new Recipe()
+            {
+                Id = 14,
+                Name = "Grilled Tri-Tip Beef",
+                Instructions = "1. Preheat grill to high heat.\r\n2. Season beef with salt, pepper, & garlic powder.\r\n3. Grill beef for 5 minutes per side.\r\n4. Reduce heat. Grill for 20 minutes.\r\n5. Let beef rest for 10 minutes. Slice & serve. Enjoy!\r\n",
+                ImageUrl = "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F43%2F2022%2F05%2F30%2F236992-santa-maria-grilled-tri-tip-beef-ddmfs-1x1-1.jpg&q=60&c=sc&poi=auto&orient=true&h=512",
+                PreparationTime = 60,
+                PostedOn = DateTime.Now,
+                CategoryId = SecondCategory.Id,
+                DifficultyId = MasterChef.Id,
+                CookId = User1.Id
+            };
+
+            FishPuttanesca = new Recipe()
+            {
+                Id = 15,
+                Name = "Fish Puttanesca",
+                Instructions = "1. Preheat oven to 180°C.\r\n2. Season fish with salt & pepper.\r\n3. Heat oil in a skillet. Brown fish on both sides.\r\n4. Add garlic, anchovies, capers, olives, & tomatoes. Simmer.\r\n5. Bake for 20 minutes.\r\n6. Serve with pasta or bread. Enjoy!\r\n",
+                ImageUrl = "https://www.allrecipes.com/thmb/ywnMvmkYn5obresV_z3-oSW_wac=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/8611251_Fish-Puttanesca_Brenda-Venable_4x3-b51d77e6c84440609a3c8faf183dc8d2.jpg",
+                PreparationTime = 30,
+                PostedOn = DateTime.Now,
+                CategoryId = SecondCategory.Id,
+                DifficultyId = MasterChef.Id,
+                CookId = User1.Id
+            };
         }
         private void SeedComments()
         {
-            MoussakaComment = new Comment()
+            BrowniesComment = new Comment()
             {
                 Id = 1,
-                Title = "Very good Moussaka!",
-                Description = "I made this moussaka with your recipe and its awesome.",
+                Title = "Very good brownies",
+                Description = "I made this with your recipe and its awesome.",
                 AuthorId = User2.Id,
                 PostedOn = DateTime.Now,
-                RecipeId = 1               
+                RecipeId = Brownies.Id
             };
         }
         private void SeedIngredient()
         {
-            //Moussaka Ingredients
-            MoussakaPotato = new Ingredient()
+            HoneyGlazedChickenChicken = new Ingredient()
             {
-                Id = 1,
-                Name = "potato",
+                Id = 10,
+                Name = "chicken thighs",
                 Quantity = 4,
-                Unit = "kg",
-                RecipeId = 1
-            };
-            MoussakaМeat = new Ingredient()
-            {
-                Id = 2,
-                Name = "minced meat",
-                Quantity = 3,
-                Unit = "kg",
-                RecipeId = 1
+                Unit = "pieces",
+                RecipeId = HoneyGlazedChicken.Id
             };
 
-            //Pancakes Ingredients
-            PancakesFlour = new Ingredient()
+            MakaroniAndCheeseMakaroni = new Ingredient()
             {
-                Id = 3,
-                Name = "flour",
-                Quantity = 1.5M,
-                Unit = "cups",
-                RecipeId = 2
-            };
-            PancakesMilk = new Ingredient()
-            {
-                Id = 4,
-                Name = "milk",
-                Quantity = 1.75M,
-                Unit = "cups",
-                RecipeId = 2
-            };
-            PancakesEgg = new Ingredient()
-            {
-                Id = 5,
-                Name = "egg",
-                Unit = "count",
+                Id = 11,
+                Name = "macaroni",
                 Quantity = 1,
-                RecipeId = 2
-            };
-            PancakesButter = new Ingredient()
-            {
-                Id = 6,
-                Name = "melted butter",
                 Unit = "cup",
-                Quantity = 1,
-                RecipeId = 2
+                RecipeId = MacaroniAndCheese.Id
             };
-            PancakesSugar = new Ingredient()
+
+            MakaroniAndCheeseCheese = new Ingredient()
             {
-                Id = 7,
-                Name = "white sugar",
-                Unit = "tablespoon",
-                Quantity = 1,
-                RecipeId = 2
-            };
-            PancakesBakingPowder = new Ingredient()
-            {
-                Id = 8,
-                Name = "baking powder",
+                Id = 12,
+                Name = "cheddar cheese",
                 Quantity = 2,
-                Unit = "tablespoons",
-                RecipeId = 2
+                Unit = "cups",
+                RecipeId = MacaroniAndCheese.Id
             };
-            PancakesSalt = new Ingredient()
+
+            CheesecakeCreamCheese = new Ingredient()
             {
-                Id = 9,
-                Name = "salt",
+                Id = 13,
+                Name = "cream cheese",
+                Quantity = 2,
+                Unit = "cups",
+                RecipeId = Cheesecake.Id
+            };
+
+            ChocolateMousseChocolate = new Ingredient()
+            {
+                Id = 14,
+                Name = "dark chocolate",
+                Quantity = 200,
+                Unit = "grams",
+                RecipeId = ChocolateMousse.Id
+            };
+
+            BrowniesChocolate = new Ingredient()
+            {
+                Id = 15,
+                Name = "dark chocolate",
+                Quantity = 200,
+                Unit = "grams",
+                RecipeId = Brownies.Id
+            };
+
+            GuacamoleAvocado = new Ingredient()
+            {
+                Id = 16,
+                Name = "avocado",
+                Quantity = 2,
+                Unit = "pieces",
+                RecipeId = Guacamole.Id
+            };
+
+            PretzelsFlour = new Ingredient()
+            {
+                Id = 17,
+                Name = "all-purpose flour",
+                Quantity = 3,
+                Unit = "cups",
+                RecipeId = Pretzels.Id
+            };
+
+            CornbreadTacoBakeCornbread = new Ingredient()
+            {
+                Id = 18,
+                Name = "cornbread mix",
                 Quantity = 1,
-                Unit = "tablespoon",
-                RecipeId = 2
+                Unit = "package",
+                RecipeId = CornbreadTacoBake.Id
+            };
+
+            GrilledTriTipBeefBeef = new Ingredient()
+            {
+                Id = 19,
+                Name = "tri-tip beef",
+                Quantity = 1,
+                Unit = "pound",
+                RecipeId = GrilledTriTipBeef.Id
+            };
+
+            FishPuttanescaFish = new Ingredient()
+            {
+                Id = 20,
+                Name = "white fish fillets",
+                Quantity = 4,
+                Unit = "pieces",
+                RecipeId = FishPuttanesca.Id
+            };
+
+            VanillaCakeFlour = new Ingredient()
+            {
+                Id = 21,
+                Name = "all-purpose flour",
+                Quantity = 2,
+                Unit = "cups",
+                RecipeId = VanillaCake.Id
             };
         }
     }

@@ -16,7 +16,7 @@ namespace RecipeFinder.Infrastructure.Data.SeedDatabase
         {
             var data = new SeedData();
 
-            builder.HasData(new Ingredient[] { data.MoussakaPotato, data.MoussakaМeat, data.PancakesSugar, data.PancakesSalt, data.PancakesMilk, data.PancakesFlour, data.PancakesEgg, data.PancakesButter, data.PancakesBakingPowder });
+            builder.HasData(new Ingredient[] { data.HoneyGlazedChickenChicken, data.MakaroniAndCheeseCheese, data.MakaroniAndCheeseMakaroni, data.CheesecakeCreamCheese, data.ChocolateMousseChocolate, data.BrowniesChocolate, data.GuacamoleAvocado, data.PretzelsFlour, data.CornbreadTacoBakeCornbread, data.GrilledTriTipBeefBeef, data.FishPuttanescaFish, data.VanillaCakeFlour });
         }
     }
 }

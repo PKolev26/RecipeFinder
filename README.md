@@ -12,6 +12,8 @@ Welcome to RecipeFinder! RecipeFinder is a web application designed to help you 
 
 - 📖 **Recipe Book**: Create your personalized recipe book by saving your favorite recipes. Remove recipes you no longer need or want to keep track of, ensuring your collection remains curated to your tastes.
 
+- 🖥️ **Admin Panel**: Manage users, recipes, comments, and categories easily with our intuitive admin panel. Keep your platform organized and vibrant by overseeing all aspects of RecipeFinder's content.
+
 ## 🧑‍💻 Technologies Used
 
 - **C#**
@@ -33,5 +35,7 @@ You can test my app with this two accounts:
 user@gmail.com - password123
 
 guest@gmail.com - password321
+
+admin@gmail.com - adminpassword213
 
 ## ❤️ I hope you enjoy using RecipeFinder as much as I enjoyed creating it!

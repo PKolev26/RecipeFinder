@@ -15,6 +15,8 @@ namespace RecipeFinder.Tests
     [TestFixture]
     public class ApplicationUserServiceUnitTests
     {
+        // Fields
+
         private RecipeFinderDbContext dbContext;
 
         private IRepository repository;
@@ -232,6 +234,8 @@ namespace RecipeFinder.Tests
         {
             await dbContext.Database.EnsureDeletedAsync();
         }
+
+        // Tests
 
         [Test]
         public async Task AllUsers_FilterByFirstName_ShouldReturnCorrectResult()

@@ -10,6 +10,8 @@ namespace RecipeFinder.Tests
     [TestFixture]
     public class HomeServiceUnitTests
     {
+        // Fields
+
         private RecipeFinderDbContext dbContext;
 
         private IRepository repository;
@@ -26,6 +28,8 @@ namespace RecipeFinder.Tests
         private Category Category;
 
         private Difficulty Difficulty;
+
+        // SetUp and TearDown
 
         [SetUp]
         public async Task Setup()
@@ -134,6 +138,8 @@ namespace RecipeFinder.Tests
             await dbContext.Database.EnsureDeletedAsync();
             await dbContext.DisposeAsync();
         }
+
+        // Tests
 
         [Test]
         public async Task UserHasUnfinishedRecipeAsync_UserWithRecipeWithNoIngredient_ShouldReturnTrue()

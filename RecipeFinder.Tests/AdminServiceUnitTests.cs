@@ -12,6 +12,8 @@ namespace RecipeFinder.Tests
     [TestFixture]
     public class AdminServiceUnitTests
     {
+        // Fields
+
         private RecipeFinderDbContext dbContext;
 
         private IRepository repository;
@@ -28,6 +30,8 @@ namespace RecipeFinder.Tests
         private Comment Comment2;
         private Comment Comment3;
         private Comment Comment4;
+
+        // SetUp and TearDown
 
         [SetUp]
         public async Task Setup()
@@ -160,6 +164,8 @@ namespace RecipeFinder.Tests
             await dbContext.Database.EnsureDeletedAsync();
             await dbContext.DisposeAsync();
         }
+
+        // Tests
 
         [Test]
         public async Task AdminServiceShouldReturnPanelInformation()

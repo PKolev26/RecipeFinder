@@ -12,6 +12,8 @@ namespace RecipeFinder.Tests
     [TestFixture]   
     public class CategoryServiceUnitTests
     {
+        // Fields
+
         private RecipeFinderDbContext dbContext;
 
         private IRepository repository;
@@ -39,6 +41,8 @@ namespace RecipeFinder.Tests
 
         private RecipeUser RecipeUser1;
         private RecipeUser RecipeUser2;
+
+        // SetUp and TearDown
 
         [SetUp]
         public async Task SetUp()
@@ -226,6 +230,8 @@ namespace RecipeFinder.Tests
             await dbContext.Database.EnsureDeletedAsync();
             await dbContext.DisposeAsync();
         }
+
+        // Tests
 
         [Test]
         public async Task ServiceShouldReturnAllCategories()

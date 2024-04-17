@@ -12,6 +12,8 @@ namespace RecipeFinder.Tests
 {
     public class RecipeServiceUnitTests
     {
+        // Fields
+
         private RecipeFinderDbContext dbContext;
 
         private IRepository repository;
@@ -45,9 +47,12 @@ namespace RecipeFinder.Tests
 
         private RecipeUser RecipeUser1;
 
+        // Setup and TearDown
+
         [SetUp]
         public async Task SetUp()
         {
+
             User1 = new ApplicationUser
             {
                 Id = "ba5ef817-fc4c-4c34-bf61-b1f495b010fd",
@@ -284,6 +289,8 @@ namespace RecipeFinder.Tests
             await dbContext.Database.EnsureDeletedAsync();
             await dbContext.DisposeAsync();
         }
+
+        // Tests for RecipeService
 
         [Test]
         public async Task AddAsync_ShouldAddRecipe()

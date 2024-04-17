@@ -11,6 +11,8 @@ namespace RecipeFinder.Tests
 {
     public class CommentServiceUnitTests
     {
+        // Fields
+
         private RecipeFinderDbContext dbContext;
 
         private IRepository repository;
@@ -24,6 +26,8 @@ namespace RecipeFinder.Tests
 
         private Comment Comment1;
         private Comment Comment2;
+
+        // SetUp and TearDown
 
         [SetUp]
         public async Task SetUp()
@@ -107,6 +111,8 @@ namespace RecipeFinder.Tests
             dbContext.Database.EnsureDeleted();
             await dbContext.DisposeAsync();
         }
+
+        // Tests
 
         [Test]
         public async Task AddAsyncShouldAddCommentToDatabase()

@@ -9,6 +9,8 @@ namespace RecipeFinder.Tests
 {
     public class IngredientServiceUnitTests
     {
+        // Fields
+
         private RecipeFinderDbContext dbContext;
 
         private IngredientService ingredientService;
@@ -18,6 +20,8 @@ namespace RecipeFinder.Tests
         private ApplicationUser User1;
 
         private Recipe Recipe1;
+
+        // SetUp and TearDown
 
         [SetUp]
         public async Task SetUp()
@@ -60,6 +64,8 @@ namespace RecipeFinder.Tests
             repository = new Repository(dbContext);
             ingredientService = new IngredientService(repository);
         }
+
+        // Tests
 
         [Test]
         public async Task AddAsync_ShouldAddIngredient()
